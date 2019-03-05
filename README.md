@@ -6,13 +6,14 @@ Nasza aplikacja będzie służyła do zarządzania grupą serwisantów, oraz prz
 
 - Wprowadzania nowych zleceń do systemu
 - Wyświetlanie zespołów serwisantów, oraz przydzielonych im zadań
-- Przydzielanie zadań do zespołów i zmianę statusu wykonywanego zadania
+- Przydzielanie zadań do zespołów i zmianę statusu wykonywanego zadania wraz z dodawaniem notatek
+- Manipulowanie terminem w porozumieniu z klientem, np gdy nie uda sie zrobic zadania w okreslonym terminie
 - Wyświetlanie harmonogramu
 
 
 ### Aplikacja będzie posiadać 2 grupy użytkowników:
 
-1. Lider grupy serwisantów - możliwość wyświetlania przydzielonych jego grupie zleceń, oraz zmiana statusu zadania.
+1. Lider grupy serwisantów - możliwość wyświetlania przydzielonych jego grupie zleceń, zmiana statusu zadania oraz dodawania notatek do istniejącego zadania.
 1. Kierownik serwisantów - możliwość zarządzania zadaniami oraz grupami serwisantów
 
 ### Do zrealizowania projektu użyjemy następujących narzędzi:
@@ -24,11 +25,25 @@ Nasza aplikacja będzie służyła do zarządzania grupą serwisantów, oraz prz
 
 ### Scenariusz działania aplikacji
 
-![alt text](https://github.com/mjochab/PZ_2019_Lab2_Gr6/blob/master/scenariusz.png "scenariusz")
+![alt text](https://github.com/mjochab/PZ_2019_Lab2_Gr6/blob/master/images/scenariusz.png "scenariusz")
 
 ### Diagram aktywności
 
-![alt text](https://github.com/mjochab/PZ_2019_Lab2_Gr6/blob/master/diagram.jpg "diagram aktywności")
+![alt text](https://github.com/mjochab/PZ_2019_Lab2_Gr6/blob/master/images/Diagram_aktywności.jpg "diagram aktywności")
+
+### Diagram przypadków użycia
+
+![alt text](https://github.com/mjochab/PZ_2019_Lab2_Gr6/blob/master/images/przypadków_użycia.jpg "diagram przypadków użycia")
+
+### Diagram klas
+
+![alt text](https://github.com/mjochab/PZ_2019_Lab2_Gr6/blob/master/images/Diagram_klas.png "diagram klas")
+
+### Diagram stanów
+
+![alt text](https://github.com/mjochab/PZ_2019_Lab2_Gr6/blob/master/images/Diagram_stanów.png "diagram stanów")
+
+
 
 
 
