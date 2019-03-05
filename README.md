@@ -33,7 +33,7 @@ Nasza aplikacja będzie służyła do zarządzania grupą serwisantów, oraz prz
 
 ### Diagram przypadków użycia
 
-![alt text](https://github.com/mjochab/PZ_2019_Lab2_Gr6/blob/master/images/przypadków_użycia.jpg "diagram przypadków użycia")
+![alt text](https://github.com/mjochab/PZ_2019_Lab2_Gr6/blob/master/images/Przypadków_użycia.jpg "diagram przypadków użycia")
 
 ### Diagram klas
 
