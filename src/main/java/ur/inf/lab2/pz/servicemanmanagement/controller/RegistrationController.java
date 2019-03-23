@@ -7,32 +7,22 @@ import org.springframework.stereotype.Controller;
 import ur.inf.lab2.pz.servicemanmanagement.ExampleService;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewManager;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewType;
-
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
+import javafx.event.ActionEvent;
+
 @Controller
-public class LoginController {
+public class RegistrationController {
     private ViewManager viewManager;
     private ExampleService exampleService;
 
-    @FXML
-    private JFXTextField emailTextField;
-    @FXML
-    private JFXButton login;
-
-    public void successfulLogin(ActionEvent event) {
-        exampleService.log("Zmiana widoku na main.fxml");
-
-        if (emailTextField.getText().equals("kierownik@test.pl"))
-            exampleService.log("Zalogowany jako kierownik");
-        else if (emailTextField.getText().equals("uberserwisant@test.pl"))
-            exampleService.log("Zalogowany jako serwisant");
-        viewManager.show(ViewType.MAIN);
+    public void changeView(ActionEvent event) {
+        viewManager.show(ViewType.LOGIN);
     }
 
-    public void changeView(ActionEvent event) {
-        viewManager.show(ViewType.REGISTER);
+    public void successfulRegistration(ActionEvent event) {
+        exampleService.log("Pomyślna rejestracja");
+        viewManager.show(ViewType.MAIN);
     }
 
     @Autowired
