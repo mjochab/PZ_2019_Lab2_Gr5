@@ -8,23 +8,23 @@ import ur.inf.lab2.pz.servicemanmanagement.view.ViewManager;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewType;
 
 @Controller
-public class SecondaryController {
-
+public class ChangeFormController {
     private ViewManager viewManager;
     private ExampleService exampleService;
 
-    public void changeView(ActionEvent actionEvent) {
-        exampleService.log("Zmiana widoku na changeform.fxml");
-        viewManager.show(ViewType.CHANGEFORM);
+    public void changeView2(ActionEvent event) {
+        exampleService.log("Naciśnięto przycisk Zatwierdź");
+        viewManager.show(ViewType.MAIN);
+    }
+
+
+    @Autowired
+    public void setExampleService(ExampleService exampleService) {
+        this.exampleService = exampleService;
     }
 
     @Autowired
     public void setViewManager(ViewManager viewManager) {
         this.viewManager = viewManager;
-    }
-
-    @Autowired
-    public void setExampleService(ExampleService exampleService) {
-        this.exampleService = exampleService;
     }
 }
