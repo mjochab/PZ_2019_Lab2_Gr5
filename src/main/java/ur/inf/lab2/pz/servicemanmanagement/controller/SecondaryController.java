@@ -15,7 +15,7 @@ public class SecondaryController {
 
     public void changeView(ActionEvent actionEvent) {
         exampleService.log("Zmiana widoku na main.fxml");
-        viewManager.show(ViewType.MAIN);
+        viewManager.show(ViewType.LOGIN);
     }
 
     @Autowired
