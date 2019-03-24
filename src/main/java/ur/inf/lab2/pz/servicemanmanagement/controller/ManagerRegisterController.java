@@ -12,22 +12,16 @@ import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
 
 @Controller
-public class RegistrationController {
+public class ManagerRegisterController {
     private ViewManager viewManager;
-    private ExampleService exampleService;
 
     public void changeView(ActionEvent event) {
         viewManager.show(ViewType.LOGIN);
     }
 
-    public void successfulRegistration(ActionEvent event) {
-        exampleService.log("Pomyślna rejestracja");
+    public void register(ActionEvent event) {
+        System.out.println("Pomyślna rejestracja");
         viewManager.show(ViewType.MAIN);
-    }
-
-    @Autowired
-    public void setExampleService(ExampleService exampleService) {
-        this.exampleService = exampleService;
     }
 
     @Autowired

@@ -11,17 +11,15 @@ import ur.inf.lab2.pz.servicemanmanagement.view.ViewType;
 public class MainController {
 
     private ViewManager viewManager;
-    private ExampleService exampleService;
 
     public void changeView(ActionEvent event) {
-        exampleService.log("Zmiana widoku na secondary.fxml");
+        System.out.println("Zmiana widoku na secondary.fxml");
         viewManager.show(ViewType.SECONDARY);
     }
 
-
-    @Autowired
-    public void setExampleService(ExampleService exampleService) {
-        this.exampleService = exampleService;
+    public void changeViewToLoginForm(ActionEvent event) {
+        System.out.println("Zmiana widoku na login.fxml");
+        viewManager.show(ViewType.LOGIN);
     }
 
     @Autowired

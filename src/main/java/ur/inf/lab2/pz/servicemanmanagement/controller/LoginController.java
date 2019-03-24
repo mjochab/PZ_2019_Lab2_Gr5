@@ -14,31 +14,30 @@ import javafx.fxml.FXML;
 @Controller
 public class LoginController {
     private ViewManager viewManager;
-    private ExampleService exampleService;
 
     @FXML
     private JFXTextField emailTextField;
-    @FXML
-    private JFXButton login;
 
-    public void successfulLogin(ActionEvent event) {
-        exampleService.log("Zmiana widoku na main.fxml");
 
-        if (emailTextField.getText().equals("kierownik@test.pl"))
-            exampleService.log("Zalogowany jako kierownik");
-        else if (emailTextField.getText().equals("uberserwisant@test.pl"))
-            exampleService.log("Zalogowany jako serwisant");
-        viewManager.show(ViewType.MAIN);
+    public void login(ActionEvent event) {
+
+
+        if (emailTextField.getText().equals("kierownik@test.pl")) {
+            System.out.println("Zalogowany jako kierownik \nZmiana widoku na main.fxml");
+            viewManager.show(ViewType.MAIN);
+        }
+
+        else if (emailTextField.getText().equals("uberserwisant@test.pl")){
+            System.out.println("Zalogowany jako serwisant\nZmiana widoku na main.fxml");
+            viewManager.show(ViewType.MAIN);
+
+        }
     }
 
     public void changeView(ActionEvent event) {
-        viewManager.show(ViewType.REGISTER);
+        viewManager.show(ViewType.MANAGER_REGISTER);
     }
 
-    @Autowired
-    public void setExampleService(ExampleService exampleService) {
-        this.exampleService = exampleService;
-    }
 
     @Autowired
     public void setViewManager(ViewManager viewManager) {

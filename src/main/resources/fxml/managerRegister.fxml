@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="534.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ur.inf.lab2.pz.servicemanmanagement.controller.RegistrationController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="534.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ur.inf.lab2.pz.servicemanmanagement.controller.ManagerRegisterController">
    <children>
       <Text layoutX="31.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rejestracja">
          <font>
@@ -28,8 +28,6 @@
       <JFXTextField layoutX="48.0" layoutY="227.0" />
       <JFXTextField layoutX="48.0" layoutY="309.0" />
       <JFXTextField layoutX="339.0" layoutY="146.0" />
-      <JFXTextField layoutX="339.0" layoutY="227.0" />
-      <JFXTextField layoutX="339.0" layoutY="309.0" />
       <Text layoutX="48.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Imię">
          <font>
             <Font name="Ubuntu" size="15.0" />
@@ -80,22 +78,17 @@
             <Font name="Ubuntu" size="12.0" />
          </font>
       </Text>
-      <Text fill="RED" layoutX="339.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pole obowiązkowe">
+      <Text fill="RED" layoutX="339.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Polityka hasła">
          <font>
             <Font name="Ubuntu" size="12.0" />
          </font>
       </Text>
-      <Text fill="RED" layoutX="341.0" layoutY="268.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pole obowiązkowe">
-         <font>
-            <Font name="Ubuntu" size="12.0" />
-         </font>
-      </Text>
-      <JFXButton layoutX="217.0" layoutY="386.0" onAction="#successfulRegistration" prefHeight="42.0" prefWidth="108.0" ripplerFill="#1400ff" style="-fx-background-color: #3a21f5;" text="Zarejestruj" textFill="WHITE">
+      <JFXButton buttonType="RAISED" layoutX="217.0" layoutY="386.0" onAction="#register" prefHeight="42.0" prefWidth="108.0" style="-fx-background-color: #3a21f5;" text="Zarejestruj" textFill="WHITE">
          <font>
             <Font name="Ubuntu" size="15.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="164.0" layoutY="486.0" onAction="#changeView" prefHeight="42.0" prefWidth="214.0" style="-fx-background-color: #f52254;" text="Zaloguj się" textFill="WHITE">
+      <JFXButton buttonType="RAISED" layoutX="164.0" layoutY="486.0" onAction="#changeView" prefHeight="42.0" prefWidth="214.0" style="-fx-background-color: #f52254;" text="Zaloguj się" textFill="WHITE">
          <font>
             <Font name="Ubuntu" size="15.0" />
          </font>
@@ -105,5 +98,7 @@
             <Font name="Ubuntu" size="23.0" />
          </font>
       </Text>
+      <JFXPasswordField layoutX="339.0" layoutY="227.0" />
+      <JFXPasswordField layoutX="339.0" layoutY="309.0" />
    </children>
 </Pane>
