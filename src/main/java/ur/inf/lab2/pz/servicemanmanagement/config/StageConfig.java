@@ -10,12 +10,6 @@ public class StageConfig {
     private String appName;
     private ViewType initialView;
 
-    private Double defaultWidth;
-    private Double maxWidth;
-
-    private Double defaultHeight;
-    private Double maxHeight;
-
     private Double minWidth;
     private Double minHeight;
 
@@ -25,20 +19,14 @@ public class StageConfig {
 
     public StageConfig(@Value("${stage.appName:APP}") String appName,
                        @Value("${stage.initialView:Dashboard}") ViewType initialView,
-                       @Value("${stage.defaultWidth:1024}") Double defaultWidth,
                        @Value("${stage.minWidth:1024}") Double minWidth,
                        @Value("${stage.minHeight:768}") Double minHeight,
-                       @Value("${stage.maxWidth:1920}") Double maxWidth,
-                       @Value("${stage.defaultHeight:768}") Double defaultHeight,
-                       @Value("${stage.maxHeight:1080}") Double maxHeight,
                        @Value("${stage.isMaximized:true}") Boolean isMaximized,
                        @Value("${stage.fullScreenEnabled:false}") Boolean fullScreenEnabled) {
         this.appName = appName;
         this.initialView = initialView;
-        this.defaultWidth = defaultWidth;
-        this.maxWidth = maxWidth;
-        this.defaultHeight = defaultHeight;
-        this.maxHeight = maxHeight;
+        this.minWidth = minWidth;
+        this.minHeight = minHeight;
         this.isMaximized = isMaximized;
         this.fullScreenEnabled = fullScreenEnabled;
         this.minHeight = minHeight;
@@ -59,38 +47,6 @@ public class StageConfig {
 
     public void setInitialView(ViewType initialView) {
         this.initialView = initialView;
-    }
-
-    public Double getDefaultWidth() {
-        return defaultWidth;
-    }
-
-    public void setDefaultWidth(Double defaultWidth) {
-        this.defaultWidth = defaultWidth;
-    }
-
-    public Double getMaxWidth() {
-        return maxWidth;
-    }
-
-    public void setMaxWidth(Double maxWidth) {
-        this.maxWidth = maxWidth;
-    }
-
-    public Double getDefaultHeight() {
-        return defaultHeight;
-    }
-
-    public void setDefaultHeight(Double defaultHeight) {
-        this.defaultHeight = defaultHeight;
-    }
-
-    public Double getMaxHeight() {
-        return maxHeight;
-    }
-
-    public void setMaxHeight(Double maxHeight) {
-        this.maxHeight = maxHeight;
     }
 
     public Boolean getMaximized() {
@@ -124,4 +80,6 @@ public class StageConfig {
     public void setMinHeight(Double minHeight) {
         this.minHeight = minHeight;
     }
+
+
 }

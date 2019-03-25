@@ -23,11 +23,13 @@ public class ViewManager {
 
 		Scene scene = new Scene(
 		        getView(stageConfig.getInitialView().getFXMLName()),
-                        stageConfig.getDefaultWidth(),
-                        stageConfig.getDefaultHeight());
+                        stageConfig.getMinWidth(),
+                        stageConfig.getMinHeight());
 		this.stage.setScene(scene);
 
         this.stage.setTitle(stageConfig.getAppName());
+        this.stage.setMinWidth(stageConfig.getMinWidth());
+        this.stage.setMinHeight(stageConfig.getMinHeight());
         this.stage.setMaximized(stageConfig.getMaximized());
 		this.stage.setFullScreen(stageConfig.getFullScreenEnabled());
 
