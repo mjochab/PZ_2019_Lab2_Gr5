@@ -13,19 +13,26 @@ public class MainController {
     private ViewManager viewManager;
     private ExampleService exampleService;
 
-    public void changeView(ActionEvent event) {
-        exampleService.log("Zmiana widoku na secondary.fxml");
+
+    public void goToDashboard(ActionEvent event){
+        exampleService.log("Zmiana widoku na Dashboard.fxml");
         viewManager.show(ViewType.DASHBOARD);
     }
 
+        public void goToManagerData (ActionEvent event){
+            exampleService.log("Zmiana widoku na manager-data.fxml");
+            viewManager.show(ViewType.MANAGERDATA);
+        }
 
-    @Autowired
-    public void setExampleService(ExampleService exampleService) {
-        this.exampleService = exampleService;
+
+        @Autowired
+        public void setExampleService (ExampleService exampleService){
+            this.exampleService = exampleService;
+        }
+
+        @Autowired
+        public void setViewManager (ViewManager viewManager){
+            this.viewManager = viewManager;
+        }
     }
 
-    @Autowired
-    public void setViewManager(ViewManager viewManager) {
-        this.viewManager = viewManager;
-    }
-}

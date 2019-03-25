@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import ur.inf.lab2.pz.servicemanmanagement.ExampleService;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewManager;
 
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 @Controller
