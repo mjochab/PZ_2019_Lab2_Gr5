@@ -17,10 +17,17 @@ public class WorkerListController {
         this.exampleService = exampleService;
     }
 
+    public void add(ActionEvent actionEvent) {
+        exampleService.log("Zmiana widoku na main.fxml");
+        viewManager.show(ViewType.MAIN);
+    }
 
     @Autowired
     public void setViewManager(ViewManager viewManager) {
         this.viewManager = viewManager;
     }
+
+
+
 
 }
