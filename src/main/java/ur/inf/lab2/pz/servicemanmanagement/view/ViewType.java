@@ -4,7 +4,8 @@ public enum ViewType {
     MAIN("main"),
     SECONDARY("secondary"),
     LOGIN("login"),
-    MANAGER_REGISTER("managerRegister");
+    MANAGER_REGISTER("managerRegister"),
+    SERVICEMAN_REGISTER("servicemanRegister");
 
     private String fxmlName;
 
