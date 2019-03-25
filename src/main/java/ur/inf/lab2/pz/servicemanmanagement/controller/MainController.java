@@ -15,7 +15,7 @@ public class MainController {
 
     public void changeView(ActionEvent event) {
         exampleService.log("Zmiana widoku na secondary.fxml");
-        viewManager.show(ViewType.SECONDARY);
+        viewManager.show(ViewType.DASHBOARD);
     }
 
 

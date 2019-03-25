@@ -16,15 +16,20 @@ public class StageConfig {
     private Double defaultHeight;
     private Double maxHeight;
 
+    private Double minWidth;
+    private Double minHeight;
+
     private Boolean isMaximized;
     private Boolean fullScreenEnabled;
 
 
     public StageConfig(@Value("${stage.appName:APP}") String appName,
-                       @Value("${stage.initialView:MAIN}") ViewType initialView,
-                       @Value("${stage.defaultWidth:800}") Double defaultWidth,
+                       @Value("${stage.initialView:Dashboard}") ViewType initialView,
+                       @Value("${stage.defaultWidth:1024}") Double defaultWidth,
+                       @Value("${stage.minWidth:1024}") Double minWidth,
+                       @Value("${stage.minHeight:768}") Double minHeight,
                        @Value("${stage.maxWidth:1920}") Double maxWidth,
-                       @Value("${stage.defaultHeight:600}") Double defaultHeight,
+                       @Value("${stage.defaultHeight:768}") Double defaultHeight,
                        @Value("${stage.maxHeight:1080}") Double maxHeight,
                        @Value("${stage.isMaximized:true}") Boolean isMaximized,
                        @Value("${stage.fullScreenEnabled:false}") Boolean fullScreenEnabled) {
@@ -36,6 +41,8 @@ public class StageConfig {
         this.maxHeight = maxHeight;
         this.isMaximized = isMaximized;
         this.fullScreenEnabled = fullScreenEnabled;
+        this.minHeight = minHeight;
+        this.minWidth = minWidth;
     }
 
     public String getAppName() {
@@ -100,5 +107,21 @@ public class StageConfig {
 
     public void setFullScreenEnabled(Boolean fullScreenEnabled) {
         this.fullScreenEnabled = fullScreenEnabled;
+    }
+
+    public Double getMinWidth() {
+        return minWidth;
+    }
+
+    public void setMinWidth(Double minWidth) {
+        this.minWidth = minWidth;
+    }
+
+    public Double getMinHeight() {
+        return minHeight;
+    }
+
+    public void setMinHeight(Double minHeight) {
+        this.minHeight = minHeight;
     }
 }
