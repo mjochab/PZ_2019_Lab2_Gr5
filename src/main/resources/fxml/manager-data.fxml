@@ -9,7 +9,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="401.0" prefWidth="510.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ur.inf.lab2.pz.servicemanmanagement.controller.ManagerDataController">
    <children>
-      <JFXButton fx:id="submitDataButton" buttonType="RAISED" layoutX="212.0" layoutY="341.0" onAction="#submitData" text="Zatwierdź" />
+      <JFXButton fx:id="submitDataButton" buttonType="RAISED" layoutX="212.0" layoutY="341.0" onAction="#submitData" style="-fx-background-color: #3a21f5;;" text="Zatwierdź" textFill="WHITE" />
       <Label layoutX="111.0" layoutY="85.0" text="Imię" />
       <JFXTextField layoutX="253.0" layoutY="78.0" text="Jan" />
       <Label layoutX="111.0" layoutY="135.0" text="Nazwisko" />
