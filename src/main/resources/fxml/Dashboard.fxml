@@ -12,174 +12,176 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="768.0" minWidth="1024.0" prefHeight="768.0" prefWidth="1024.0" stylesheets="@../styles/dark-theme.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ur.inf.lab2.pz.servicemanmanagement.controller.DashboardController">
    <children>
       <BorderPane minHeight="768.0" minWidth="1024.0" prefHeight="1024.0" prefWidth="789.0">
          <top>
             <AnchorPane prefHeight="71.0" prefWidth="1024.0" BorderPane.alignment="CENTER">
                <children>
-                  <Text fill="WHITE" layoutX="54.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jan Kowalski - kierownik" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="20.0">
+                  <Text layoutX="54.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jan Kowalski - kierownik" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="20.0">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Text>
-                  <Text fill="WHITE" layoutX="1162.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="23.03.2019" AnchorPane.rightAnchor="30.0">
+                  <Text layoutX="1162.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="23.03.2019" AnchorPane.rightAnchor="30.0">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text fill="WHITE" layoutX="1162.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="12:25" AnchorPane.rightAnchor="30.0">
+                  <Text layoutX="1162.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="12:25" AnchorPane.rightAnchor="30.0">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Text>
-                  <Button fx:id="notificationsButton" layoutX="487.0" layoutY="20.0" mnemonicParsing="false" onAction="#drawerAction" prefHeight="37.0" prefWidth="113.0" style="-fx-text-fill: #B2B2B2; -fx-border-color: #FFFF8D; -fx-border-radius: 20px; -fx-background-radius: 20px; -fx-background-color: #2A2E37;" styleClass="menu-button" stylesheets="@../styles/dark-theme.css" text="Powiadomienia" textFill="#4b5364" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="20.0" />
+                  <JFXButton buttonType="RAISED" fx:id="notificationsButton" layoutX="487.0" layoutY="20.0" mnemonicParsing="false" onAction="#drawerAction" prefHeight="36.0" prefWidth="151.0" style="-fx-background-color: white;" text="Powiadomienia" textFill="#4b5364" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="20.0" />
                </children>
             </AnchorPane>
          </top>
          <left>
             <AnchorPane prefHeight="535.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button layoutX="20.0" layoutY="26.0" mnemonicParsing="false" onAction="#showTimetable" prefHeight="34.0" prefWidth="109.0" style="-fx-text-fill: #B2B2B2; -fx-border-color: #FFFF8D; -fx-border-radius: 20px; -fx-background-radius: 20px; -fx-background-color: #2A2E37;" styleClass="menu-button" stylesheets="@../styles/dark-theme.css" text="Harmonogram" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="30.0" />
-                  <Button layoutX="15.0" layoutY="76.0" mnemonicParsing="false" onAction="#showEmployees" prefHeight="34.0" prefWidth="109.0" style="-fx-text-fill: #B2B2B2; -fx-border-color: #FFFF8D; -fx-border-radius: 20px; -fx-background-radius: 20px; -fx-background-color: #2A2E37;" styleClass="menu-button" stylesheets="@../styles/dark-theme.css" text="Pracownicy" textFill="#4b5364" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="70.0" />
-                  <Button layoutX="15.0" layoutY="672.0" mnemonicParsing="false" onAction="#logout" prefHeight="34.0" prefWidth="109.0" style="-fx-text-fill: #B2B2B2; -fx-border-color: #FFFF8D; -fx-border-radius: 20px; -fx-background-radius: 20px; -fx-background-color: #2A2E37;" styleClass="menu-button" stylesheets="@../styles/dark-theme.css" text="Wyloguj" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" />
+
+                  <JFXButton buttonType="RAISED" layoutX="20.0" layoutY="26.0" mnemonicParsing="false" onAction="#showTimetable" prefHeight="34.0" prefWidth="109.0" style="-fx-background-color: white;" text="Harmonogram" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="30.0" />
+                  <JFXButton buttonType="RAISED" layoutX="15.0" layoutY="76.0" mnemonicParsing="false" onAction="#showEmployees" prefHeight="34.0" prefWidth="109.0" style="-fx-background-color: white;" text="Pracownicy" textFill="#4b5364" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="70.0" />
+                  <JFXButton buttonType="RAISED" layoutX="15.0" layoutY="672.0" mnemonicParsing="false" onAction="#logout" prefHeight="34.0" prefWidth="109.0" style="-fx-background-color: white;" text="Wyloguj" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" />
                </children>
             </AnchorPane>
          </left>
          <center>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                <children>
-                  <Text fill="WHITE" layoutX="27.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wykres" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="15.0">
+                  <Text layoutX="27.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wykres" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="15.0">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Text>
-                  <Text fill="WHITE" layoutX="294.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Najnowsze zadania" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="15.0">
+                  <Text layoutX="294.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Najnowsze zadania" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="15.0">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Text>
-                  <Pane layoutX="27.0" layoutY="62.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #B2B2B2;" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="50.0" />
-                  <Text fill="WHITE" layoutY="307.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Serwisanci">
+                  <Pane layoutX="27.0" layoutY="62.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #B2B2B2;" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="50.0" />
+                  <Text layoutY="307.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Serwisanci" AnchorPane.leftAnchor="10.0">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Text>
-                  <TableView layoutX="251.0" layoutY="50.0" prefHeight="200.0" prefWidth="474.0" AnchorPane.leftAnchor="251.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0">
+                  <TableView layoutX="251.0" layoutY="50.0" prefHeight="200.0" prefWidth="474.0" style="-fx-background-color: #DDD8DC;" AnchorPane.leftAnchor="251.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0">
                     <columns>
                       <TableColumn prefWidth="75.0" text="C1" />
                     </columns>
                   </TableView>
-                  <ScrollPane layoutY="331.0" maxWidth="650.0" prefHeight="331.0" prefWidth="625.0" style="-fx-background-color: #2A2E37;" AnchorPane.leftAnchor="0.0">
+                  <ScrollPane layoutY="331.0" maxWidth="650.0" prefHeight="331.0" prefWidth="625.0" style="-fx-background-color: #DDD8DC;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="340.0">
                      <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="516.0" prefWidth="604.0" style="-fx-background-color: #2A2E37;">
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="516.0" prefWidth="604.0" style="-fx-background-color: white;">
                            <children>
-                              <Pane layoutX="25.0" layoutY="30.0" prefHeight="157.0" prefWidth="168.0" style="-fx-background-color: #4b5364;" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <Pane layoutX="25.0" layoutY="30.0" prefHeight="157.0" prefWidth="168.0" style="-fx-background-color: #DDD8DC;" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <Text layoutX="63.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #FFFF8D;" text="Grupa I" />
-                                    <Text layoutX="39.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #FFFF8D;" text="Lider: Janusz K" />
-                                    <Text layoutX="5.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #FFFF8D;" text="Zakładanie internetu" textAlignment="CENTER">
+                                    <Text layoutX="63.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: black;" text="Grupa I" />
+                                    <Text layoutX="39.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: black;" text="Lider: Janusz K" />
+                                    <Text layoutX="5.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: black;" text="Zakładanie internetu" textAlignment="CENTER">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </Text>
-                                    <Text layoutX="53.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #FFFF8D;" text="7:00 - 9:00" />
+                                    <Text layoutX="53.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: black;" text="7:00 - 9:00" />
                                  </children>
                               </Pane>
-                              <Pane layoutX="218.0" prefHeight="157.0" prefWidth="168.0" style="-fx-background-color: #4b5364;">
+                              <Pane layoutX="196.0" prefHeight="157.0" prefWidth="168.0" style="-fx-background-color: #DDD8DC;">
                                  <children>
-                                    <Text layoutX="63.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #FFFF8D;" text="Grupa I" />
-                                    <Text layoutX="39.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #FFFF8D;" text="Lider: Janusz K" />
-                                    <Text layoutX="5.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #FFFF8D;" text="Zakładanie internetu" textAlignment="CENTER">
+                                    <Text layoutX="63.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: black;" text="Grupa I" />
+                                    <Text layoutX="39.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: black;" text="Lider: Janusz K" />
+                                    <Text layoutX="5.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: black;" text="Zakładanie internetu" textAlignment="CENTER">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </Text>
-                                    <Text layoutX="53.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #FFFF8D;" text="7:00 - 9:00" />
+                                    <Text layoutX="53.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: black;" text="7:00 - 9:00" />
                                  </children>
                               </Pane>
-                              <Pane layoutY="206.0" prefHeight="157.0" prefWidth="168.0" style="-fx-background-color: #4b5364;">
+                              <Pane layoutX="387.0" prefHeight="157.0" prefWidth="168.0" style="-fx-background-color: #DDD8DC;">
                                  <children>
-                                    <Text layoutX="63.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #FFFF8D;" text="Grupa I" />
-                                    <Text layoutX="39.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #FFFF8D;" text="Lider: Janusz K" />
-                                    <Text layoutX="5.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #FFFF8D;" text="Zakładanie internetu" textAlignment="CENTER">
+                                    <Text layoutX="63.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: black;" text="Grupa I" />
+                                    <Text layoutX="39.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: black;" text="Lider: Janusz K" />
+                                    <Text layoutX="5.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: black;" text="Zakładanie internetu" textAlignment="CENTER">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </Text>
-                                    <Text layoutX="53.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #FFFF8D;" text="7:00 - 9:00" />
+                                    <Text layoutX="53.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: black;" text="7:00 - 9:00" />
                                  </children>
                               </Pane>
-                              <Pane layoutY="391.0" prefHeight="157.0" prefWidth="168.0" style="-fx-background-color: #4b5364;">
+                              <Pane layoutY="180.0" prefHeight="157.0" prefWidth="168.0" style="-fx-background-color: #DDD8DC;">
                                  <children>
-                                    <Text layoutX="63.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #FFFF8D;" text="Grupa I" />
-                                    <Text layoutX="39.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #FFFF8D;" text="Lider: Janusz K" />
-                                    <Text layoutX="5.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #FFFF8D;" text="Zakładanie internetu" textAlignment="CENTER">
+                                    <Text layoutX="63.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: black;" text="Grupa I" />
+                                    <Text layoutX="39.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: black;" text="Lider: Janusz K" />
+                                    <Text layoutX="5.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: black;" text="Zakładanie internetu" textAlignment="CENTER">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </Text>
-                                    <Text layoutX="53.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #FFFF8D;" text="7:00 - 9:00" />
+                                    <Text layoutX="53.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: black;" text="7:00 - 9:00" />
                                  </children>
                               </Pane>
-                              <Pane layoutX="428.0" prefHeight="157.0" prefWidth="168.0" style="-fx-background-color: #4b5364;">
+                              <Pane layoutX="196.0" layoutY="180.0" prefHeight="157.0" prefWidth="168.0" style="-fx-background-color: #DDD8DC;">
                                  <children>
-                                    <Text layoutX="63.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #FFFF8D;" text="Grupa I" />
-                                    <Text layoutX="39.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #FFFF8D;" text="Lider: Janusz K" />
-                                    <Text layoutX="5.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #FFFF8D;" text="Zakładanie internetu" textAlignment="CENTER">
+                                    <Text layoutX="63.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: black;" text="Grupa I" />
+                                    <Text layoutX="39.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: black;" text="Lider: Janusz K" />
+                                    <Text layoutX="5.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: black;" text="Zakładanie internetu" textAlignment="CENTER">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </Text>
-                                    <Text layoutX="53.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #FFFF8D;" text="7:00 - 9:00" />
+                                    <Text layoutX="53.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: black;" text="7:00 - 9:00" />
                                  </children>
                               </Pane>
-                              <Pane layoutX="218.0" layoutY="206.0" prefHeight="157.0" prefWidth="168.0" style="-fx-background-color: #4b5364;">
+                              <Pane layoutX="387.0" layoutY="180.0" prefHeight="157.0" prefWidth="168.0" style="-fx-background-color: #DDD8DC;">
                                  <children>
-                                    <Text layoutX="63.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #FFFF8D;" text="Grupa I" />
-                                    <Text layoutX="39.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #FFFF8D;" text="Lider: Janusz K" />
-                                    <Text layoutX="5.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #FFFF8D;" text="Zakładanie internetu" textAlignment="CENTER">
+                                    <Text layoutX="63.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: black;" text="Grupa I" />
+                                    <Text layoutX="39.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: black;" text="Lider: Janusz K" />
+                                    <Text layoutX="5.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: black;" text="Zakładanie internetu" textAlignment="CENTER">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </Text>
-                                    <Text layoutX="53.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #FFFF8D;" text="7:00 - 9:00" />
+                                    <Text layoutX="53.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: black;" text="7:00 - 9:00" />
                                  </children>
                               </Pane>
-                              <Pane layoutX="428.0" layoutY="206.0" prefHeight="157.0" prefWidth="168.0" style="-fx-background-color: #4b5364;">
+                              <Pane layoutY="359.0" prefHeight="157.0" prefWidth="168.0" style="-fx-background-color: #DDD8DC;">
                                  <children>
-                                    <Text layoutX="63.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #FFFF8D;" text="Grupa I" />
-                                    <Text layoutX="39.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #FFFF8D;" text="Lider: Janusz K" />
-                                    <Text layoutX="5.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #FFFF8D;" text="Zakładanie internetu" textAlignment="CENTER">
+                                    <Text layoutX="63.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: black;" text="Grupa I" />
+                                    <Text layoutX="39.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: black;" text="Lider: Janusz K" />
+                                    <Text layoutX="5.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: black;" text="Zakładanie internetu" textAlignment="CENTER">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </Text>
-                                    <Text layoutX="53.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #FFFF8D;" text="7:00 - 9:00" />
+                                    <Text layoutX="53.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: black;" text="7:00 - 9:00" />
                                  </children>
                               </Pane>
-                              <Pane layoutX="218.0" layoutY="391.0" prefHeight="157.0" prefWidth="168.0" style="-fx-background-color: #4b5364;">
+                              <Pane layoutX="196.0" layoutY="359.0" prefHeight="157.0" prefWidth="168.0" style="-fx-background-color: #DDD8DC;">
                                  <children>
-                                    <Text layoutX="63.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #FFFF8D;" text="Grupa I" />
-                                    <Text layoutX="39.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #FFFF8D;" text="Lider: Janusz K" />
-                                    <Text layoutX="5.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #FFFF8D;" text="Zakładanie internetu" textAlignment="CENTER">
+                                    <Text layoutX="63.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: black;" text="Grupa I" />
+                                    <Text layoutX="39.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: black;" text="Lider: Janusz K" />
+                                    <Text layoutX="5.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: black;" text="Zakładanie internetu" textAlignment="CENTER">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </Text>
-                                    <Text layoutX="53.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #FFFF8D;" text="7:00 - 9:00" />
+                                    <Text layoutX="53.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: black;" text="7:00 - 9:00" />
                                  </children>
                               </Pane>
-                              <Pane layoutX="428.0" layoutY="391.0" prefHeight="157.0" prefWidth="168.0" style="-fx-background-color: #4b5364;">
+                              <Pane layoutX="387.0" layoutY="359.0" prefHeight="157.0" prefWidth="168.0" style="-fx-background-color: #DDD8DC;">
                                  <children>
-                                    <Text layoutX="63.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #FFFF8D;" text="Grupa I" />
-                                    <Text layoutX="39.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #FFFF8D;" text="Lider: Janusz K" />
-                                    <Text layoutX="5.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #FFFF8D;" text="Zakładanie internetu" textAlignment="CENTER">
+                                    <Text layoutX="63.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: black;" text="Grupa I" />
+                                    <Text layoutX="39.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: black;" text="Lider: Janusz K" />
+                                    <Text layoutX="5.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: black;" text="Zakładanie internetu" textAlignment="CENTER">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </Text>
-                                    <Text layoutX="53.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #FFFF8D;" text="7:00 - 9:00" />
+                                    <Text layoutX="53.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: black;" text="7:00 - 9:00" />
                                  </children>
                               </Pane>
                            </children>
@@ -196,7 +198,7 @@
                      <children>
                         <Pane prefHeight="682.0" prefWidth="196.0" style="-fx-background-color: INVISIBLE;">
                            <children>
-                              <Pane prefHeight="49.0" prefWidth="196.0" style="-fx-background-color: #FFFF8D; -fx-background-radius: 20px;">
+                              <Pane prefHeight="49.0" prefWidth="196.0" style="-fx-background-color: #47E2FF; -fx-background-radius: 20px;">
                                  <children>
                                     <Text fill="WHITE" layoutX="19.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #2A2E37;" text="Powiadomienia">
                                        <font>
@@ -205,56 +207,56 @@
                                     </Text>
                                  </children>
                               </Pane>
-                              <Pane layoutY="55.0" prefHeight="148.0" prefWidth="196.0" style="-fx-background-color: #4b5364; -fx-background-radius: 5px;">
+                              <Pane layoutY="55.0" prefHeight="148.0" prefWidth="196.0" style="-fx-background-color: #DDD8DC; -fx-background-radius: 5px;">
                                  <children>
-                                    <Text fill="WHITE" layoutX="30.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Powiadomienie">
+                                    <Text layoutX="30.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Powiadomienie">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Text>
-                                    <Text layoutX="12.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #FFFF8D;" text="Masz nową wiadomość" textAlignment="CENTER">
+                                    <Text fill="#3bcee8" layoutX="12.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: 47E2FF;" text="Masz nową wiadomość" textAlignment="CENTER">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </Text>
                                  </children>
                               </Pane>
-                              <Pane layoutY="183.0" prefHeight="148.0" prefWidth="196.0" style="-fx-background-color: #4b5364; -fx-background-radius: 5px;">
+                              <Pane layoutY="183.0" prefHeight="148.0" prefWidth="196.0" style="-fx-background-color: #DDD8DC; -fx-background-radius: 5px;">
                                  <children>
-                                    <Text fill="WHITE" layoutX="30.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Powiadomienie">
+                                    <Text layoutX="30.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Powiadomienie">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Text>
-                                    <Text layoutX="12.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #FFFF8D;" text="Masz nową wiadomość" textAlignment="CENTER">
+                                    <Text layoutX="12.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #47E2FF;" text="Masz nową wiadomość" textAlignment="CENTER">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </Text>
                                  </children>
                               </Pane>
-                              <Pane layoutY="331.0" prefHeight="148.0" prefWidth="196.0" style="-fx-background-color: #4b5364; -fx-background-radius: 5px;">
+                              <Pane layoutY="331.0" prefHeight="148.0" prefWidth="196.0" style="-fx-background-color: #DDD8DC; -fx-background-radius: 5px;">
                                  <children>
-                                    <Text fill="WHITE" layoutX="30.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Powiadomienie">
+                                    <Text layoutX="30.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Powiadomienie">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Text>
-                                    <Text layoutX="12.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #FFFF8D;" text="Masz nową wiadomość" textAlignment="CENTER">
+                                    <Text layoutX="12.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #47E2FF;" text="Masz nową wiadomość" textAlignment="CENTER">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </Text>
                                  </children>
                               </Pane>
-                              <Pane layoutY="479.0" prefHeight="148.0" prefWidth="196.0" style="-fx-background-color: #4b5364; -fx-background-radius: 5px;">
+                              <Pane layoutY="479.0" prefHeight="148.0" prefWidth="196.0" style="-fx-background-color: #DDD8DC; -fx-background-radius: 5px;">
                                  <children>
-                                    <Text fill="WHITE" layoutX="30.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Powiadomienie">
+                                    <Text layoutX="30.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Powiadomienie">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Text>
-                                    <Text layoutX="12.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #FFFF8D;" text="Masz nową wiadomość" textAlignment="CENTER">
+                                    <Text layoutX="12.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #47E2FF;" text="Masz nową wiadomość" textAlignment="CENTER">
                                        <font>
                                           <Font size="15.0" />
                                        </font>

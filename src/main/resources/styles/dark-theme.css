@@ -1,11 +1,11 @@
 {
-    -fx-primary: #2A2E37;
+    -fx-primary: #DDD8DC;
     -fx-secondary: #FFFF8D;
     -fx-primarytext: #B2B2B2;
 }
 
 .root {
-    -fx-background-color: -fx-primary;
+    -fx-background-color: #DDD8DC;
 }
 
 .menu-button{
@@ -14,7 +14,7 @@
     }
 
 .scroll-pane {
-    -fx-background-color: #02030A;
+    -fx-background-color: white;
 }
 
 .scroll-bar:horizontal, .scroll-bar:vertical{
@@ -35,10 +35,10 @@
 
 .scroll-bar:horizontal .thumb,
 .scroll-bar:vertical .thumb {
-    -fx-background-color: #FFFF8D;
+    -fx-background-color: white;
     -fx-background-radius: 5em;
 }
 
 .scroll-pane > .corner {
-    -fx-background-color: black;
+    -fx-background-color: white;
 }
