@@ -19,6 +19,7 @@
          </font>
       </Text>
       <JFXButton buttonType="RAISED" layoutX="400.0" layoutY="100.0" onAction="#changeViewToLoginForm" style="-fx-background-color: #3a21f5;" text="Logowanie/Rejestracja" textFill="WHITE" />
+      <JFXButton buttonType="RAISED" layoutX="400.0" layoutY="150.0" onAction="#changeViewToServicemanRegistration" style="-fx-background-color: #3a21f5;" text="Rejestracja serwisanta" textFill="WHITE" />
    </children>
    <effect>
       <BoxBlur iterations="0" />

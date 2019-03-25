@@ -22,6 +22,10 @@ public class MainController {
         viewManager.show(ViewType.LOGIN);
     }
 
+    public void changeViewToServicemanRegistration(ActionEvent event) {
+        System.out.println("Zmiana widoku na servicemanRegister.fxml");
+        viewManager.show(ViewType.SERVICEMAN_REGISTER);
+    }
     @Autowired
     public void setViewManager(ViewManager viewManager) {
         this.viewManager = viewManager;
