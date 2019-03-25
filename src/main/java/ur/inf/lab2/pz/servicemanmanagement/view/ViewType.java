@@ -3,7 +3,7 @@ package ur.inf.lab2.pz.servicemanmanagement.view;
 public enum ViewType {
     MAIN("main"),
     SECONDARY("secondary"),
-    CHANGEFORM("changeform");
+    MANAGERDATA("manager-data");
 
     private String fxmlName;
 

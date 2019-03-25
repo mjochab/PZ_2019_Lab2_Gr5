@@ -13,9 +13,9 @@ public class MainController {
     private ViewManager viewManager;
     private ExampleService exampleService;
 
-    public void changeView(ActionEvent event) {
-        exampleService.log("Zmiana widoku na secondary.fxml");
-        viewManager.show(ViewType.SECONDARY);
+    public void goToManagerData(ActionEvent event) {
+        exampleService.log("Zmiana widoku na manager-data.fxml");
+        viewManager.show(ViewType.MANAGERDATA);
     }
 
 
