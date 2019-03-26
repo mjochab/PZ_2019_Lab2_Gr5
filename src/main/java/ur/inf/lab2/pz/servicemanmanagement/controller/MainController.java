@@ -12,28 +12,29 @@ import ur.inf.lab2.pz.servicemanmanagement.view.ViewType;
 public class MainController {
 
     private ViewManager viewManager;
-    private ExampleService exampleService;
 
 
     public void goToDashboard(ActionEvent event){
-        exampleService.log("Zmiana widoku na Dashboard.fxml");
+        System.out.println("Zmiana widoku na Dashboard.fxml");
         viewManager.show(ViewType.DASHBOARD);
-
 
     }
 
         public void goToManagerData (ActionEvent event){
-            exampleService.log("Zmiana widoku na manager-data.fxml");
             viewManager.show(ViewType.MANAGER_TIMETABLE);
         }
 
 
-        @Autowired
-        public void setExampleService (ExampleService exampleService){
-            this.exampleService = exampleService;
+
+        public void changeViewToLoginForm(ActionEvent event){
+            System.out.println("Zmiana widoku na login.fxml");
+        viewManager.show(ViewType.LOGIN);
         }
 
-        @Autowired
+        public void changeViewToServicemanRegistration(ActionEvent event) {
+        System.out.println("Zmiana widoku na servicemanRegister.fxml");
+        viewManager.show(ViewType.SERVICEMAN_REGISTER);
+    }@Autowired
         public void setViewManager (ViewManager viewManager){
             this.viewManager = viewManager;
         }
