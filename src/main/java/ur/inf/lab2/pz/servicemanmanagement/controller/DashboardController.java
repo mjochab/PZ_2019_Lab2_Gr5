@@ -1,17 +1,18 @@
 package ur.inf.lab2.pz.servicemanmanagement.controller;
 
 import javafx.animation.TranslateTransition;
-import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ur.inf.lab2.pz.servicemanmanagement.ExampleService;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewManager;
+import ur.inf.lab2.pz.servicemanmanagement.view.ViewType;
 
+import javax.swing.text.View;
 import java.io.IOException;
 
 @Controller
@@ -55,6 +56,20 @@ public class DashboardController{
         exampleService.log("Wylogowanie z systemu");
     }
 
+    @FXML
+    public void showManagerData(ActionEvent event) {
+        viewManager.show(ViewType.MANAGER_DATA);
+    }
+
+    @FXML
+    public void submitManagerData(ActionEvent event) {
+        viewManager.show(ViewType.DASHBOARD);
+    }
+
+    @FXML
+    public void showDashboard(ActionEvent event) {
+        viewManager.show(ViewType.DASHBOARD);
+    }
 
     @FXML
     private void drawerAction() throws IOException {

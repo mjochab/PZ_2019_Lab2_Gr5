@@ -21,7 +21,7 @@ public class ManagerRegisterController {
 
     public void register(ActionEvent event) {
         System.out.println("Pomyślna rejestracja");
-        viewManager.show(ViewType.MAIN);
+        viewManager.show(ViewType.DASHBOARD);
     }
 
     @Autowired

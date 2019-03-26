@@ -23,13 +23,11 @@ public class LoginController {
 
 
         if (emailTextField.getText().equals("kierownik@test.pl")) {
-            System.out.println("Zalogowany jako kierownik \nZmiana widoku na main.fxml");
-            viewManager.show(ViewType.MAIN);
+            viewManager.show(ViewType.DASHBOARD);
         }
 
         else if (emailTextField.getText().equals("uberserwisant@test.pl")){
-            System.out.println("Zalogowany jako serwisant\nZmiana widoku na main.fxml");
-            viewManager.show(ViewType.MAIN);
+            viewManager.show(ViewType.SERVICEMAN_REGISTER);
 
         }
     }

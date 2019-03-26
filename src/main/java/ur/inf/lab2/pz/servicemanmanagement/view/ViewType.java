@@ -4,7 +4,7 @@ public enum ViewType {
     MAIN("main"),
     SECONDARY("secondary"),
     DASHBOARD("Dashboard"),
-    MANAGERDATA("manager-data"),
+    MANAGER_DATA("manager-data"),
     MANAGER_TIMETABLE("manager-timetable"),
     LOGIN("login"),
     MANAGER_REGISTER("managerRegister"),
