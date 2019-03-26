@@ -31,6 +31,7 @@ public class ViewManager {
         this.stage.setMinWidth(stageConfig.getMinWidth());
         this.stage.setMinHeight(stageConfig.getMinHeight());
         this.stage.setMaximized(stageConfig.getMaximized());
+        this.stage.setResizable(false);
 		this.stage.setFullScreen(stageConfig.getFullScreenEnabled());
 
 		this.stage.show();

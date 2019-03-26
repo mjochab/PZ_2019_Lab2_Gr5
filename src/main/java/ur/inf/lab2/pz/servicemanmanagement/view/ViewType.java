@@ -4,7 +4,8 @@ public enum ViewType {
     MAIN("main"),
     SECONDARY("secondary"),
     DASHBOARD("Dashboard"),
-    MANAGERDATA("manager-data");
+    MANAGERDATA("manager-data"),
+    MANAGER_TIMETABLE("manager-timetable");
 
     private String fxmlName;
 

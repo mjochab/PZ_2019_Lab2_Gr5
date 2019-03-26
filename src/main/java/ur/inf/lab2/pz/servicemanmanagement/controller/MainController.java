@@ -1,5 +1,6 @@
 package ur.inf.lab2.pz.servicemanmanagement.controller;
 
+import com.jfoenix.controls.JFXMasonryPane;
 import javafx.event.ActionEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,11 +18,13 @@ public class MainController {
     public void goToDashboard(ActionEvent event){
         exampleService.log("Zmiana widoku na Dashboard.fxml");
         viewManager.show(ViewType.DASHBOARD);
+
+
     }
 
         public void goToManagerData (ActionEvent event){
             exampleService.log("Zmiana widoku na manager-data.fxml");
-            viewManager.show(ViewType.MANAGERDATA);
+            viewManager.show(ViewType.MANAGER_TIMETABLE);
         }
 
 
