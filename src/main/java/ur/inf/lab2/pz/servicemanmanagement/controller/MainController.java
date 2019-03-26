@@ -1,5 +1,6 @@
 package ur.inf.lab2.pz.servicemanmanagement.controller;
 
+import com.jfoenix.controls.JFXMasonryPane;
 import javafx.event.ActionEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,26 +12,31 @@ import ur.inf.lab2.pz.servicemanmanagement.view.ViewType;
 public class MainController {
 
     private ViewManager viewManager;
-    private ExampleService exampleService;
 
-    public void changeView(ActionEvent event) {
-        exampleService.log("Zmiana widoku na secondary.fxml");
-        viewManager.show(ViewType.SECONDARY);
+
+    public void goToDashboard(ActionEvent event){
+        System.out.println("Zmiana widoku na Dashboard.fxml");
+        viewManager.show(ViewType.DASHBOARD);
+
     }
 
-    public void changeWorkerView(ActionEvent event){
-        exampleService.log("Zmiana widoku na workerList.fxml");
-        viewManager.show(ViewType.WORKER_LIST);
-    }
+        public void goToManagerData (ActionEvent event){
+            viewManager.show(ViewType.MANAGER_TIMETABLE);
+        }
 
 
-    @Autowired
-    public void setExampleService(ExampleService exampleService) {
-        this.exampleService = exampleService;
+
+        public void changeViewToLoginForm(ActionEvent event){
+            System.out.println("Zmiana widoku na login.fxml");
+        viewManager.show(ViewType.LOGIN);
+        }
+
+        public void changeViewToServicemanRegistration(ActionEvent event) {
+        System.out.println("Zmiana widoku na servicemanRegister.fxml");
+        viewManager.show(ViewType.SERVICEMAN_REGISTER);
+    }@Autowired
+        public void setViewManager (ViewManager viewManager){
+            this.viewManager = viewManager;
+        }
     }
 
-    @Autowired
-    public void setViewManager(ViewManager viewManager) {
-        this.viewManager = viewManager;
-    }
-}
