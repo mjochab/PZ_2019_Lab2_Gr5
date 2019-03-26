@@ -8,7 +8,8 @@ public enum ViewType {
     MANAGER_TIMETABLE("manager-timetable"),
     LOGIN("login"),
     MANAGER_REGISTER("managerRegister"),
-    SERVICEMAN_REGISTER("servicemanRegister");
+    SERVICEMAN_REGISTER("servicemanRegister"),
+    WORKER_LIST("workerList");
 
     private String fxmlName;
 
