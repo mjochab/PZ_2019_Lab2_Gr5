@@ -12,11 +12,10 @@ import ur.inf.lab2.pz.servicemanmanagement.ExampleService;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewManager;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewType;
 
-import javax.swing.text.View;
 import java.io.IOException;
 
 @Controller
-public class DashboardController{
+public class ServicemanTimetableController {
 
     @FXML
     private Button notificationsButton;
@@ -39,7 +38,7 @@ public class DashboardController{
 
     @FXML
     public void showTimetable(javafx.event.ActionEvent event) throws IOException {
-        viewManager.show(ViewType.MANAGER_TIMETABLE);
+        viewManager.show(ViewType.SERVICEMAN_TIMETABLE);
     }
 
     @FXML
@@ -63,12 +62,22 @@ public class DashboardController{
     }
 
     @FXML
+    public void submitServicemanData(ActionEvent event) throws IOException {
+        viewManager.show(ViewType.SERVICEMAN_TIMETABLE);
+    }
+
+    @FXML
     public void showDashboard(ActionEvent event) throws IOException {
         viewManager.show(ViewType.DASHBOARD);
     }
 
     @FXML
     public void addWorker(ActionEvent event) {
+    }
+
+    @FXML
+    public void showServicemanData(ActionEvent event) throws IOException {
+        viewManager.show(ViewType.SERVICEMAN_DATA);
     }
 
     @FXML
@@ -87,8 +96,4 @@ public class DashboardController{
         });
     }
 
-
-
 }
-
-

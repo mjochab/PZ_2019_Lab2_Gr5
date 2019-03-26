@@ -9,7 +9,9 @@ public enum ViewType {
     LOGIN("login"),
     MANAGER_REGISTER("managerRegister"),
     SERVICEMAN_REGISTER("servicemanRegister"),
-    WORKER_LIST("workerList");
+    WORKER_LIST("workerList"),
+    SERVICEMAN_TIMETABLE("serviceman-timetable"),
+    SERVICEMAN_DATA("serviceman-data");
 
     private String fxmlName;
 

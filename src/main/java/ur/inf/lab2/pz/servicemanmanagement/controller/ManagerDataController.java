@@ -6,11 +6,13 @@ import org.springframework.stereotype.Controller;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewManager;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewType;
 
+import java.io.IOException;
+
 @Controller
 public class ManagerDataController {
     private ViewManager viewManager;
 
-    public void submitData(ActionEvent event) {
+    public void submitData(ActionEvent event) throws IOException {
         System.out.println("ManagerDataController - zatwierdzono\n" +
                 "formularz danych kierownika");
         viewManager.show(ViewType.MAIN);

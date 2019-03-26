@@ -8,30 +8,32 @@ import ur.inf.lab2.pz.servicemanmanagement.ExampleService;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewManager;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewType;
 
+import java.io.IOException;
+
 @Controller
 public class MainController {
 
     private ViewManager viewManager;
 
 
-    public void goToDashboard(ActionEvent event){
+    public void goToDashboard(ActionEvent event) throws IOException {
         System.out.println("Zmiana widoku na Dashboard.fxml");
         viewManager.show(ViewType.DASHBOARD);
 
     }
 
-        public void goToManagerData (ActionEvent event){
+        public void goToManagerData (ActionEvent event) throws IOException {
             viewManager.show(ViewType.MANAGER_TIMETABLE);
         }
 
 
 
-        public void changeViewToLoginForm(ActionEvent event){
+        public void changeViewToLoginForm(ActionEvent event) throws IOException {
             System.out.println("Zmiana widoku na login.fxml");
         viewManager.show(ViewType.LOGIN);
         }
 
-        public void changeViewToServicemanRegistration(ActionEvent event) {
+        public void changeViewToServicemanRegistration(ActionEvent event) throws IOException {
         System.out.println("Zmiana widoku na servicemanRegister.fxml");
         viewManager.show(ViewType.SERVICEMAN_REGISTER);
     }@Autowired

@@ -7,13 +7,15 @@ import ur.inf.lab2.pz.servicemanmanagement.view.ViewType;
 
 import javafx.event.ActionEvent;
 
+import java.io.IOException;
+
 @Controller
 public class ServicemanRegisterController {
     private ViewManager viewManager;
 
-    public void register(ActionEvent event) {
+    public void register(ActionEvent event) throws IOException {
         System.out.println("Zarejestrowano nowego uber serwisanta");
-        viewManager.show(ViewType.MAIN);
+        viewManager.show(ViewType.SERVICEMAN_TIMETABLE);
     }
 
     @Autowired

@@ -18,7 +18,7 @@ public class ViewManager {
     private StageConfig stageConfig;
     private Stage stage;
 
-    public void init(Stage stage) {
+    public void init(Stage stage) throws IOException {
         this.stage = stage;
 
 		Scene scene = new Scene(
@@ -37,21 +37,17 @@ public class ViewManager {
 		this.stage.show();
     }
 
-    public void show(ViewType viewType) {
+    public void show(ViewType viewType) throws IOException {
         Parent view = getView(viewType.getFXMLName());
         stage.getScene().setRoot(view);
     }
 
-    private Parent getView(String viewName) {
+    private Parent getView(String viewName) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setControllerFactory(context::getBean);
         loader.setLocation(getClass().getResource("/fxml/"+viewName+".fxml"));
 
-        try {
-            return (Parent) loader.load();
-        } catch (IOException e) {
-            return null;
-        }
+        return (Parent) loader.load();
     }
 
     @Autowired

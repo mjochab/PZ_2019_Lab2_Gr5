@@ -11,15 +11,17 @@ import javafx.fxml.FXML;
 
 import javafx.event.ActionEvent;
 
+import java.io.IOException;
+
 @Controller
 public class ManagerRegisterController {
     private ViewManager viewManager;
 
-    public void changeView(ActionEvent event) {
+    public void changeView(ActionEvent event) throws IOException {
         viewManager.show(ViewType.LOGIN);
     }
 
-    public void register(ActionEvent event) {
+    public void register(ActionEvent event) throws IOException {
         System.out.println("Pomyślna rejestracja");
         viewManager.show(ViewType.DASHBOARD);
     }

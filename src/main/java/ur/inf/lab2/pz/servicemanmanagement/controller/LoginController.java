@@ -11,6 +11,8 @@ import ur.inf.lab2.pz.servicemanmanagement.view.ViewType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
+import java.io.IOException;
+
 @Controller
 public class LoginController {
     private ViewManager viewManager;
@@ -19,7 +21,7 @@ public class LoginController {
     private JFXTextField emailTextField;
 
 
-    public void login(ActionEvent event) {
+    public void login(ActionEvent event) throws IOException {
 
 
         if (emailTextField.getText().equals("kierownik@test.pl")) {
@@ -32,7 +34,7 @@ public class LoginController {
         }
     }
 
-    public void changeView(ActionEvent event) {
+    public void changeView(ActionEvent event) throws IOException {
         viewManager.show(ViewType.MANAGER_REGISTER);
     }
 
