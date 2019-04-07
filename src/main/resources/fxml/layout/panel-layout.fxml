@@ -36,13 +36,13 @@
             <FontAwesomeIconView accessibleRole="PARENT" fill="WHITE" glyphName="CALENDAR" layoutX="1178.0" layoutY="50.0" size="20" text="" wrappingWidth="12.0" AnchorPane.bottomAnchor="19.0" AnchorPane.rightAnchor="80.0" />
             <AnchorPane layoutX="5.0" layoutY="7.0" prefHeight="43.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Label accessibleRole="PARENT" styleClass="text-icons" stylesheets="@../../styles/styles.css" text="Kierownik" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                  <Label fx:id="roleLabel" accessibleRole="PARENT" styleClass="text-icons" stylesheets="@../../styles/styles.css" text="Kierownik" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
                      <font>
                         <Font name="Noto Sans CJK TC Light" size="13.0" />
                      </font>
                   </Label>
                   <FontAwesomeIconView accessibleRole="PARENT" fill="WHITE" glyphName="USER" size="60" styleClass="text-icons" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
-                  <Label accessibleRole="PARENT" styleClass="text-icons" stylesheets="@../../styles/styles.css" text="Jan Kowalski" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
+                  <Label fx:id="fullNameLabel" accessibleRole="PARENT" styleClass="text-icons" stylesheets="@../../styles/styles.css" text="Jan Kowalski" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
                      <font>
                         <Font name="Noto Sans CJK JP Light" size="20.0" />
                      </font>
@@ -69,7 +69,7 @@
                <children>
                   <AnchorPane prefHeight="800.0" prefWidth="200.0" styleClass="bg-light-primary" stylesheets="@../../styles/styles.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <JFXButton accessibleRole="PARENT" contentDisplay="TOP" layoutX="59.0" layoutY="14.0" onAction="#navigateToDashboard" prefHeight="80.0" stylesheets="@../../styles/styles.css" text="Dashboard" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                        <JFXButton fx:id="dashboardButton" accessibleRole="PARENT" contentDisplay="TOP" layoutX="59.0" layoutY="14.0" onAction="#navigateToDashboard" prefHeight="80.0" stylesheets="@../../styles/styles.css" text="Dashboard" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                            <font>
                               <Font name="Noto Sans CJK TC DemiLight" size="20.0" />
                            </font>
@@ -81,7 +81,7 @@
                               <String fx:value="bg-primary" />
                            </styleClass>
                         </JFXButton>
-                        <JFXButton accessibleRole="PARENT" contentDisplay="TOP" layoutX="63.0" layoutY="65.0" onAction="#navigateToTimetable" prefHeight="80.0" stylesheets="@../../styles/styles.css" text="Harmonogram" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="80.0">
+                        <JFXButton fx:id="timetableButton" accessibleRole="PARENT" contentDisplay="TOP" layoutX="63.0" layoutY="65.0" onAction="#navigateToTimetable" prefHeight="80.0" stylesheets="@../../styles/styles.css" text="Harmonogram" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="80.0">
                            <font>
                               <Font name="Noto Sans CJK TC DemiLight" size="20.0" />
                            </font>
@@ -93,7 +93,7 @@
                               <String fx:value="bg-primary" />
                            </styleClass>
                         </JFXButton>
-                        <JFXButton accessibleRole="PARENT" contentDisplay="TOP" layoutX="73.0" layoutY="75.0" onAction="#navigateToEmployees" prefHeight="80.0" stylesheets="@../../styles/styles.css" text="Pracownicy" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="160.0">
+                        <JFXButton fx:id="employeeButton" accessibleRole="PARENT" contentDisplay="TOP" layoutX="73.0" layoutY="75.0" onAction="#navigateToEmployees" prefHeight="80.0" stylesheets="@../../styles/styles.css" text="Pracownicy" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="160.0">
                            <font>
                               <Font name="Noto Sans CJK TC DemiLight" size="20.0" />
                            </font>

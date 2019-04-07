@@ -3,6 +3,7 @@ package ur.inf.lab2.pz.servicemanmanagement.controller;
 import com.jfoenix.controls.JFXTextField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import ur.inf.lab2.pz.servicemanmanagement.service.MockSecurityContext;
 import ur.inf.lab2.pz.servicemanmanagement.view.Layout;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewComponent;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewManager;
@@ -16,6 +17,7 @@ import java.io.IOException;
 public class LoginController {
     private ViewManager viewManager;
 
+
     @FXML
     private JFXTextField emailTextField;
 
@@ -23,10 +25,13 @@ public class LoginController {
     public void login(ActionEvent event) throws IOException {
 
         if (emailTextField.getText().equals("kierownik@test.pl")) {
+            MockSecurityContext.loggedUser = MockSecurityContext.UserType.MANAGER;
             viewManager.switchLayout(Layout.PANEL, ViewComponent.DASHBOARD);
         }
 
         else if (emailTextField.getText().equals("uberserwisant@test.pl")){
+            MockSecurityContext.loggedUser = MockSecurityContext.UserType.SERVICEMAN;
+            viewManager.switchLayout(Layout.PANEL, ViewComponent.TIMETABLE);
 //            viewManager.show(ViewType.SERVICEMAN_REGISTER);
 
         }

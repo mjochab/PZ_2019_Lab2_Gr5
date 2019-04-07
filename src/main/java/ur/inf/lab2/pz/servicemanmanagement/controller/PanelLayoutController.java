@@ -1,13 +1,16 @@
 package ur.inf.lab2.pz.servicemanmanagement.controller;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import ur.inf.lab2.pz.servicemanmanagement.service.MockSecurityContext;
 import ur.inf.lab2.pz.servicemanmanagement.view.Layout;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewComponent;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewManager;
@@ -25,6 +28,34 @@ public class PanelLayoutController {
 
     @FXML
     private AnchorPane drawer;
+
+    @FXML
+    private Label fullNameLabel;
+    @FXML
+    private Label roleLabel;
+
+    @FXML
+    private JFXButton dashboardButton;
+    @FXML
+    private JFXButton timetableButton;
+    @FXML
+    private JFXButton employeeButton;
+
+    @FXML
+    public void initialize() {
+        if (MockSecurityContext.loggedUser.equals(MockSecurityContext.UserType.SERVICEMAN)) {
+            dashboardButton.setManaged(false);
+            dashboardButton.setVisible(false);
+            dashboardButton.getChildrenUnmodifiable().forEach(node -> node.setManaged(false));
+            employeeButton.setManaged(false);
+            employeeButton.setVisible(false);
+            employeeButton.getChildrenUnmodifiable().forEach(node -> node.setManaged(false));
+            AnchorPane.setTopAnchor(timetableButton, 0.0);
+
+            fullNameLabel.setText("Andrzej Gołota");
+            roleLabel.setText("Głowa serwisantów");
+        }
+    }
 
     @FXML
     private void drawerAction() throws IOException { // TODO pierwszy klik nie dziala
@@ -58,7 +89,15 @@ public class PanelLayoutController {
 
     @FXML
     public void navigateToManagerData(ActionEvent event) throws IOException {
-        viewManager.loadComponent(ViewComponent.MANAGER_DATA);
+        switch (MockSecurityContext.loggedUser) {
+            case MANAGER: {
+                viewManager.loadComponent(ViewComponent.MANAGER_DATA);
+                break;
+            }
+            case SERVICEMAN: {
+                viewManager.loadComponent(ViewComponent.SERVICEMAN_DATA);
+            }
+        }
     }
 
     @FXML
