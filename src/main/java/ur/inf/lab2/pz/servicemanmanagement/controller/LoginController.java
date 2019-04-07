@@ -31,7 +31,8 @@ public class LoginController {
 
         else if (emailTextField.getText().equals("uberserwisant@test.pl")){
             MockSecurityContext.loggedUser = MockSecurityContext.UserType.SERVICEMAN;
-            viewManager.switchLayout(Layout.PANEL, ViewComponent.TIMETABLE);
+            viewManager.loadComponent(ViewComponent.SERVICEMAN_REGISTER);
+//            viewManager.switchLayout(Layout.PANEL, ViewComponent.TIMETABLE);
 //            viewManager.show(ViewType.SERVICEMAN_REGISTER);
 
         }

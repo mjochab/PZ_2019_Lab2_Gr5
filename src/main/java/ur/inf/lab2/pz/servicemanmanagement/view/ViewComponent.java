@@ -8,7 +8,8 @@ public enum ViewComponent {
     EMPLOYEES("component/manager/employees"),
     MANAGER_DATA("component/manager/user-data"),
     MANAGER_REGISTER("component/manager/register"),
-    SERVICEMAN_DATA("component/serviceman/user-data");
+    SERVICEMAN_DATA("component/serviceman/user-data"),
+    SERVICEMAN_REGISTER("component/serviceman/register");
 
 
     private String fxmlPath;
