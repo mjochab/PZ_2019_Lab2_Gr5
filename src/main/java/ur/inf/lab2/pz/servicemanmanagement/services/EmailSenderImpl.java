@@ -1,4 +1,4 @@
-package ur.inf.lab2.pz.servicemanmanagement.controller;
+package ur.inf.lab2.pz.servicemanmanagement.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -10,7 +10,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 @Service
-public class EmailSenderImpl implements EmailSender{
+public class EmailSenderImpl implements EmailSender {
 
     @Autowired
     private JavaMailSender javaMailSender;

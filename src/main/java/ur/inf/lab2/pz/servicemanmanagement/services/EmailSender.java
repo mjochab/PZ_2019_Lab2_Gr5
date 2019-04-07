@@ -1,4 +1,4 @@
-package ur.inf.lab2.pz.servicemanmanagement.controller;
+package ur.inf.lab2.pz.servicemanmanagement.services;
 
 public interface EmailSender {
 
