@@ -65,8 +65,8 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Text>
-                        <JFXTextField layoutX="521.0" layoutY="144.0" prefHeight="26.0" prefWidth="189.0" />
-                        <JFXTextField layoutX="521.0" layoutY="238.0" prefHeight="26.0" prefWidth="189.0" />
+                        <JFXTextField fx:id="emailInput" layoutX="521.0" layoutY="144.0" prefHeight="26.0" prefWidth="189.0" />
+                        <JFXTextField fx:id="groupNameInput" layoutX="521.0" layoutY="238.0" prefHeight="26.0" prefWidth="189.0" />
                         <Text layoutX="522.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adres e-mail" wrappingWidth="89.7294921875" />
                         <Text layoutX="524.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nazwa grupy" />
                         <JFXButton fx:id="addWorkerBtn" buttonType="RAISED" layoutX="588.0" layoutY="303.0" onAction="#addWorker" ripplerFill="#1b0505" style="-fx-background-color: #3a21f5;" text="Dodaj" textAlignment="CENTER" textFill="WHITE" />

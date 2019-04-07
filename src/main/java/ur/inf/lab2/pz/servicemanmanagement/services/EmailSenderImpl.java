@@ -8,6 +8,7 @@ import ur.inf.lab2.pz.servicemanmanagement.domain.User;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import java.util.UUID;
 
 @Service
 public class EmailSenderImpl implements EmailSender {
@@ -19,6 +20,9 @@ public class EmailSenderImpl implements EmailSender {
     public void sendEmail(String to, String title, String content) {
         MimeMessage mail = javaMailSender.createMimeMessage();
         try {
+            String firstPassword = UUID.randomUUID().toString().substring(0,6);
+            title = "Account's First password";
+            content = firstPassword;
             User user = new User();
             MimeMessageHelper helper = new MimeMessageHelper(mail, true);
             helper.setTo(to);

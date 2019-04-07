@@ -1,5 +1,6 @@
 package ur.inf.lab2.pz.servicemanmanagement.controller;
 
+import com.jfoenix.controls.JFXTextField;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,6 +18,12 @@ import java.io.IOException;
 
 @Controller
 public class DashboardController{
+
+    @FXML
+    private JFXTextField emailInput;
+
+    @FXML
+    private JFXTextField groupNameInput;
 
     @FXML
     private Button notificationsButton;
@@ -69,6 +76,8 @@ public class DashboardController{
 
     @FXML
     public void addWorker(ActionEvent event) {
+        System.out.println(emailInput.getText());
+        System.out.println(groupNameInput.getText());
     }
 
     @FXML
