@@ -1,13 +1,10 @@
 package ur.inf.lab2.pz.servicemanmanagement.controller;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import ur.inf.lab2.pz.servicemanmanagement.ExampleService;
+import ur.inf.lab2.pz.servicemanmanagement.view.Layout;
+import ur.inf.lab2.pz.servicemanmanagement.view.ViewComponent;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewManager;
-import ur.inf.lab2.pz.servicemanmanagement.view.ViewType;
-import javafx.fxml.FXML;
 
 import javafx.event.ActionEvent;
 
@@ -17,13 +14,12 @@ import java.io.IOException;
 public class ManagerRegisterController {
     private ViewManager viewManager;
 
-    public void changeView(ActionEvent event) throws IOException {
-        viewManager.show(ViewType.LOGIN);
+    public void navigateToLogin(ActionEvent event) throws IOException {
+        viewManager.loadComponent(ViewComponent.LOGIN);
     }
 
     public void register(ActionEvent event) throws IOException {
-        System.out.println("Pomyślna rejestracja");
-        viewManager.show(ViewType.DASHBOARD);
+        viewManager.switchLayout(Layout.PANEL, ViewComponent.DASHBOARD);
     }
 
     @Autowired
