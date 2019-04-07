@@ -21,6 +21,17 @@ public class User {
 
     private String companyName;
 
+    private String groupName;
+
+
+    public User() { }
+
+    public User(String email, String password, String groupName) {
+        this.email = email;
+        this.password = password;
+        this.groupName = groupName;
+    }
+
     @ManyToOne
     @JoinColumn(name="id_role")
     public Role role;
@@ -83,5 +94,13 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
     }
 }
