@@ -2,6 +2,7 @@ package ur.inf.lab2.pz.servicemanmanagement.controller;
 
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import javafx.scene.text.Text;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,11 @@ public class LoginController {
     @FXML
     private JFXPasswordField passwordTextField;
 
+    @FXML
+    private  Text alertLabel;
 
-    public void login(ActionEvent event) throws IOException {
+
+    public void login(ActionEvent event) throws NullPointerException, IOException {
         userService.userLogin(emailTextField.getText(), passwordTextField.getText());
 
     }

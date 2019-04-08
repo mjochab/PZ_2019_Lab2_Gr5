@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ur.inf.lab2.pz.servicemanmanagement.controller.LoginController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ur.inf.lab2.pz.servicemanmanagement.controller.LoginController">
    <top>
       <AnchorPane prefHeight="845.0" prefWidth="1024.0" BorderPane.alignment="CENTER">
          <children>
@@ -33,7 +31,7 @@
                      </font>
                   </Text>
                   <JFXTextField fx:id="emailTextField" layoutX="73.0" layoutY="124.0" prefHeight="26.0" prefWidth="300.0" />
-                  <Text fill="RED" layoutX="202.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Niepoprawny e-mail lub hasło">
+                  <Text fx:id="alertLabel" visible="false" fill="RED" layoutX="202.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Niepoprawny e-mail lub hasło">
                      <font>
                         <Font name="Ubuntu" size="12.0" />
                      </font>
