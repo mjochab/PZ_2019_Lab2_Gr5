@@ -23,6 +23,11 @@ public class User {
 
     private String groupName;
 
+    private boolean enabled = false;
+
+    @ManyToOne
+    @JoinColumn(name="id_role")
+    public Role role;
 
     public User() { }
 
@@ -32,9 +37,7 @@ public class User {
         this.groupName = groupName;
     }
 
-    @ManyToOne
-    @JoinColumn(name="id_role")
-    public Role role;
+
 
     public Long getId() {
         return id;
@@ -102,5 +105,13 @@ public class User {
 
     public void setGroupName(String groupName) {
         this.groupName = groupName;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 }

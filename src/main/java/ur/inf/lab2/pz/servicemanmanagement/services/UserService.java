@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import ur.inf.lab2.pz.servicemanmanagement.domain.Role;
 import ur.inf.lab2.pz.servicemanmanagement.domain.SecurityContext;
 import ur.inf.lab2.pz.servicemanmanagement.domain.User;
+import ur.inf.lab2.pz.servicemanmanagement.domain.dto.ServicemanFirstLoginDTO;
 import ur.inf.lab2.pz.servicemanmanagement.domain.enums.Roles;
 import ur.inf.lab2.pz.servicemanmanagement.repository.RoleRepository;
 import ur.inf.lab2.pz.servicemanmanagement.repository.UserRepository;
@@ -33,21 +34,20 @@ public class UserService {
     @Autowired
     private ViewManager viewManager;
 
-    public void userLogin(String email, String password) throws IOException{
+    public void userLogin(String email, String password) throws IOException {
 
         User user = Optional.of(userRepository.findByEmail(email)).orElseThrow(() -> new IOException());
-        if (passwordEncoder.matches(password,user.getPassword())
-                && user.getRole().getRole().equals(Roles.ROLE_MANAGER.toString()))
-        {SecurityContext.setLoggedUser(user);
+        if (passwordEncoder.matches(password, user.getPassword())) {
+            SecurityContext.setLoggedUser(user);
 
             if (SecurityContext.getLoggedUser().getRole().getRole().equals(Roles.ROLE_MANAGER.toString()))
                 viewManager.show(ViewType.DASHBOARD);
             else if (SecurityContext.getLoggedUser().getRole().getRole().equals(Roles.ROLE_SERVICEMAN.toString())) {
-                if (SecurityContext.getLoggedUser().getFirstName()==null) viewManager.show(ViewType.SERVICEMAN_REGISTER);
-                viewManager.show(ViewType.SERVICEMAN_TIMETABLE);
+                if (!SecurityContext.getLoggedUser().isEnabled()) {
+                    viewManager.show(ViewType.SERVICEMAN_FIRST_LOGIN);
+                } else viewManager.show(ViewType.SERVICEMAN_TIMETABLE);
             } else throw new IOException();
-            }
-        else throw new IOException();
+        } else throw new IOException();
 
     }
 
@@ -56,7 +56,7 @@ public class UserService {
                            String confirmPassword, String roleName) throws IOException {
 
         Role role = Optional.of(roleRepository.findByRole(roleName)).orElseThrow(() -> new IOException());
-        if (userRepository.findByEmail(email)!=null) throw new IOException();
+        if (userRepository.findByEmail(email) != null) throw new IOException();
         if (password.equals(confirmPassword)) {
             User user = new User();
             user.setFirstName(firstName);
@@ -68,6 +68,17 @@ public class UserService {
             userRepository.save(user);
         }
         viewManager.show(ViewType.LOGIN);
+    }
+
+    public void changePersonalData(ServicemanFirstLoginDTO data) throws IOException {
+        User currentUser = SecurityContext.getLoggedUser();
+        currentUser.setFirstName(data.getFirstName());
+        currentUser.setLastName(data.getLastName());
+        currentUser.setPassword(encryptionService.encode(data.getPassword()));
+        currentUser.setEnabled(true);
+        userRepository.save(currentUser);
+
+        viewManager.show(ViewType.SERVICEMAN_TIMETABLE);
     }
 
 }
