@@ -64,27 +64,27 @@
                         <Font name="Ubuntu" size="15.0" />
                      </font>
                   </Text>
-                  <Text fill="RED" layoutX="48.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pole obowiązkowe">
+                  <Text fx:id="lastNameAlert" fill="RED" layoutX="48.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pole obowiązkowe" visible="false">
                      <font>
                         <Font name="Ubuntu" size="12.0" />
                      </font>
                   </Text>
-                  <Text fill="RED" layoutX="48.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pole obowiązkowe">
+                  <Text fx:id="firstNameAlert" fill="RED" layoutX="48.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pole obowiązkowe" visible="false">
                      <font>
                         <Font name="Ubuntu" size="12.0" />
                      </font>
                   </Text>
-                  <Text fill="RED" layoutX="48.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pole obowiązkowe">
+                  <Text fx:id="companyNameAlert" fill="RED" layoutX="48.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pole obowiązkowe" visible="false">
                      <font>
                         <Font name="Ubuntu" size="12.0" />
                      </font>
                   </Text>
-                  <Text fill="RED" layoutX="339.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pole obowiązkowe">
+                  <Text fx:id="emailAlert" fill="RED" layoutX="339.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pole obowiązkowe" visible="false">
                      <font>
                         <Font name="Ubuntu" size="12.0" />
                      </font>
                   </Text>
-                  <Text fill="RED" layoutX="339.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Polityka hasła">
+                  <Text fx:id="privacyAlert" fill="RED" layoutX="339.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Polityka hasła" visible="false">
                      <font>
                         <Font name="Ubuntu" size="12.0" />
                      </font>

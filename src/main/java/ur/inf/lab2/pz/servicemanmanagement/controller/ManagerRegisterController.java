@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.text.Text;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ur.inf.lab2.pz.servicemanmanagement.domain.enums.Roles;
@@ -26,6 +27,9 @@ public class ManagerRegisterController {
     @Autowired
     private UserService userService;
 
+    @FXML
+    private Text firstNameAlert,lastNameAlert,emailAlert,companyNameAlert,privacyAlert;
+
 
     public void changeView(ActionEvent event) throws IOException {
         viewManager.show(ViewType.LOGIN);
@@ -35,7 +39,7 @@ public class ManagerRegisterController {
 
         userService.createUser(firstNameTextField.getText(), lastNameTextField.getText(),
                 companyNameTextField.getText(), emailTextField.getText(),
-                password.getText(), confirmPassword.getText(), Roles.ROLE_MANAGER.toString());
+                password.getText(), confirmPassword.getText(), Roles.ROLE_MANAGER.toString(),firstNameAlert,lastNameAlert,emailAlert,companyNameAlert,privacyAlert);
     }
 
     @Autowired

@@ -1,5 +1,6 @@
 package ur.inf.lab2.pz.servicemanmanagement.services;
 
+import javafx.scene.text.Text;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,7 @@ import ur.inf.lab2.pz.servicemanmanagement.domain.User;
 import ur.inf.lab2.pz.servicemanmanagement.domain.enums.Roles;
 import ur.inf.lab2.pz.servicemanmanagement.repository.RoleRepository;
 import ur.inf.lab2.pz.servicemanmanagement.repository.UserRepository;
+import ur.inf.lab2.pz.servicemanmanagement.utils.StringUtils;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewManager;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewType;
 
@@ -33,9 +35,13 @@ public class UserService {
     @Autowired
     private ViewManager viewManager;
 
-    public void userLogin(String email, String password) throws IOException{
+    @Autowired
+    private StringUtils stringUtils;
 
-        User user = Optional.of(userRepository.findByEmail(email)).orElseThrow(() -> new IOException());
+    public void userLogin(String email, String password, Text alertLabel) throws NullPointerException,IOException{
+
+        try{
+        User user = Optional.of(userRepository.findByEmail(email)).orElseThrow(() -> new NullPointerException());
         if (passwordEncoder.matches(password,user.getPassword())
                 && user.getRole().getRole().equals(Roles.ROLE_MANAGER.toString()))
         {SecurityContext.setLoggedUser(user);
@@ -45,17 +51,29 @@ public class UserService {
             else if (SecurityContext.getLoggedUser().getRole().getRole().equals(Roles.ROLE_SERVICEMAN.toString())) {
                 if (SecurityContext.getLoggedUser().getFirstName()==null) viewManager.show(ViewType.SERVICEMAN_REGISTER);
                 viewManager.show(ViewType.SERVICEMAN_TIMETABLE);
-            } else throw new IOException();
+            } else throw new NullPointerException();
             }
-        else throw new IOException();
+        else throw new NullPointerException();}
+
+        catch (NullPointerException e){
+            alertLabel.setVisible(true);
+        }
 
     }
 
     public void createUser(String firstName, String lastName,
                            String companyName, String email, String password,
-                           String confirmPassword, String roleName) throws IOException {
+                           String confirmPassword, String roleName, Text firstNameAlert, Text lastNameAlert,Text emailAlert, Text companyNameAlert, Text privacyAlert) throws IOException {
 
-        Role role = Optional.of(roleRepository.findByRole(roleName)).orElseThrow(() -> new IOException());
+        firstNameAlert.setVisible(false); lastNameAlert.setVisible(false); companyNameAlert.setVisible(false); emailAlert.setVisible(false); privacyAlert.setVisible(false);
+        if (stringUtils.isEmptyOrWhitespaceOnly(firstName)) firstNameAlert.setVisible(true);
+        if(stringUtils.isEmptyOrWhitespaceOnly(lastName)) lastNameAlert.setVisible(true);
+        if(stringUtils.isEmptyOrWhitespaceOnly(companyName)) companyNameAlert.setVisible(true);
+        if(stringUtils.isEmptyOrWhitespaceOnly(email)) emailAlert.setVisible(true);
+        if (!password.equals(confirmPassword))  privacyAlert.setText("Hasla nie zgadzaja sie"); privacyAlert.setVisible(true);
+
+        if(!stringUtils.isEmptyOrWhitespaceOnly(firstName)
+                && !stringUtils.isEmptyOrWhitespaceOnly(lastName) && !stringUtils.isEmptyOrWhitespaceOnly(companyName) && !stringUtils.isEmptyOrWhitespaceOnly(email) && password.equals(confirmPassword)) {     Role role = Optional.of(roleRepository.findByRole(roleName)).orElseThrow(() -> new IOException());
         if (userRepository.findByEmail(email)!=null) throw new IOException();
         if (password.equals(confirmPassword)) {
             User user = new User();
@@ -68,6 +86,6 @@ public class UserService {
             userRepository.save(user);
         }
         viewManager.show(ViewType.LOGIN);
-    }
+    }}
 
 }
