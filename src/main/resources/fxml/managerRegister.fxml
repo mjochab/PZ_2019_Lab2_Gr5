@@ -106,6 +106,7 @@
                   </Text>
                   <JFXPasswordField fx:id="password" layoutX="339.0" layoutY="227.0" />
                   <JFXPasswordField fx:id="confirmPassword" layoutX="339.0" layoutY="309.0" />
+                  <Text fx:id="existingUserAlert" fill="RED" layoutX="80.0" layoutY="369.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Uzytkownik o podanym adresie e-mail istnieje juz w systemie" visible="false" />
                </children>
             </Pane>
          </children>

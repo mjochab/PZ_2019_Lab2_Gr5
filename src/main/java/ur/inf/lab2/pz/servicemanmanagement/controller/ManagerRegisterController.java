@@ -28,7 +28,7 @@ public class ManagerRegisterController {
     private UserService userService;
 
     @FXML
-    private Text firstNameAlert,lastNameAlert,emailAlert,companyNameAlert,privacyAlert;
+    private Text firstNameAlert,lastNameAlert,emailAlert,companyNameAlert,privacyAlert, existingUserAlert;
 
 
     public void changeView(ActionEvent event) throws IOException {
@@ -39,7 +39,7 @@ public class ManagerRegisterController {
 
         userService.createUser(firstNameTextField.getText(), lastNameTextField.getText(),
                 companyNameTextField.getText(), emailTextField.getText(),
-                password.getText(), confirmPassword.getText(), Roles.ROLE_MANAGER.toString(),firstNameAlert,lastNameAlert,emailAlert,companyNameAlert,privacyAlert);
+                password.getText(), confirmPassword.getText(), Roles.ROLE_MANAGER.toString(),firstNameAlert,lastNameAlert,emailAlert,companyNameAlert,privacyAlert, existingUserAlert);
     }
 
     @Autowired
