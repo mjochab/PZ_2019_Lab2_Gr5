@@ -70,10 +70,15 @@ public class UserService {
         if(stringUtils.isEmptyOrWhitespaceOnly(lastName)) lastNameAlert.setVisible(true);
         if(stringUtils.isEmptyOrWhitespaceOnly(companyName)) companyNameAlert.setVisible(true);
         if(stringUtils.isEmptyOrWhitespaceOnly(email)) emailAlert.setVisible(true);
-        if (!password.equals(confirmPassword))  privacyAlert.setText("Hasla nie zgadzaja sie"); privacyAlert.setVisible(true);
+        if (!email.contains("@") && email.length() < 3) emailAlert.setText("Email jest nieprawidłowy"); emailAlert.setVisible(true);
+        if (!password.equals(confirmPassword))  privacyAlert.setText("Hasła nie zgadzaja sie"); privacyAlert.setVisible(true);
+        if(password.length() < 6 || password.length() > 16) privacyAlert.setText("Hasło musi zawierać conajmniej 6 i maksymalnie 16 znaków."); privacyAlert.setVisible(true);
 
         if(!stringUtils.isEmptyOrWhitespaceOnly(firstName)
-                && !stringUtils.isEmptyOrWhitespaceOnly(lastName) && !stringUtils.isEmptyOrWhitespaceOnly(companyName) && !stringUtils.isEmptyOrWhitespaceOnly(email) && password.equals(confirmPassword)) {     Role role = Optional.of(roleRepository.findByRole(roleName)).orElseThrow(() -> new IOException());
+                && !stringUtils.isEmptyOrWhitespaceOnly(lastName) && !stringUtils.isEmptyOrWhitespaceOnly(companyName)
+                && !stringUtils.isEmptyOrWhitespaceOnly(email) && password.equals(confirmPassword)&& !stringUtils.isEmptyOrWhitespaceOnly(password)) {
+                    Role role = Optional.of(roleRepository.findByRole(roleName)).orElseThrow(() -> new IOException());
+
         if (userRepository.findByEmail(email)!=null) throw new IOException();
         if (password.equals(confirmPassword)) {
             User user = new User();
