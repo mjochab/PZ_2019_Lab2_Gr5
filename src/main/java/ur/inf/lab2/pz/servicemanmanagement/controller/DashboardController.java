@@ -10,14 +10,24 @@ import javafx.util.Duration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ur.inf.lab2.pz.servicemanmanagement.ExampleService;
+import ur.inf.lab2.pz.servicemanmanagement.domain.User;
+import ur.inf.lab2.pz.servicemanmanagement.repository.UserRepository;
+import ur.inf.lab2.pz.servicemanmanagement.services.EmailSenderImpl;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewManager;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewType;
 
 import javax.swing.text.View;
 import java.io.IOException;
+import java.util.UUID;
 
 @Controller
 public class DashboardController{
+
+    @Autowired
+    private EmailSenderImpl emailSender;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @FXML
     private JFXTextField emailInput;
@@ -78,6 +88,11 @@ public class DashboardController{
     public void addWorker(ActionEvent event) {
         System.out.println(emailInput.getText());
         System.out.println(groupNameInput.getText());
+        String firstPassword = UUID.randomUUID().toString().substring(0,6);
+        String groupName = groupNameInput.getText();
+        User user = new User(emailInput.getText(), firstPassword, groupName);
+        userRepository.save(user);
+        emailSender.sendEmail(emailInput.getText(), "Account's First password", firstPassword);
     }
 
     @FXML
