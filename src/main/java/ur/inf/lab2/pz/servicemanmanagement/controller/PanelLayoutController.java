@@ -10,6 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import ur.inf.lab2.pz.servicemanmanagement.domain.SecurityContext;
 import ur.inf.lab2.pz.servicemanmanagement.service.MockSecurityContext;
 import ur.inf.lab2.pz.servicemanmanagement.view.Layout;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewComponent;
@@ -43,7 +44,7 @@ public class PanelLayoutController {
 
     @FXML
     public void initialize() {
-        if (MockSecurityContext.loggedUser.equals(MockSecurityContext.UserType.SERVICEMAN)) {
+        if (SecurityContext.getLoggedUser().role.getRole().equals("ROLE_SERVICEMAN")) {
             dashboardButton.setManaged(false);
             dashboardButton.setVisible(false);
             dashboardButton.getChildrenUnmodifiable().forEach(node -> node.setManaged(false));
@@ -102,6 +103,7 @@ public class PanelLayoutController {
 
     @FXML
     public void logout(ActionEvent event) throws IOException {
+        SecurityContext.setLoggedUser(null);
         viewManager.switchLayout(Layout.START, ViewComponent.LOGIN);
     }
 

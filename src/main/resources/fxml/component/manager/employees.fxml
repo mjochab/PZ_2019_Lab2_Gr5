@@ -45,7 +45,7 @@
                   </Text>
                </children>
             </HBox>
-            <JFXTextField prefHeight="26.0" prefWidth="189.0" />
+            <JFXTextField fx:id="emailInput" prefHeight="26.0" prefWidth="189.0" />
             <HBox prefHeight="15.0" prefWidth="210.0">
                <children>
                   <FontAwesomeIconView glyphName="USERS" size="20" />
@@ -62,7 +62,7 @@
                   <Insets top="20.0" />
                </VBox.margin>
             </HBox>
-            <JFXTextField prefHeight="26.0" prefWidth="189.0" />
+            <JFXTextField fx:id="groupNameInput" prefHeight="26.0" prefWidth="189.0" />
             <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <JFXButton fx:id="addWorkerBtn" buttonType="RAISED" minHeight="35.0" minWidth="100.0" onAction="#addWorker" prefHeight="40.0" prefWidth="70.0" ripplerFill="#1b0505" styleClass="bg-dark-primary" stylesheets="@../../../styles/styles.css" text="Dodaj" textAlignment="CENTER" textFill="WHITE" />

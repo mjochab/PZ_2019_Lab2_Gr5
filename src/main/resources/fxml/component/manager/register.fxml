@@ -11,7 +11,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <FlowPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ur.inf.lab2.pz.servicemanmanagement.controller.ManagerRegisterController">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
@@ -54,7 +53,7 @@
                               <Font name="Ubuntu" size="15.0" />
                            </font>
                         </Text>
-                        <JFXTextField>
+                        <JFXTextField fx:id="firstNameTextField">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
@@ -75,7 +74,7 @@
                               <Insets top="15.0" />
                            </VBox.margin>
                         </Text>
-                        <JFXTextField />
+                        <JFXTextField fx:id="lastNameTextField" />
                         <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Pole obowiązkowe">
                            <font>
                               <Font name="Ubuntu" size="12.0" />
@@ -92,7 +91,7 @@
                               <Insets top="15.0" />
                            </VBox.margin>
                         </Text>
-                        <JFXTextField />
+                        <JFXTextField fx:id="companyNameTextField" />
                         <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Pole obowiązkowe">
                            <font>
                               <Font name="Ubuntu" size="12.0" />
@@ -129,7 +128,7 @@
                               <Font name="Ubuntu" size="15.0" />
                            </font>
                         </Text>
-                        <JFXTextField />
+                        <JFXTextField fx:id="emailTextField" />
                         <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Pole obowiązkowe">
                            <font>
                               <Font name="Ubuntu" size="12.0" />
@@ -146,7 +145,7 @@
                               <Insets top="15.0" />
                            </VBox.margin>
                         </Text>
-                        <JFXPasswordField />
+                        <JFXPasswordField fx:id="password" />
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Powtórz hasło">
                            <font>
                               <Font name="Ubuntu" size="15.0" />
@@ -155,7 +154,7 @@
                               <Insets top="15.0" />
                            </VBox.margin>
                         </Text>
-                        <JFXPasswordField />
+                        <JFXPasswordField fx:id="confirmPassword" />
                         <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Polityka hasła">
                            <font>
                               <Font name="Ubuntu" size="12.0" />
