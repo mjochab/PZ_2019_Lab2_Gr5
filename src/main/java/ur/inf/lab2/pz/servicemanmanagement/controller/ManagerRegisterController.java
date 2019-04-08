@@ -1,5 +1,6 @@
 package ur.inf.lab2.pz.servicemanmanagement.controller;
 
+import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,7 +18,10 @@ public class ManagerRegisterController {
     private ViewManager viewManager;
 
     @FXML
-    private JFXTextField firstNameTextField, lastNameTextField, companyNameTextField, emailTextField, password, confirmPassword;
+    private JFXTextField firstNameTextField, lastNameTextField, companyNameTextField, emailTextField;
+
+    @FXML
+    private JFXPasswordField password, confirmPassword;
 
     @Autowired
     private UserService userService;

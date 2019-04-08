@@ -63,7 +63,7 @@ public class UserService {
             user.setLastName(lastName);
             user.setCompanyName(companyName);
             user.setEmail(email);
-            user.setPassword(encryptionService.encode(user.getPassword()));
+            user.setPassword(encryptionService.encode(password));
             user.setRole(role);
             userRepository.save(user);
         }
