@@ -39,9 +39,6 @@ public class UserService {
     @Autowired
     private StringUtils stringUtils;
 
-    @Autowired
-    private ManagerRegisterController managerRegisterController;
-
     public void userLogin(String email, String password, Text alertLabel) throws NullPointerException, IOException {
 
         try {
@@ -77,29 +74,43 @@ public class UserService {
         existingUserAlert.setVisible(false);
 
         if (stringUtils.isEmptyOrWhitespaceOnly(firstName)) firstNameAlert.setVisible(true);
-        if(stringUtils.isEmptyOrWhitespaceOnly(lastName)) lastNameAlert.setVisible(true);
-        if(stringUtils.isEmptyOrWhitespaceOnly(companyName)) companyNameAlert.setVisible(true);
-        if(stringUtils.isEmptyOrWhitespaceOnly(email)) emailAlert.setVisible(true);
-        if (!email.contains("@") && email.length() < 3) emailAlert.setText("Email jest nieprawidłowy"); emailAlert.setVisible(true);
-        if (!password.equals(confirmPassword))  privacyAlert.setText("Hasła nie zgadzaja sie"); privacyAlert.setVisible(true);
-        if(password.length() < 6 || password.length() > 16) privacyAlert.setText("Hasło musi zawierać conajmniej 6 i maksymalnie 16 znaków."); privacyAlert.setVisible(true);
+        if (stringUtils.isEmptyOrWhitespaceOnly(lastName)) lastNameAlert.setVisible(true);
+        if (stringUtils.isEmptyOrWhitespaceOnly(companyName)) companyNameAlert.setVisible(true);
+        if (stringUtils.isEmptyOrWhitespaceOnly(email)) emailAlert.setVisible(true);
+        if (!email.contains("@") && email.length() < 3) {emailAlert.setText("Email jest nieprawidłowy");
+        emailAlert.setVisible(true);}
+        if (!password.equals(confirmPassword)) {privacyAlert.setText("Hasła nie zgadzaja sie");
+        privacyAlert.setVisible(true);}
+        if (password.length() < 6 || password.length() > 16)
+        {privacyAlert.setText("Hasło musi zawierać conajmniej 6 i maksymalnie 16 znaków.");
+        privacyAlert.setVisible(true);}
 
-        if(!stringUtils.isEmptyOrWhitespaceOnly(firstName)
-                && !stringUtils.isEmptyOrWhitespaceOnly(lastName) && !stringUtils.isEmptyOrWhitespaceOnly(companyName)
-                && !stringUtils.isEmptyOrWhitespaceOnly(email) && password.equals(confirmPassword)&& !stringUtils.isEmptyOrWhitespaceOnly(password)) {
-                    Role role = Optional.of(roleRepository.findByRole(roleName)).orElseThrow(() -> new IOException());
+        if (!stringUtils.isEmptyOrWhitespaceOnly(firstName)
+                && !stringUtils.isEmptyOrWhitespaceOnly(lastName)
+                && !stringUtils.isEmptyOrWhitespaceOnly(companyName)
+                && !stringUtils.isEmptyOrWhitespaceOnly(email)
+                && password.equals(confirmPassword)
+                && !stringUtils.isEmptyOrWhitespaceOnly(password)
+                && email.contains("@")
+                && email.length()>2
+                && password.length()>5
+                && password.length()<17) {
+            Role role = Optional.of(roleRepository.findByRole(roleName)).orElseThrow(() -> new IOException());
 
-        if (userRepository.findByEmail(email)!=null) throw new IOException();
-        if (password.equals(confirmPassword)) {
-            User user = new User();
-            user.setFirstName(firstName);
-            user.setLastName(lastName);
-            user.setCompanyName(companyName);
-            user.setEmail(email);
-            user.setPassword(encryptionService.encode(password));
-            user.setRole(role);
-            userRepository.save(user);
-        }
-    }}
+            if (userRepository.findByEmail(email) != null) existingUserAlert.setVisible(true);
+            else{
+            if (password.equals(confirmPassword)) {
+                User user = new User();
+                user.setFirstName(firstName);
+                user.setLastName(lastName);
+                user.setCompanyName(companyName);
+                user.setEmail(email);
+                user.setPassword(encryptionService.encode(password));
+                user.setRole(role);
+                userRepository.save(user);
+                viewManager.show(ViewType.LOGIN);
 
+            }
+        }}
+    }
 }
