@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<FlowPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ur.inf.lab2.pz.servicemanmanagement.controller.ServicemanFirstLoginController">
+   <children>
+      <VBox alignment="TOP_CENTER" minWidth="200.0" prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pierwsze logowanie">
+               <font>
+                  <Font size="27.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="30.0" />
+               </VBox.margin>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Wprowadź swoje dane:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="15.0" />
+               </VBox.margin>
+            </Text>
+            <JFXTextField fx:id="firstNameField" prefHeight="26.0" prefWidth="208.0" promptText="Imię">
+               <VBox.margin>
+                  <Insets bottom="15.0" />
+               </VBox.margin>
+            </JFXTextField>
+            <JFXTextField fx:id="lastNameField" prefHeight="26.0" prefWidth="208.0" promptText="Nazwisko">
+               <VBox.margin>
+                  <Insets bottom="15.0" />
+               </VBox.margin>
+            </JFXTextField>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Zmień hasło:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="15.0" />
+               </VBox.margin>
+            </Text>
+            <JFXPasswordField fx:id="newPasswordField" promptText="Nowe hasło">
+               <VBox.margin>
+                  <Insets bottom="15.0" />
+               </VBox.margin>
+            </JFXPasswordField>
+            <JFXPasswordField fx:id="repeatPasswordField" promptText="Powtórz hasło">
+               <VBox.margin>
+                  <Insets bottom="15.0" />
+               </VBox.margin>
+            </JFXPasswordField>
+            <Label fx:id="alert" prefHeight="16.0" prefWidth="194.0" text="Podano nieprawidłowe dane" textFill="RED" visible="false" />
+            <JFXButton fx:id="loginButton" buttonType="RAISED" minHeight="40.0" minWidth="100.0" onAction="#servicemanLogin" prefHeight="42.0" prefWidth="85.0" styleClass="bg-dark-primary" stylesheets="@../../../styles/styles.css" text="Dalej" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Ubuntu" size="15.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </JFXButton>
+         </children></VBox>
+   </children>
+</FlowPane>

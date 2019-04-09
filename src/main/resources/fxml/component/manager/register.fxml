@@ -58,7 +58,7 @@
                               <Insets />
                            </VBox.margin>
                         </JFXTextField>
-                        <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Pole obowiązkowe">
+                        <Text fx:id="firstNameAlert" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Pole obowiązkowe">
                            <font>
                               <Font name="Ubuntu" size="12.0" />
                            </font>
@@ -75,7 +75,7 @@
                            </VBox.margin>
                         </Text>
                         <JFXTextField fx:id="lastNameTextField" />
-                        <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Pole obowiązkowe">
+                        <Text fx:id="lastNameAlert" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Pole obowiązkowe">
                            <font>
                               <Font name="Ubuntu" size="12.0" />
                            </font>
@@ -92,7 +92,7 @@
                            </VBox.margin>
                         </Text>
                         <JFXTextField fx:id="companyNameTextField" />
-                        <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Pole obowiązkowe">
+                        <Text fx:id="companyNameAlert" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Pole obowiązkowe">
                            <font>
                               <Font name="Ubuntu" size="12.0" />
                            </font>
@@ -129,7 +129,7 @@
                            </font>
                         </Text>
                         <JFXTextField fx:id="emailTextField" />
-                        <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Pole obowiązkowe">
+                        <Text fx:id="emailAlert" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Pole obowiązkowe">
                            <font>
                               <Font name="Ubuntu" size="12.0" />
                            </font>
@@ -155,7 +155,7 @@
                            </VBox.margin>
                         </Text>
                         <JFXPasswordField fx:id="confirmPassword" />
-                        <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Polityka hasła">
+                        <Text fx:id="privacyAlert" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Polityka hasła">
                            <font>
                               <Font name="Ubuntu" size="12.0" />
                            </font>
@@ -170,14 +170,29 @@
                   </VBox>
                </children>
             </HBox>
-            <JFXButton buttonType="RAISED" minHeight="40.0" minWidth="105.0" onAction="#register" prefHeight="40.0" prefWidth="120.0" styleClass="bg-dark-primary" stylesheets="@../../../styles/styles.css" text="Zarejestruj się" textFill="WHITE">
-               <font>
-                  <Font name="Ubuntu" size="15.0" />
-               </font>
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <JFXButton buttonType="RAISED" minHeight="40.0" minWidth="105.0" onAction="#register" prefHeight="40.0" prefWidth="120.0" styleClass="bg-dark-primary" stylesheets="@../../../styles/styles.css" text="Zarejestruj się" textFill="WHITE">
+                     <font>
+                        <Font name="Ubuntu" size="15.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <Text fx:id="existingUserAlert" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Użytkownik o takim mailu istnieje">
+                     <font>
+                        <Font name="Ubuntu" size="12.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </Text>
+               </children>
                <VBox.margin>
-                  <Insets bottom="20.0" top="30.0" />
+                  <Insets bottom="20.0" />
                </VBox.margin>
-            </JFXButton>
+            </VBox>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Masz już konto?">
                <font>
                   <Font name="Ubuntu" size="23.0" />
