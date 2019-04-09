@@ -11,6 +11,7 @@ import javafx.util.Duration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ur.inf.lab2.pz.servicemanmanagement.domain.SecurityContext;
+import ur.inf.lab2.pz.servicemanmanagement.domain.enums.Roles;
 import ur.inf.lab2.pz.servicemanmanagement.service.MockSecurityContext;
 import ur.inf.lab2.pz.servicemanmanagement.view.Layout;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewComponent;
@@ -90,15 +91,15 @@ public class PanelLayoutController {
 
     @FXML
     public void navigateToManagerData(ActionEvent event) throws IOException {
-        switch (MockSecurityContext.loggedUser) {
-            case MANAGER: {
-                viewManager.loadComponent(ViewComponent.MANAGER_DATA);
-                break;
-            }
-            case SERVICEMAN: {
-                viewManager.loadComponent(ViewComponent.SERVICEMAN_DATA);
-            }
-        }
+        final String roleManager = Roles.ROLE_MANAGER.toString();
+        final String roleServiceman = Roles.ROLE_SERVICEMAN.toString();
+        String actualRole = SecurityContext.getLoggedUser().role.getRole();
+
+        if (roleManager.equals(actualRole))
+            viewManager.loadComponent(ViewComponent.MANAGER_DATA);
+        else if (roleServiceman.equals(actualRole))
+            viewManager.loadComponent(ViewComponent.SERVICEMAN_DATA);
+
     }
 
     @FXML
