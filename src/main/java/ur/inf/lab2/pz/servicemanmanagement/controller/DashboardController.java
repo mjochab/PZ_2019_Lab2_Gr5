@@ -1,5 +1,6 @@
 package ur.inf.lab2.pz.servicemanmanagement.controller;
 
+import com.jfoenix.controls.JFXTextField;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,14 +10,41 @@ import javafx.util.Duration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ur.inf.lab2.pz.servicemanmanagement.ExampleService;
+import ur.inf.lab2.pz.servicemanmanagement.domain.Role;
+import ur.inf.lab2.pz.servicemanmanagement.domain.User;
+import ur.inf.lab2.pz.servicemanmanagement.domain.enums.Roles;
+import ur.inf.lab2.pz.servicemanmanagement.repository.RoleRepository;
+import ur.inf.lab2.pz.servicemanmanagement.repository.UserRepository;
+import ur.inf.lab2.pz.servicemanmanagement.services.EmailSenderImpl;
+import ur.inf.lab2.pz.servicemanmanagement.services.EncryptionService;
+import ur.inf.lab2.pz.servicemanmanagement.services.UserService;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewManager;
-import ur.inf.lab2.pz.servicemanmanagement.view.ViewType;
-
-import javax.swing.text.View;
 import java.io.IOException;
+import java.util.UUID;
 
 @Controller
-public class DashboardController{
+public class DashboardController {
+
+    @Autowired
+    private EmailSenderImpl emailSender;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private RoleRepository roleRepository;
+
+    @Autowired
+    private EncryptionService encryptionService;
+
+    @FXML
+    private JFXTextField emailInput;
+
+    @FXML
+    private JFXTextField groupNameInput;
 
     @FXML
     private Button notificationsButton;
@@ -38,42 +66,26 @@ public class DashboardController{
     }
 
     @FXML
-    public void showTimetable(javafx.event.ActionEvent event) throws IOException {
-        viewManager.show(ViewType.MANAGER_TIMETABLE);
-    }
-
-    @FXML
-    public void showEmployees(javafx.event.ActionEvent event) throws IOException {
-        viewManager.show(ViewType.WORKER_LIST);
-    }
-
-    @FXML
-    public void logout(javafx.event.ActionEvent event) throws IOException {
-        viewManager.show(ViewType.LOGIN);
-    }
-
-    @FXML
-    public void showManagerData(ActionEvent event) throws IOException {
-        viewManager.show(ViewType.MANAGER_DATA);
-    }
-
-    @FXML
-    public void submitManagerData(ActionEvent event) throws IOException {
-        viewManager.show(ViewType.DASHBOARD);
-    }
-
-    @FXML
-    public void showDashboard(ActionEvent event) throws IOException {
-        viewManager.show(ViewType.DASHBOARD);
-    }
-
-    @FXML
     public void addWorker(ActionEvent event) {
+
+        Role role = roleRepository.findByRole("ROLE_SERVICEMAN");
+        System.out.println(emailInput.getText());
+        System.out.println(groupNameInput.getText());
+        String firstPassword = UUID.randomUUID().toString().substring(0, 6);
+        String groupName = groupNameInput.getText();
+        // User user = new User(emailInput.getText(), firstPassword, groupName);
+        User newUser = new User();
+        newUser.setEmail(emailInput.getText());
+        newUser.setGroupName(groupName);
+        newUser.setPassword(encryptionService.encode(firstPassword));
+        newUser.setRole(role);
+
+        userRepository.save(newUser);
+        emailSender.sendEmail(emailInput.getText(), "Account's First password", firstPassword);
     }
 
     @FXML
     private void drawerAction() throws IOException {
-
         TranslateTransition openNav = new TranslateTransition(new Duration(350), drawer);
         openNav.setToX(0);
         TranslateTransition closeNav = new TranslateTransition(new Duration(350), drawer);
@@ -86,7 +98,6 @@ public class DashboardController{
             }
         });
     }
-
 
 
 }

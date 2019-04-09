@@ -1,0 +1,1 @@
+ALTER TABLE `user` ADD `group_name` varchar(255) DEFAULT NULL;
