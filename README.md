@@ -25,23 +25,23 @@ Nasza aplikacja będzie służyła do zarządzania grupą serwisantów, oraz prz
 
 ### Scenariusz działania aplikacji
 
-![alt text](https://github.com/mjochab/PZ_2019_Lab2_Gr6/blob/master/images/scenariusz.png "scenariusz")
+![alt text](https://github.com/mjochab/PZ_2019_Lab2_Gr6/blob/master/doc/diagrams/scenariusz.png "scenariusz")
 
 ### Diagram aktywności
 
-![alt text](https://github.com/mjochab/PZ_2019_Lab2_Gr6/blob/master/images/Diagram_aktywności.jpg "diagram aktywności")
+![alt text](https://github.com/mjochab/PZ_2019_Lab2_Gr6/blob/master/doc/diagrams/Diagram_aktywności.jpg "diagram aktywności")
 
 ### Diagram przypadków użycia
 
-![alt text](https://github.com/mjochab/PZ_2019_Lab2_Gr6/blob/master/images/Przypadków_użycia.jpg "diagram przypadków użycia")
+![alt text](https://github.com/mjochab/PZ_2019_Lab2_Gr6/blob/master/doc/diagrams/Przypadków_użycia.jpg "diagram przypadków użycia")
 
 ### Diagram klas
 
-![alt text](https://github.com/mjochab/PZ_2019_Lab2_Gr6/blob/master/images/Diagram_klas.png "diagram klas")
+![alt text](https://github.com/mjochab/PZ_2019_Lab2_Gr6/blob/master/doc/diagrams/Diagram_klas.png "diagram klas")
 
 ### Diagram stanów
 
-![alt text](https://github.com/mjochab/PZ_2019_Lab2_Gr6/blob/master/images/Diagram_stanów.png "diagram stanów")
+![alt text](https://github.com/mjochab/PZ_2019_Lab2_Gr6/blob/master/doc/diagrams/Diagram_stanów.png "diagram stanów")
 
 
 
