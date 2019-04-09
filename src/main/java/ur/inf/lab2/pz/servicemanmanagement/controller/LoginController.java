@@ -1,43 +1,55 @@
 package ur.inf.lab2.pz.servicemanmanagement.controller;
 
-import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import ur.inf.lab2.pz.servicemanmanagement.ExampleService;
-import ur.inf.lab2.pz.servicemanmanagement.view.ViewManager;
-import ur.inf.lab2.pz.servicemanmanagement.view.ViewType;
-
+import javafx.scene.text.Text;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import ur.inf.lab2.pz.servicemanmanagement.services.UserService;
+import ur.inf.lab2.pz.servicemanmanagement.service.MockSecurityContext;
+import ur.inf.lab2.pz.servicemanmanagement.view.Layout;
+import ur.inf.lab2.pz.servicemanmanagement.view.ViewComponent;
+import ur.inf.lab2.pz.servicemanmanagement.view.ViewManager;
 
 import java.io.IOException;
 
 @Controller
 public class LoginController {
+
+    @Autowired
+    private UserService userService;
+
     private ViewManager viewManager;
 
     @FXML
     private JFXTextField emailTextField;
 
+    @FXML
+    private JFXPasswordField passwordTextField;
 
-    public void login(ActionEvent event) throws IOException {
+    @FXML
+    private  Text alertLabel;
 
 
-        if (emailTextField.getText().equals("kierownik@test.pl")) {
-            viewManager.show(ViewType.DASHBOARD);
-        }
+    @FXML
+    public void initialize() {
+        alertLabel.setVisible(false);
+    }
 
-        else if (emailTextField.getText().equals("uberserwisant@test.pl")){
-            viewManager.show(ViewType.SERVICEMAN_REGISTER);
-
+    public void login(ActionEvent event) {
+        try {
+            userService.userLogin(emailTextField.getText(), passwordTextField.getText());
+        } catch (IOException e) {
+            alertLabel.setVisible(true);
         }
     }
 
-    public void changeView(ActionEvent event) throws IOException {
-        viewManager.show(ViewType.MANAGER_REGISTER);
+    @FXML
+    public void navigateToRegister(ActionEvent event) throws IOException {
+        viewManager.loadComponent(ViewComponent.MANAGER_REGISTER);
     }
-
 
     @Autowired
     public void setViewManager(ViewManager viewManager) {

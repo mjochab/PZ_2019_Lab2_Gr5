@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<FlowPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ur.inf.lab2.pz.servicemanmanagement.controller.ManagerRegisterController">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <FontAwesomeIconView glyphName="USER_PLUS" size="24" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rejestracja">
+                     <font>
+                        <Font name="Ubuntu" size="23.0" />
+                     </font>
+                  </Text>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <VBox minWidth="150.0" prefHeight="200.0" prefWidth="150.0">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <FontAwesomeIconView glyphName="CHILD" size="16" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Dane osobowe:">
+                                 <font>
+                                    <Font name="Ubuntu" size="16.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </Text>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="20.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Imię">
+                           <font>
+                              <Font name="Ubuntu" size="15.0" />
+                           </font>
+                        </Text>
+                        <JFXTextField fx:id="firstNameTextField">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </JFXTextField>
+                        <Text fx:id="firstNameAlert" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Pole obowiązkowe">
+                           <font>
+                              <Font name="Ubuntu" size="12.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="2.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nazwisko">
+                           <font>
+                              <Font name="Ubuntu" size="15.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
+                        </Text>
+                        <JFXTextField fx:id="lastNameTextField" />
+                        <Text fx:id="lastNameAlert" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Pole obowiązkowe">
+                           <font>
+                              <Font name="Ubuntu" size="12.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="2.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nazwa firmy">
+                           <font>
+                              <Font name="Ubuntu" size="15.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
+                        </Text>
+                        <JFXTextField fx:id="companyNameTextField" />
+                        <Text fx:id="companyNameAlert" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Pole obowiązkowe">
+                           <font>
+                              <Font name="Ubuntu" size="12.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="2.0" />
+                           </VBox.margin>
+                        </Text>
+                     </children>
+                     <HBox.margin>
+                        <Insets right="15.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox minWidth="150.0" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <HBox prefHeight="16.0" prefWidth="150.0">
+                           <children>
+                              <FontAwesomeIconView glyphName="SIGN_IN" size="16" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Dane logowania:">
+                                 <font>
+                                    <Font name="Ubuntu" size="16.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </Text>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="20.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Adres e-mail">
+                           <font>
+                              <Font name="Ubuntu" size="15.0" />
+                           </font>
+                        </Text>
+                        <JFXTextField fx:id="emailTextField" />
+                        <Text fx:id="emailAlert" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Pole obowiązkowe">
+                           <font>
+                              <Font name="Ubuntu" size="12.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="2.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Hasło">
+                           <font>
+                              <Font name="Ubuntu" size="15.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
+                        </Text>
+                        <JFXPasswordField fx:id="password" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Powtórz hasło">
+                           <font>
+                              <Font name="Ubuntu" size="15.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
+                        </Text>
+                        <JFXPasswordField fx:id="confirmPassword" />
+                        <Text fx:id="privacyAlert" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Polityka hasła">
+                           <font>
+                              <Font name="Ubuntu" size="12.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="2.0" />
+                           </VBox.margin>
+                        </Text>
+                     </children>
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin>
+                  </VBox>
+               </children>
+            </HBox>
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <JFXButton buttonType="RAISED" minHeight="40.0" minWidth="105.0" onAction="#register" prefHeight="40.0" prefWidth="120.0" styleClass="bg-dark-primary" stylesheets="@../../../styles/styles.css" text="Zarejestruj się" textFill="WHITE">
+                     <font>
+                        <Font name="Ubuntu" size="15.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <Text fx:id="existingUserAlert" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Użytkownik o takim mailu istnieje">
+                     <font>
+                        <Font name="Ubuntu" size="12.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </Text>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </VBox>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Masz już konto?">
+               <font>
+                  <Font name="Ubuntu" size="23.0" />
+               </font>
+            </Text>
+            <JFXButton buttonType="RAISED" minHeight="40.0" onAction="#navigateToLogin" prefHeight="40.0" prefWidth="210.0" styleClass="bg-accent" stylesheets="@../../../styles/styles.css" text="Zaloguj się" textFill="WHITE">
+               <font>
+                  <Font name="Ubuntu" size="15.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+            </JFXButton>
+         </children>
+      </VBox>
+   </children>
+</FlowPane>

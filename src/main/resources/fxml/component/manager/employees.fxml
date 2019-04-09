@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ur.inf.lab2.pz.servicemanmanagement.controller.EmployeesController">
+   <children>
+      <JFXTreeTableView minHeight="300.0" minWidth="450.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="350.0" AnchorPane.topAnchor="20.0" />
+      <VBox layoutX="578.0" layoutY="20.0" minWidth="300.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <FontAwesomeIconView glyphName="PLUS_CIRCLE" size="24" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Dodaj pracownika ">
+                     <font>
+                        <Font name="System Bold" size="22.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="30.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <FontAwesomeIconView glyphName="ENVELOPE" size="20" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Adres e-mail" wrappingWidth="89.7294921875">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
+            <JFXTextField fx:id="emailInput" prefHeight="26.0" prefWidth="189.0" />
+            <HBox prefHeight="15.0" prefWidth="210.0">
+               <children>
+                  <FontAwesomeIconView glyphName="USERS" size="20" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nazwa grupy">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+               </children>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </HBox>
+            <JFXTextField fx:id="groupNameInput" prefHeight="26.0" prefWidth="189.0" />
+            <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <JFXButton fx:id="addWorkerBtn" buttonType="RAISED" minHeight="35.0" minWidth="100.0" onAction="#addWorker" prefHeight="40.0" prefWidth="70.0" ripplerFill="#1b0505" styleClass="bg-dark-primary" stylesheets="@../../../styles/styles.css" text="Dodaj" textAlignment="CENTER" textFill="WHITE" />
+               </children>
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

@@ -1,0 +1,35 @@
+.bg-dark-primary {
+    -fx-background-color: #0288D1;
+}
+
+.bg-light-primary {
+    -fx-background-color: #B3E5FC;
+}
+
+.bg-primary {
+    -fx-background-color: #03A9F4;
+}
+
+.buttons-on-primary {
+    -fx-background-color: #FFFFFF;
+}
+
+.text-icons {
+    -fx-text-fill: #FFFFFF;
+}
+
+.bg-accent {
+    -fx-background-color: #607D8B;
+}
+
+.primary-text {
+    -fx-text-fill: #212121;
+}
+
+.secondary-text {
+    -fx-text-fill: #757575;
+}
+
+.bg-divider {
+    -fx-background-color: #BDBDBD;
+}

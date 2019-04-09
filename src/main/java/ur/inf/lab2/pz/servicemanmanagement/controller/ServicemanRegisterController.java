@@ -2,24 +2,18 @@ package ur.inf.lab2.pz.servicemanmanagement.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import ur.inf.lab2.pz.servicemanmanagement.view.Layout;
+import ur.inf.lab2.pz.servicemanmanagement.view.ViewComponent;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewManager;
-import ur.inf.lab2.pz.servicemanmanagement.view.ViewType;
-
-import javafx.event.ActionEvent;
 
 import java.io.IOException;
 
-@Controller
+@Controller //TODO FONT TO STYLES
 public class ServicemanRegisterController {
-    private ViewManager viewManager;
 
-    public void register(ActionEvent event) throws IOException {
-        System.out.println("Zarejestrowano nowego uber serwisanta");
-        viewManager.show(ViewType.SERVICEMAN_TIMETABLE);
-    }
+    @Autowired private ViewManager viewManager;
 
-    @Autowired
-    public void setViewManager(ViewManager viewManager) {
-        this.viewManager = viewManager;
-    }
+    public void register() throws IOException {
+
+        viewManager.switchLayout(Layout.PANEL, ViewComponent.TIMETABLE); }
 }
