@@ -1,12 +1,9 @@
 package ur.inf.lab2.pz.servicemanmanagement.utils;
 
 
-import org.springframework.stereotype.Service;
-
-@Service
 public class StringUtils {
 
-    public boolean isEmptyOrWhitespaceOnly(String str) {
+    public static boolean isEmptyOrWhitespaceOnly(String str) {
 
         if (str == null || str.length() == 0) {
 

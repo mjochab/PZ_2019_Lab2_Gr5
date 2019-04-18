@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import ur.inf.lab2.pz.servicemanmanagement.domain.validator.FXFormValidator;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewComponent;
 import ur.inf.lab2.pz.servicemanmanagement.domain.enums.Roles;
 import ur.inf.lab2.pz.servicemanmanagement.services.UserService;
@@ -46,10 +47,30 @@ public class ManagerRegisterController {
     }
 
     public void register(ActionEvent event) throws IOException {
+        FXFormValidator validator = new FXFormValidator();
+        String email = emailTextField.getText();
+        validator.validateEmail(email, emailAlert);
 
-        userService.createUser(firstNameTextField.getText(), lastNameTextField.getText(),
-                companyNameTextField.getText(), emailTextField.getText(),
-                password.getText(), confirmPassword.getText(), Roles.ROLE_MANAGER.toString(),firstNameAlert,lastNameAlert,emailAlert,companyNameAlert,privacyAlert, existingUserAlert);
+        if (validator.isClean()) {
+            // TODO zrobić obiekt zamiast przerzucać 10 parametrów
+            // np. ValidUserRegisterForm który zwraca walidator
+            // moje rozwiazanie jest na szybko, mozna sie pobawić
+            userService.createUser(
+                    firstNameTextField.getText(),
+                    lastNameTextField.getText(),
+                    companyNameTextField.getText(),
+                    email,
+                    password.getText(),
+                    confirmPassword.getText(),
+                    Roles.ROLE_MANAGER.toString(),
+                    firstNameAlert,
+                    lastNameAlert,
+//                emailAlert,
+                    companyNameAlert,
+                    privacyAlert,
+                    existingUserAlert);
+        }
+
     }
 
     @Autowired

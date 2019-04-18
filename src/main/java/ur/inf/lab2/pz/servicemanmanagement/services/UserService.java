@@ -39,9 +39,6 @@ public class UserService {
     @Autowired
     private ViewManager viewManager;
 
-    @Autowired
-    private StringUtils stringUtils;
-
     public void userLogin(String email, String password) throws IOException {
 
         List<User> allByEmail = userRepository.findAllByEmail(email);
@@ -70,34 +67,29 @@ public class UserService {
     public void createUser(String firstName, String lastName,
                            String companyName, String email, String password,
                            String confirmPassword, String roleName, Text firstNameAlert, Text lastNameAlert,
-                           Text emailAlert, Text companyNameAlert, Text privacyAlert, Text existingUserAlert) throws IOException {
+                           Text companyNameAlert, Text privacyAlert, Text existingUserAlert) throws IOException {
 
-        firstNameAlert.setVisible(false);
-        lastNameAlert.setVisible(false);
-        companyNameAlert.setVisible(false);
-        emailAlert.setVisible(false);
-        privacyAlert.setVisible(false);
-        existingUserAlert.setVisible(false);
+        if (StringUtils.isEmptyOrWhitespaceOnly(firstName)) firstNameAlert.setVisible(true);
+        if (StringUtils.isEmptyOrWhitespaceOnly(lastName)) lastNameAlert.setVisible(true);
+        if (StringUtils.isEmptyOrWhitespaceOnly(companyName)) companyNameAlert.setVisible(true);
 
-        if (stringUtils.isEmptyOrWhitespaceOnly(firstName)) firstNameAlert.setVisible(true);
-        if (stringUtils.isEmptyOrWhitespaceOnly(lastName)) lastNameAlert.setVisible(true);
-        if (stringUtils.isEmptyOrWhitespaceOnly(companyName)) companyNameAlert.setVisible(true);
-        if (stringUtils.isEmptyOrWhitespaceOnly(email)) emailAlert.setVisible(true);
-        if (!email.contains("@") || email.length() < 3) {
-            emailAlert.setText("Email jest nieprawidłowy");
-            emailAlert.setVisible(true);}
+
+//        if (stringUtils.isEmptyOrWhitespaceOnly(email)) emailAlert.setVisible(true);
+//        if (!email.contains("@") || email.length() < 3) {
+//            emailAlert.setText("Email jest nieprawidłowy");
+//            emailAlert.setVisible(true);}
         if (!password.equals(confirmPassword)) {privacyAlert.setText("Hasła nie zgadzaja sie");
             privacyAlert.setVisible(true);}
         if (password.length() < 6 || password.length() > 16)
         {privacyAlert.setText("Hasło musi zawierać conajmniej 6 i maksymalnie 16 znaków.");
             privacyAlert.setVisible(true);}
 
-        if (!stringUtils.isEmptyOrWhitespaceOnly(firstName)
-                && !stringUtils.isEmptyOrWhitespaceOnly(lastName)
-                && !stringUtils.isEmptyOrWhitespaceOnly(companyName)
-                && !stringUtils.isEmptyOrWhitespaceOnly(email)
+        if (!StringUtils.isEmptyOrWhitespaceOnly(firstName)
+                && !StringUtils.isEmptyOrWhitespaceOnly(lastName)
+                && !StringUtils.isEmptyOrWhitespaceOnly(companyName)
+                && !StringUtils.isEmptyOrWhitespaceOnly(email)
                 && password.equals(confirmPassword)
-                && !stringUtils.isEmptyOrWhitespaceOnly(password)
+                && !StringUtils.isEmptyOrWhitespaceOnly(password)
                 && email.contains("@")
                 && email.length()>2
                 && password.length()>5
