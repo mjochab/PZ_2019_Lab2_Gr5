@@ -7,7 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import ur.inf.lab2.pz.servicemanmanagement.domain.validator.FXFormValidator;
+import ur.inf.lab2.pz.servicemanmanagement.domain.dto.ManagerRegisterDTO;
+import ur.inf.lab2.pz.servicemanmanagement.domain.validator.ValidUserRegisterForm;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewComponent;
 import ur.inf.lab2.pz.servicemanmanagement.domain.enums.Roles;
 import ur.inf.lab2.pz.servicemanmanagement.services.UserService;
@@ -36,6 +37,8 @@ public class ManagerRegisterController {
     @FXML
     private Text firstNameAlert,lastNameAlert,emailAlert,companyNameAlert,privacyAlert, existingUserAlert;
 
+
+
     @FXML
     public void initialize() {
         firstNameAlert.setVisible(false);
@@ -44,31 +47,20 @@ public class ManagerRegisterController {
         companyNameAlert.setVisible(false);
         privacyAlert.setVisible(false);
         existingUserAlert.setVisible(false);
+
     }
 
     public void register(ActionEvent event) throws IOException {
-        FXFormValidator validator = new FXFormValidator();
-        String email = emailTextField.getText();
-        validator.validateEmail(email, emailAlert);
 
-        if (validator.isClean()) {
-            // TODO zrobić obiekt zamiast przerzucać 10 parametrów
-            // np. ValidUserRegisterForm który zwraca walidator
-            // moje rozwiazanie jest na szybko, mozna sie pobawić
-            userService.createUser(
-                    firstNameTextField.getText(),
+        if (validate()) {
+            ManagerRegisterDTO dto = new ManagerRegisterDTO(firstNameTextField.getText(),
                     lastNameTextField.getText(),
                     companyNameTextField.getText(),
-                    email,
+                    emailTextField.getText(),
                     password.getText(),
-                    confirmPassword.getText(),
-                    Roles.ROLE_MANAGER.toString(),
-                    firstNameAlert,
-                    lastNameAlert,
-//                emailAlert,
-                    companyNameAlert,
-                    privacyAlert,
-                    existingUserAlert);
+                    Roles.ROLE_MANAGER.toString());
+
+            userService.createUser(dto);
         }
 
     }
@@ -76,5 +68,23 @@ public class ManagerRegisterController {
     @Autowired
     public void setViewManager(ViewManager viewManager) {
         this.viewManager = viewManager;
+    }
+
+    private boolean validate() {
+        ValidUserRegisterForm validator = new ValidUserRegisterForm(firstNameTextField.getText(),
+                lastNameTextField.getText(),
+                companyNameTextField.getText(),
+                emailTextField.getText(),
+                password.getText(),
+                confirmPassword.getText(),
+                firstNameAlert,
+                lastNameAlert,
+                companyNameAlert,
+                emailAlert,
+                privacyAlert,
+                existingUserAlert);
+        validator.validate();
+        return validator.getValidator().isClean();
+
     }
 }
