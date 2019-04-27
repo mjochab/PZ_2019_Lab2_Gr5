@@ -34,14 +34,14 @@ public class ValidUserRegisterForm {
 
         clearAlerts();
         validator = new FXFormValidator();
-        validator.setHasErrors(false);
         validator.validateEmptyOrWhitespaceOnly(firstName, firstNameAlert);
         validator.validateEmptyOrWhitespaceOnly(lastName, lastNameAlert);
         validator.validateEmptyOrWhitespaceOnly(companyName, companyNameAlert);
+        validator.validateEmptyOrWhitespaceOnly(password,privacyAlert);
+        validator.validateEmptyOrWhitespaceOnly(confirmPassword,privacyAlert);
         validator.validateEmail(email, emailAlert);
         validator.validatePasswordEquality(password, confirmPassword, privacyAlert);
         validator.validatePasswordLength(password, privacyAlert);
-        //validator.validateUserAlreadyExists(email, existingUserAlert);
     }
 
     private void clearAlerts() {

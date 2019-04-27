@@ -1,4 +1,5 @@
 package ur.inf.lab2.pz.servicemanmanagement.services;
+import javafx.scene.text.Text;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import ur.inf.lab2.pz.servicemanmanagement.repository.UserRepository;
 import ur.inf.lab2.pz.servicemanmanagement.view.Layout;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewComponent;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewManager;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -60,9 +62,13 @@ public class UserService {
 
     }
 
-    public void createUser(ManagerRegisterDTO dto) throws IOException {
+    public void createUser(ManagerRegisterDTO dto, Text existingUserAlert) throws IOException {
 
             Role role = Optional.of(roleRepository.findByRole(dto.getRole())).orElseThrow(() -> new IOException());
+
+            existingUserAlert.setVisible(false);
+            try{
+            if(userRepository.findAllByEmail(dto.getEmail()).isEmpty()){
                     User user = new User();
                     user.setFirstName(dto.getFirstName());
                     user.setLastName(dto.getLastName());
@@ -72,7 +78,11 @@ public class UserService {
                     user.setRole(role);
                     userRepository.save(user);
                     viewManager.loadComponent(ViewComponent.LOGIN);
+            } else throw new IOException(); }
+            catch (IOException ex) {
+                existingUserAlert.setVisible(true);
             }
+    }
 
 
     public void changePersonalData(ServicemanFirstLoginDTO data) throws IOException {

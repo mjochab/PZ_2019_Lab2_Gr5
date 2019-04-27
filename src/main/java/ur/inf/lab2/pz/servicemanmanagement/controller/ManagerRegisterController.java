@@ -60,7 +60,7 @@ public class ManagerRegisterController {
                     password.getText(),
                     Roles.ROLE_MANAGER.toString());
 
-            userService.createUser(dto);
+            userService.createUser(dto,existingUserAlert);
         }
 
     }
