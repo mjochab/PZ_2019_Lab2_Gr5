@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="450.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ur.inf.lab2.pz.servicemanmanagement.controller.NewClientDialogController">
+   <children>
+      <Pane layoutX="10.0" layoutY="10.0" prefHeight="497.0" prefWidth="400.0">
+         <children>
+            <Text layoutX="127.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dane klienta">
+               <font>
+                  <Font name="Ubuntu" size="19.0" />
+               </font>
+            </Text>
+            <Text layoutX="33.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Imię" />
+            <Text layoutX="30.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nazwisko" />
+            <Text layoutX="31.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ulica" />
+            <Text layoutX="30.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numer domu" />
+            <Text layoutX="29.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numer lokalu" />
+            <Text layoutX="31.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Miasto" />
+            <JFXTextField fx:id="firstNameTextField" layoutX="141.0" layoutY="61.0" />
+            <JFXTextField fx:id="lastNameTextField" layoutX="141.0" layoutY="105.0" />
+            <JFXTextField fx:id="streetTextField" layoutX="141.0" layoutY="146.0" />
+            <JFXTextField fx:id="houseNumberTextField" layoutX="141.0" layoutY="193.0" />
+            <JFXTextField fx:id="apartmentNumberTextField" layoutX="141.0" layoutY="237.0" />
+            <JFXTextField fx:id="cityTextField" layoutX="141.0" layoutY="279.0" />
+            <JFXButton fx:id="addNewClientButton" buttonType="RAISED" layoutX="235.0" layoutY="397.0" minHeight="40.0" minWidth="105.0" onAction="#addNewClient" prefHeight="40.0" prefWidth="120.0" styleClass="bg-dark-primary" stylesheets="@../../../styles/styles.css" text="Dodaj" textFill="WHITE">
+               <font>
+                  <Font name="Ubuntu" size="15.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="closeDialogButton" buttonType="RAISED" layoutX="67.0" layoutY="397.0" minHeight="40.0" minWidth="105.0" onAction="#closeDialog" prefHeight="40.0" prefWidth="120.0" styleClass="bg-dark-primary" stylesheets="@../../../styles/styles.css" text="Anuluj" textFill="WHITE">
+               <font>
+                  <Font name="Ubuntu" size="15.0" />
+               </font>
+            </JFXButton>
+            <Text layoutX="31.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefon" />
+            <JFXTextField fx:id="phoneTextField" layoutX="141.0" layoutY="320.0" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
