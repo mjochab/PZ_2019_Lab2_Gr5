@@ -67,7 +67,6 @@ public class UserService {
             Role role = Optional.of(roleRepository.findByRole(dto.getRole())).orElseThrow(() -> new IOException());
 
             existingUserAlert.setVisible(false);
-            try{
             if(userRepository.findAllByEmail(dto.getEmail()).isEmpty()){
                     User user = new User();
                     user.setFirstName(dto.getFirstName());
@@ -78,10 +77,7 @@ public class UserService {
                     user.setRole(role);
                     userRepository.save(user);
                     viewManager.loadComponent(ViewComponent.LOGIN);
-            } else throw new IOException(); }
-            catch (IOException ex) {
-                existingUserAlert.setVisible(true);
-            }
+            } else existingUserAlert.setVisible(true);
     }
 
 

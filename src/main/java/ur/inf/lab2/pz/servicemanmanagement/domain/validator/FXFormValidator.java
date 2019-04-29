@@ -1,6 +1,7 @@
 package ur.inf.lab2.pz.servicemanmanagement.domain.validator;
 
 import javafx.scene.text.Text;
+import org.thymeleaf.util.Validate;
 import ur.inf.lab2.pz.servicemanmanagement.utils.StringUtils;
 
 
@@ -10,7 +11,7 @@ public class FXFormValidator {
 
     public void validateEmail(String email, Text errorLabel) {
         if (StringUtils.isEmptyOrWhitespaceOnly(email) || !email.contains("@") || email.length() < 3) {
-            errorLabel.setText("Email jest nieprawidłowy");
+            errorLabel.setText(ValidateMessage.INCORRECT_EMAIL_FORMAT);
             errorLabel.setVisible(true);
             hasErrors = true;
         }
@@ -22,41 +23,32 @@ public class FXFormValidator {
 
     public void validateEmptyOrWhitespaceOnly(String text, Text errorLabel) {
         if (StringUtils.isEmptyOrWhitespaceOnly(text)) {
-            errorLabel.setText("Nieprawidłowa wartość");
+            errorLabel.setText(ValidateMessage.INCORRECT_TEXT_VALUE);
             errorLabel.setVisible(true);
             hasErrors = true;
         }
     }
 
     public void validatePasswordEquality(String pass1, String pass2, Text errorLabel) {
-        try {
-            if (!pass1.equals(pass2)) {
-                errorLabel.setText("Hasła nie zgadzaja sie");
+
+            if (pass1==null || pass2==null ||!pass1.equals(pass2)) {
+                errorLabel.setText(ValidateMessage.PASSWORDS_NOT_MATCH);
                 errorLabel.setVisible(true);
                 hasErrors = true;
             }
-        } catch (NullPointerException ex) {
-            errorLabel.setText("Hasła nie zgadzaja sie");
-            errorLabel.setVisible(true);
-            hasErrors = true;
-        }
     }
 
     public void validatePasswordLength(String password, Text errorLabel) {
-        try {
-            if (password.length() < 6 || password.length() > 16) {
-                errorLabel.setText("Prawidłowa długość hasła to 6-16 znaków");
+
+            if (password==null || password.length() < 6 || password.length() > 16) {
+                errorLabel.setText(ValidateMessage.INCORRECT_PASSWORD_LENGTH);
                 errorLabel.setVisible(true);
                 hasErrors = true;
             }
-        } catch (NullPointerException ex) {
-            errorLabel.setText("Prawidłowa długość hasła to 6-16 znaków");
-            errorLabel.setVisible(true);
-            hasErrors = true;
         }
     }
 
 
-}
+
 
 

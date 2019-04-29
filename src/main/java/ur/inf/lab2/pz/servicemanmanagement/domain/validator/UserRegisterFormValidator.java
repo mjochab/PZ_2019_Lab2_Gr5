@@ -1,21 +1,19 @@
 package ur.inf.lab2.pz.servicemanmanagement.domain.validator;
 
-import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 
-public class ValidUserRegisterForm {
+public class UserRegisterFormValidator {
 
     String firstName, lastName, companyName, email, password, confirmPassword;
 
-    @FXML
     Text firstNameAlert, lastNameAlert, companyNameAlert, emailAlert, privacyAlert, existingUserAlert;
 
     private FXFormValidator validator;
 
-    public ValidUserRegisterForm(String firstName, String lastName, String companyName, String email,
-                                 String password, String confirmPassword, Text firstNameAlert,
-                                 Text lastNameAlert, Text companyNameAlert, Text emailAlert,
-                                 Text privacyAlert, Text existingUserAlert) {
+    public UserRegisterFormValidator(String firstName, String lastName, String companyName, String email,
+                                     String password, String confirmPassword, Text firstNameAlert,
+                                     Text lastNameAlert, Text companyNameAlert, Text emailAlert,
+                                     Text privacyAlert, Text existingUserAlert) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.companyName = companyName;
