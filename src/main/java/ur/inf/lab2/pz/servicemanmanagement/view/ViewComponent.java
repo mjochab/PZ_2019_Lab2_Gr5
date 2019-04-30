@@ -9,7 +9,9 @@ public enum ViewComponent {
     MANAGER_DATA("component/manager/user-data"),
     MANAGER_REGISTER("component/manager/register"),
     SERVICEMAN_DATA("component/serviceman/user-data"),
-    SERVICEMAN_REGISTER("component/serviceman/serviceman-first-login");
+    SERVICEMAN_REGISTER("component/serviceman/serviceman-first-login"),
+    NEW_TASK_DIALOG("component/manager/new-task-dialog"),
+    NEW_CLIENT_DIALOG("component/manager/new-client");
 
 
     private String fxmlPath;

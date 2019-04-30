@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="950.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ur.inf.lab2.pz.servicemanmanagement.controller.NewTaskDialogController">
+    <children>
+        <VBox alignment="TOP_CENTER" prefHeight="500" prefWidth="800.0">
+            <children>
+                <HBox alignment="CENTER" prefHeight="61.0" prefWidth="800.0">
+                    <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nowe zadanie">
+                            <font>
+                                <Font name="Ubuntu" size="23.0" />
+                            </font>
+                        </Text>
+                    </children>
+                </HBox>
+                <HBox prefHeight="349.0" prefWidth="800.0">
+                    <children>
+                        <Pane prefHeight="346.0" prefWidth="356.0">
+                            <children>
+                                <Text layoutX="86.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Szczegóły zadania">
+                                    <font>
+                                        <Font name="Ubuntu" size="19.0" />
+                                    </font>
+                                </Text>
+                                <Text layoutX="44.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tytuł" />
+                                <Text layoutX="44.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Opis" />
+                                <JFXTextField fx:id="titleTextField" layoutX="163.0" layoutY="65.0" prefHeight="26.0" prefWidth="155.0" />
+                                <JFXTextArea fx:id="detailsTextArea" layoutX="42.0" layoutY="189.0" prefHeight="48.0" prefWidth="273.0" />
+                            </children>
+                        </Pane>
+                        <Pane prefHeight="346.0" prefWidth="445.0">
+                     <children>
+                        <JFXTreeTableView fx:id="tableView" layoutX="11.0" layoutY="73.0" prefHeight="222.0" prefWidth="542.0" />
+                        <Text layoutX="133.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wybierz klienta">
+                           <font>
+                              <Font name="Ubuntu" size="19.0" />
+                           </font>
+                        </Text>
+                        <JFXButton fx:id="newClientButton" buttonType="RAISED" layoutX="311.0" layoutY="306.0" minHeight="26.0" minWidth="94.0" onAction="#openNewClientDialog" prefHeight="26.0" prefWidth="120.0" styleClass="bg-dark-primary" stylesheets="@../../../styles/styles.css" text="Nowy klient" textFill="WHITE">
+                           <font>
+                              <Font name="Ubuntu" size="15.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                        </Pane>
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Pane prefHeight="97.0" prefWidth="800.0">
+                     <children>
+                        <JFXButton fx:id="saveButton" buttonType="RAISED" layoutX="521.0" layoutY="29.0" minHeight="40.0" minWidth="105.0" onAction="#saveTask" prefHeight="40.0" prefWidth="120.0" styleClass="bg-dark-primary" stylesheets="@../../../styles/styles.css" text="Zapisz" textFill="WHITE">
+                           <font>
+                              <Font name="Ubuntu" size="15.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton fx:id="cancelButton" buttonType="RAISED" layoutX="194.0" layoutY="29.0" minHeight="40.0" minWidth="105.0" onAction="#closeDialog" prefHeight="40.0" prefWidth="120.0" styleClass="bg-dark-primary" stylesheets="@../../../styles/styles.css" text="Anuluj" textFill="WHITE">
+                           <font>
+                              <Font name="Ubuntu" size="15.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                  </Pane>
+               </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</FlowPane>

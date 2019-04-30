@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
@@ -29,22 +30,22 @@ public class ViewManager {
     public void init(Stage stage) throws IOException {
         this.stage = stage;
 
-		Scene scene = new Scene(
-		        getView(stageConfig.getInitialView().getFxmlPath()),
-                        stageConfig.getMinWidth(),
-                        stageConfig.getMinHeight());
-		this.stage.setScene(scene);
+        Scene scene = new Scene(
+                getView(stageConfig.getInitialView().getFxmlPath()),
+                stageConfig.getMinWidth(),
+                stageConfig.getMinHeight());
+        this.stage.setScene(scene);
 
         this.stage.setTitle(stageConfig.getAppName());
         this.stage.setMinWidth(stageConfig.getMinWidth());
         this.stage.setMinHeight(stageConfig.getMinHeight());
         this.stage.setMaximized(stageConfig.getMaximized());
         this.stage.setResizable(stageConfig.getIsResizeable());
-		this.stage.setFullScreen(stageConfig.getFullScreenEnabled());
+        this.stage.setFullScreen(stageConfig.getFullScreenEnabled());
 
         switchLayout(Layout.START, ViewComponent.LOGIN);
 
-		this.stage.show();
+        this.stage.show();
     }
 
     private Node findChildNodeById(Parent parent, String id) {
@@ -176,10 +177,24 @@ public class ViewManager {
 //
 //    }
 
+    public void openDialog(ViewComponent viewComponent) throws IOException {
+        try {
+            Parent dialog = getView(viewComponent.getFxmlPath());
+
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setScene(new Scene(dialog));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
     private Parent getView(String viewName) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setControllerFactory(context::getBean);
-        loader.setLocation(getClass().getResource("/fxml/"+viewName+".fxml"));
+        loader.setLocation(getClass().getResource("/fxml/" + viewName + ".fxml"));
 
         return (Parent) loader.load();
     }

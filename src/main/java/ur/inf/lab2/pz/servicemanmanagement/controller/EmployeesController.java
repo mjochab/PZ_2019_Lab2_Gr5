@@ -2,31 +2,18 @@ package ur.inf.lab2.pz.servicemanmanagement.controller;
 
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
+import javafx.scene.text.Text;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import ur.inf.lab2.pz.servicemanmanagement.domain.MyEntity;
-import ur.inf.lab2.pz.servicemanmanagement.domain.User;
-import ur.inf.lab2.pz.servicemanmanagement.domain.enums.Roles;
-import ur.inf.lab2.pz.servicemanmanagement.repository.ExampleRepository;
-import ur.inf.lab2.pz.servicemanmanagement.repository.RoleRepository;
-import ur.inf.lab2.pz.servicemanmanagement.repository.UserRepository;
-import ur.inf.lab2.pz.servicemanmanagement.services.EmailSender;
-import ur.inf.lab2.pz.servicemanmanagement.services.EncryptionService;
-
-import java.util.List;
-import java.util.UUID;
+import ur.inf.lab2.pz.servicemanmanagement.domain.validator.WorkerAddValidator;
+import ur.inf.lab2.pz.servicemanmanagement.services.EmployeeService;
+import ur.inf.lab2.pz.servicemanmanagement.domain.dto.workerAddDTO;
 
 @Controller
 public class EmployeesController {
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private EmailSender emailSender;
-
-    @Autowired
-    private EncryptionService encryptionService;
+    private EmployeeService employeeService;
 
     @FXML
     private JFXTextField emailInput;
@@ -34,26 +21,38 @@ public class EmployeesController {
     @FXML
     private JFXTextField groupNameInput;
 
-    @Autowired
-    private RoleRepository roleRepository;
+    @FXML
+    private Text emailAlert;
 
+    @FXML
+    private Text existingUserAlert;
+
+    @FXML
+    private Text emptyGroupAlert;
 
     @FXML
     public void initialize() {
-
+        emailAlert.setVisible(false);
+        existingUserAlert.setVisible(false);
+        emptyGroupAlert.setVisible(false);
     }
 
-    @FXML
-    public void addWorker() {
-        System.out.println(emailInput.getText());
-        System.out.println(groupNameInput.getText());
-        String firstPassword = UUID.randomUUID().toString().substring(0,6);
-        String groupName = groupNameInput.getText();
-        User user = new User(emailInput.getText(), encryptionService.encode(firstPassword), groupName);
-        user.setRole(roleRepository.findByRole(Roles.ROLE_SERVICEMAN.toString()));
-        userRepository.save(user);
-        emailSender.sendEmail(emailInput.getText(), "Account's First password", firstPassword);
-        emailInput.clear();
-        groupNameInput.clear();
+    public void addWorker(){
+        if(validate()){
+            workerAddDTO dto = new workerAddDTO(emailInput.getText(), groupNameInput.getText());
+            employeeService.addWorker(dto, existingUserAlert);
+        }
+    }
+
+    private boolean validate() {
+        WorkerAddValidator validator = new WorkerAddValidator(
+                emailInput.getText(),
+                groupNameInput.getText(),
+                emailAlert,
+                emptyGroupAlert,
+                existingUserAlert);
+        validator.validate();
+        return validator.getValidator().isClean();
     }
 }
+

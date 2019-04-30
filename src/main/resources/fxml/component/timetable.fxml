@@ -2,11 +2,10 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -18,13 +17,7 @@
    <children>
       <JFXComboBox layoutX="29.0" layoutY="44.0" prefHeight="40.0" prefWidth="211.0" promptText="Wybierz grupę serwisantów" AnchorPane.leftAnchor="29.0" />
       <Label layoutX="278.0" layoutY="14.0" text="Nieprzydzielone zadania" />
-      <JFXButton buttonType="RAISED" layoutX="673.0" layoutY="9.0" prefHeight="25.0" prefWidth="121.0" style="-fx-background-color: #3a21f5;;" text="Nowe zadanie" textFill="WHITE" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="9.0" />
-      <TableView layoutX="278.0" layoutY="44.0" prefHeight="103.0" prefWidth="510.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="44.0">
-         <columns>
-            <TableColumn prefWidth="75.0" text="C1" />
-            <TableColumn prefWidth="75.0" text="C2" />
-         </columns>
-      </TableView>
+      <JFXButton fx:id="NewTaskButton" buttonType="RAISED" layoutX="673.0" layoutY="9.0" onAction="#openNewTaskDialog" prefHeight="25.0" prefWidth="121.0" style="-fx-background-color: #3a21f5;;" text="Nowe zadanie" textFill="WHITE" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="9.0" />
       <GridPane layoutX="52.0" layoutY="169.0" prefHeight="505.0" prefWidth="722.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -303,5 +296,6 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
+      <JFXTreeTableView fx:id="tasksTableView" layoutX="381.0" layoutY="-116.0" prefHeight="282.0" prefWidth="457.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="44.0" />
    </children>
 </AnchorPane>

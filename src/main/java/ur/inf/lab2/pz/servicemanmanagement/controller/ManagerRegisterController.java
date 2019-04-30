@@ -7,6 +7,9 @@ import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import ur.inf.lab2.pz.servicemanmanagement.domain.User;
+import ur.inf.lab2.pz.servicemanmanagement.domain.dto.ManagerRegisterDTO;
+import ur.inf.lab2.pz.servicemanmanagement.domain.validator.UserRegisterFormValidator;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewComponent;
 import ur.inf.lab2.pz.servicemanmanagement.domain.enums.Roles;
 import ur.inf.lab2.pz.servicemanmanagement.services.UserService;
@@ -17,23 +20,22 @@ import java.io.IOException;
 
 @Controller
 public class ManagerRegisterController {
+
+    private UserService userService;
     private ViewManager viewManager;
-
-    public void navigateToLogin(ActionEvent event) throws IOException {
-        viewManager.loadComponent(ViewComponent.LOGIN);
-    }
-
-    @FXML
-    private JFXTextField firstNameTextField, lastNameTextField, companyNameTextField, emailTextField;
 
     @FXML
     private JFXPasswordField password, confirmPassword;
 
-    @Autowired
-    private UserService userService;
+    @FXML
+    private JFXTextField companyNameTextField, emailTextField,firstNameTextField, lastNameTextField;
+
+
 
     @FXML
-    private Text firstNameAlert,lastNameAlert,emailAlert,companyNameAlert,privacyAlert, existingUserAlert;
+    private Text companyNameAlert, emailAlert, existingUserAlert, firstNameAlert,lastNameAlert,privacyAlert;
+
+
 
     @FXML
     public void initialize() {
@@ -43,17 +45,53 @@ public class ManagerRegisterController {
         companyNameAlert.setVisible(false);
         privacyAlert.setVisible(false);
         existingUserAlert.setVisible(false);
-    }
 
-    public void register(ActionEvent event) throws IOException {
-
-        userService.createUser(firstNameTextField.getText(), lastNameTextField.getText(),
-                companyNameTextField.getText(), emailTextField.getText(),
-                password.getText(), confirmPassword.getText(), Roles.ROLE_MANAGER.toString(),firstNameAlert,lastNameAlert,emailAlert,companyNameAlert,privacyAlert, existingUserAlert);
     }
 
     @Autowired
     public void setViewManager(ViewManager viewManager) {
         this.viewManager = viewManager;
+    }
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    public void register(ActionEvent event) throws IOException {
+
+        if (validate()) {
+            ManagerRegisterDTO dto = new ManagerRegisterDTO(firstNameTextField.getText(),
+                    lastNameTextField.getText(),
+                    companyNameTextField.getText(),
+                    emailTextField.getText(),
+                    password.getText(),
+                    Roles.ROLE_MANAGER.toString());
+
+            userService.createUser(dto,existingUserAlert);
+        }
+
+    }
+
+    private boolean validate() {
+        UserRegisterFormValidator validator = new UserRegisterFormValidator(firstNameTextField.getText(),
+                lastNameTextField.getText(),
+                companyNameTextField.getText(),
+                emailTextField.getText(),
+                password.getText(),
+                confirmPassword.getText(),
+                firstNameAlert,
+                lastNameAlert,
+                companyNameAlert,
+                emailAlert,
+                privacyAlert,
+                existingUserAlert);
+        validator.validate();
+        return validator.getValidator().isClean();
+
+    }
+
+    public void navigateToLogin(ActionEvent event) throws IOException {
+        viewManager.loadComponent(ViewComponent.LOGIN);
     }
 }
