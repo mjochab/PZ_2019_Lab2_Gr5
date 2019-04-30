@@ -1,5 +1,4 @@
 package ur.inf.lab2.pz.servicemanmanagement.services;
-
 import javafx.scene.text.Text;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -7,16 +6,15 @@ import org.springframework.stereotype.Service;
 import ur.inf.lab2.pz.servicemanmanagement.domain.Role;
 import ur.inf.lab2.pz.servicemanmanagement.domain.SecurityContext;
 import ur.inf.lab2.pz.servicemanmanagement.domain.User;
+import ur.inf.lab2.pz.servicemanmanagement.domain.dto.ManagerRegisterDTO;
 import ur.inf.lab2.pz.servicemanmanagement.domain.dto.ServicemanFirstLoginDTO;
 import ur.inf.lab2.pz.servicemanmanagement.domain.enums.Roles;
 import ur.inf.lab2.pz.servicemanmanagement.repository.RoleRepository;
 import ur.inf.lab2.pz.servicemanmanagement.repository.UserRepository;
-import ur.inf.lab2.pz.servicemanmanagement.utils.StringUtils;
 import ur.inf.lab2.pz.servicemanmanagement.view.Layout;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewComponent;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewManager;
 
-import javax.swing.text.View;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -64,54 +62,24 @@ public class UserService {
 
     }
 
-    public void createUser(String firstName, String lastName,
-                           String companyName, String email, String password,
-                           String confirmPassword, String roleName, Text firstNameAlert, Text lastNameAlert,
-                           Text companyNameAlert, Text privacyAlert, Text existingUserAlert) throws IOException {
+    public void createUser(ManagerRegisterDTO dto, Text existingUserAlert) throws IOException {
 
-        if (StringUtils.isEmptyOrWhitespaceOnly(firstName)) firstNameAlert.setVisible(true);
-        if (StringUtils.isEmptyOrWhitespaceOnly(lastName)) lastNameAlert.setVisible(true);
-        if (StringUtils.isEmptyOrWhitespaceOnly(companyName)) companyNameAlert.setVisible(true);
+            Role role = Optional.of(roleRepository.findByRole(dto.getRole())).orElseThrow(() -> new IOException());
 
-
-//        if (stringUtils.isEmptyOrWhitespaceOnly(email)) emailAlert.setVisible(true);
-//        if (!email.contains("@") || email.length() < 3) {
-//            emailAlert.setText("Email jest nieprawidłowy");
-//            emailAlert.setVisible(true);}
-        if (!password.equals(confirmPassword)) {privacyAlert.setText("Hasła nie zgadzaja sie");
-            privacyAlert.setVisible(true);}
-        if (password.length() < 6 || password.length() > 16)
-        {privacyAlert.setText("Hasło musi zawierać conajmniej 6 i maksymalnie 16 znaków.");
-            privacyAlert.setVisible(true);}
-
-        if (!StringUtils.isEmptyOrWhitespaceOnly(firstName)
-                && !StringUtils.isEmptyOrWhitespaceOnly(lastName)
-                && !StringUtils.isEmptyOrWhitespaceOnly(companyName)
-                && !StringUtils.isEmptyOrWhitespaceOnly(email)
-                && password.equals(confirmPassword)
-                && !StringUtils.isEmptyOrWhitespaceOnly(password)
-                && email.contains("@")
-                && email.length()>2
-                && password.length()>5
-                && password.length()<17) {
-            Role role = Optional.of(roleRepository.findByRole(roleName)).orElseThrow(() -> new IOException());
-
-            if (!userRepository.findAllByEmail(email).isEmpty()) existingUserAlert.setVisible(true);
-            else{
-                if (password.equals(confirmPassword)) {
+            existingUserAlert.setVisible(false);
+            if(userRepository.findAllByEmail(dto.getEmail()).isEmpty()){
                     User user = new User();
-                    user.setFirstName(firstName);
-                    user.setLastName(lastName);
-                    user.setCompanyName(companyName);
-                    user.setEmail(email);
-                    user.setPassword(encryptionService.encode(password));
+                    user.setFirstName(dto.getFirstName());
+                    user.setLastName(dto.getLastName());
+                    user.setCompanyName(dto.getCompanyName());
+                    user.setEmail(dto.getEmail());
+                    user.setPassword(encryptionService.encode(dto.getPassword()));
                     user.setRole(role);
                     userRepository.save(user);
                     viewManager.loadComponent(ViewComponent.LOGIN);
-
-                }
-            }}
+            } else existingUserAlert.setVisible(true);
     }
+
 
     public void changePersonalData(ServicemanFirstLoginDTO data) throws IOException {
         User currentUser = SecurityContext.getLoggedUser();
