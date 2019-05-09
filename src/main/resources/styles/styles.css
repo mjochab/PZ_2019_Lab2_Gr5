@@ -1,13 +1,13 @@
 .bg-dark-primary {
-    -fx-background-color: #0288D1;
+    -fx-background-color: #455A64;
 }
 
 .bg-light-primary {
-    -fx-background-color: #B3E5FC;
+    -fx-background-color: #CFD8DC;
 }
 
 .bg-primary {
-    -fx-background-color: #03A9F4;
+    -fx-background-color: #607D8B;
 }
 
 .buttons-on-primary {
@@ -19,7 +19,7 @@
 }
 
 .bg-accent {
-    -fx-background-color: #607D8B;
+    -fx-background-color: #00BCD4;
 }
 
 .primary-text {
