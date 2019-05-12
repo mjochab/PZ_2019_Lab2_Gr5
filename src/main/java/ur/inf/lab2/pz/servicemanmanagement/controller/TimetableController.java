@@ -19,9 +19,6 @@ import jfxtras.scene.control.agenda.Agenda;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ur.inf.lab2.pz.servicemanmanagement.domain.*;
-import ur.inf.lab2.pz.servicemanmanagement.domain.timetable.Timetable;
-import ur.inf.lab2.pz.servicemanmanagement.domain.timetable.TimetableTask;
-import ur.inf.lab2.pz.servicemanmanagement.domain.timetable.UnallocatedTask;
 import ur.inf.lab2.pz.servicemanmanagement.repository.TaskRepository;
 import ur.inf.lab2.pz.servicemanmanagement.service.TimetableManager;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewComponent;
@@ -67,7 +64,7 @@ class GroupData {
 @Controller
 public class TimetableController implements Initializable {
 
-//    ObservableList<TimetableTask> tasks;
+    ObservableList<Task> tasks;
     @Autowired
     private ViewManager viewManager;
     @Autowired
@@ -75,7 +72,7 @@ public class TimetableController implements Initializable {
     @FXML
     private JFXButton NewTaskButton;
     @FXML
-    private JFXTreeTableView<UnallocatedTask> tasksTableView;
+    private JFXTreeTableView<Task> tasksTableView;
 
     @FXML
     private AnchorPane placeForTimetable;
@@ -84,7 +81,12 @@ public class TimetableController implements Initializable {
 
     @Autowired
     private TimetableManager timetableManager;
-    private Timetable timetable;
+
+    public void groupChanged(ActionEvent event) {
+        GroupData selectedGroup = serviceTeamSelect.getSelectionModel().getSelectedItem();
+        Agenda agenda = timetableManager.load(selectedGroup.getLeaderId());
+        viewManager.loadComponentInto(placeForTimetable, agenda);
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -97,39 +99,25 @@ public class TimetableController implements Initializable {
         serviceTeamSelect.getItems().add(new GroupData(1L, "Grupa kretynów"));
         //
 
-        initTimetable();
         viewManager.loadComponentInto(placeForTimetable, ViewComponent.TIMETABLE_GROUP_NOT_SELECTED);
     }
 
-    private void initTimetable() {
-        timetable = timetableManager.createTimetable(tasksTableView);
-    }
-
-    public void groupChanged(ActionEvent event) {
-        GroupData selectedGroup = serviceTeamSelect.getSelectionModel().getSelectedItem();
-
-        timetable.loadTasks(timetableManager.getTasksFromActualWeek(selectedGroup.getLeaderId()));
-        viewManager.loadComponentInto(placeForTimetable, timetable.getView());
-    }
 
     private void initTableColumns() {
-        TreeTableColumn idCol = new TreeTableColumn("Identyfikator");
-        TreeTableColumn tagCol = new TreeTableColumn("Tag");
-        TreeTableColumn descriptionCol = new TreeTableColumn("Opis");
+        TreeTableColumn titleCol = new TreeTableColumn("Tytuł");
+        TreeTableColumn detailsCol = new TreeTableColumn("Opis");
 
-        tasksTableView.getColumns().addAll(idCol, tagCol, descriptionCol);
+        tasksTableView.getColumns().addAll(titleCol, detailsCol);
 
-        idCol.setCellValueFactory(new TreeItemPropertyValueFactory<Client, String>("id"));
-        tagCol.setCellValueFactory(new TreeItemPropertyValueFactory<Client, String>("tag"));
-        descriptionCol.setCellValueFactory(new TreeItemPropertyValueFactory<Client, String>("description"));
+        titleCol.setCellValueFactory(new TreeItemPropertyValueFactory<Client, String>("title"));
+        detailsCol.setCellValueFactory(new TreeItemPropertyValueFactory<Client, String>("details"));
 
     }
 
     public void loadTable() {
-//        tasks = FXCollections.observableArrayList(timetableManager.getUnallocatedTasks());
-//        TreeItem<TimetableTask> root = new RecursiveTreeItem<>(tasks, RecursiveTreeObject::getChildren);
-
-        tasksTableView.setRoot(timetableManager.getUnallocatedTasksAsTreeItem());
+        tasks = FXCollections.observableArrayList(taskRepository.findAll());
+        TreeItem<Task> root = new RecursiveTreeItem<>(tasks, RecursiveTreeObject::getChildren);
+        tasksTableView.setRoot(root);
         tasksTableView.setShowRoot(false);
     }
 
