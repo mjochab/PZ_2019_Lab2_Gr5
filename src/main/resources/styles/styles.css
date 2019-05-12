@@ -1,3 +1,7 @@
+.global-font {
+    -fx-font-family: "Noto Sans CJK TC DemiLight";
+}
+
 .bg-dark-primary {
     -fx-background-color: #455A64;
 }
@@ -32,4 +36,13 @@
 
 .bg-divider {
     -fx-background-color: #BDBDBD;
+}
+
+.Agenda {
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+}
+
+.task {
+    -fx-background-color: #CFD8DC;
 }

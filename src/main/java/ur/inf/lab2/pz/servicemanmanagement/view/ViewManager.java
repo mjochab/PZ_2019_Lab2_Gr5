@@ -26,6 +26,7 @@ public class ViewManager {
 
     private Parent actualLayout;
     private Layout actualLayoutType;
+    private String globalStylePath = getClass().getResource("/styles/styles.css").toExternalForm();
 
     public void init(Stage stage) throws IOException {
         this.stage = stage;
@@ -35,6 +36,7 @@ public class ViewManager {
                 stageConfig.getMinWidth(),
                 stageConfig.getMinHeight());
         this.stage.setScene(scene);
+        scene.getStylesheets().add(globalStylePath);
 
         this.stage.setTitle(stageConfig.getAppName());
         this.stage.setMinWidth(stageConfig.getMinWidth());
@@ -80,6 +82,36 @@ public class ViewManager {
         } else throw new PlaceForComponentException("Nie mozna zaladować komponentu " + component.getFxmlPath());
     }
 
+    public void loadComponentInto(AnchorPane placeForComponent, ViewComponent componentToAddAlias) {
+        if (placeForComponent == null)
+            throw new IllegalArgumentException("place for component cannot be null.");
+
+        placeForComponent.getChildren().clear();
+
+        Parent componentToAdd;
+        try {
+            componentToAdd = getView(componentToAddAlias.getFxmlPath());
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        fillToAnchorPane(componentToAdd);
+        placeForComponent.getChildren().add(componentToAdd);
+    }
+
+    public void loadComponentInto(AnchorPane placeForComponent, Parent componentToAdd) {
+        if (placeForComponent == null)
+            throw new IllegalArgumentException("place for component cannot be null.");
+
+        placeForComponent.getChildren().clear();
+        fillToAnchorPane(componentToAdd);
+
+        placeForComponent.getChildren().add(componentToAdd);
+    }
+
+
+
     public void switchLayout(Layout layout, ViewComponent initialComponent) throws IOException {
         Parent layoutComponent = getView(layout.getFxmlPath());
         Parent childComponent = getView(initialComponent.getFxmlPath());
@@ -101,83 +133,14 @@ public class ViewManager {
         stage.getScene().setRoot(layoutComponent);
     }
 
-    private void fillToAnchorPane(Parent childComponent) {
+    public void fillToAnchorPane(Parent childComponent) {
         AnchorPane.setTopAnchor(childComponent, 0.0);
         AnchorPane.setRightAnchor(childComponent, 0.0);
         AnchorPane.setBottomAnchor(childComponent, 0.0);
         AnchorPane.setLeftAnchor(childComponent, 0.0);
     }
 
-//    public void show(ViewType viewType) throws IOException {
-//        Parent view = getView(viewType.getFXMLName());
-//        stage.getScene().setRoot(view);
-//    }
-
-//    public void showEmptyPanelWithLogin() throws IOException {
-//        AnchorPane emptyLayout = (AnchorPane) getView(ViewType.EMPTY_LAYOUT.getFXMLName());
-//        AnchorPane cardContainer = (AnchorPane) emptyLayout.getChildren()
-//                .stream()
-//                .filter(node -> "cardContainer".equals(node.getId()))
-//                .collect(Collectors.toList()).get(0);
-//
-//        AnchorPane placeForComponent = (AnchorPane) cardContainer.getChildren().stream().filter(node -> "placeForComponent".equals(node.getId()))
-//                .collect(Collectors.toList()).get(0);
-//
-//        AnchorPane loginComponent = (AnchorPane) getView(ViewType.LOGIN.getFXMLName());
-//
-//        AnchorPane.setTopAnchor(loginComponent, 0.0);
-//        AnchorPane.setBottomAnchor(loginComponent, 0.0);
-//        AnchorPane.setLeftAnchor(loginComponent, 0.0);
-//        AnchorPane.setRightAnchor(loginComponent, 0.0);
-//
-//        placeForComponent.getChildren().add(loginComponent);
-//
-//        stage.getScene().setRoot(emptyLayout);
-//    }
-//
-//    public void showManagerPanelWithInitDashboard() throws IOException {
-//        AnchorPane layout = (AnchorPane) getView(ViewType.MANAGER_PANEL_LAYOUT.getFXMLName());
-//        List<Node> placeForComp = layout.getChildren()
-//                .stream()
-//                .filter(node -> "placeForComponent".equals(node.getId()))
-//                .collect(Collectors.toList());
-//
-//        AnchorPane placeForComponent = (AnchorPane) placeForComp.get(0);
-//        AnchorPane dashboard = (AnchorPane) getView(ViewType.MANAGER_DASHBOARD.getFXMLName());
-//        AnchorPane.setTopAnchor(dashboard, 0.0);
-//        AnchorPane.setBottomAnchor(dashboard, 0.0);
-//        AnchorPane.setLeftAnchor(dashboard, 0.0);
-//        AnchorPane.setRightAnchor(dashboard, 0.0);
-//
-//        placeForComponent.getChildren().add(dashboard);
-//
-//
-//        AnchorPane sidenavContainer = (AnchorPane) layout.getChildren()
-//                .stream()
-//                .filter(node -> "sideNavContainer".equals(node.getId()))
-//                .collect(Collectors.toList())
-//                .get(0);
-//
-//
-//        List<Node> collect = sidenavContainer.getChildren()
-//                .stream()
-//                .filter(node -> "placeForSidenav".equals(node.getId()))
-//                .collect(Collectors.toList());
-//        AnchorPane placeForSidenav = (AnchorPane) collect.get(0);
-//        AnchorPane managerSideNav = (AnchorPane) getView(ViewType.MANAGER_SIDENAV.getFXMLName());
-//
-//        AnchorPane.setTopAnchor(managerSideNav, 0.0);
-//        AnchorPane.setBottomAnchor(managerSideNav, 0.0);
-//        AnchorPane.setLeftAnchor(managerSideNav, 0.0);
-//        AnchorPane.setRightAnchor(managerSideNav, 0.0);
-//
-//        placeForSidenav.getChildren().add(managerSideNav);
-//
-//        stage.getScene().setRoot(layout);
-//
-//    }
-
-    public void openDialog(ViewComponent viewComponent) throws IOException {
+    public void openDialog(ViewComponent viewComponent) {
         try {
             Parent dialog = getView(viewComponent.getFxmlPath());
 
@@ -189,7 +152,6 @@ public class ViewManager {
             e.printStackTrace();
         }
     }
-
 
     private Parent getView(String viewName) throws IOException {
         FXMLLoader loader = new FXMLLoader();
@@ -208,4 +170,6 @@ public class ViewManager {
     public void setStageConfig(StageConfig stageConfig) {
         this.stageConfig = stageConfig;
     }
+
+
 }
