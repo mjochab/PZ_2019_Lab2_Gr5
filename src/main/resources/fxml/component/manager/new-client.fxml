@@ -7,7 +7,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane prefHeight="450.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ur.inf.lab2.pz.servicemanmanagement.controller.NewClientDialogController">
    <children>
       <Pane layoutX="10.0" layoutY="10.0" prefHeight="497.0" prefWidth="400.0">
@@ -41,6 +40,42 @@
             </JFXButton>
             <Text layoutX="31.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefon" />
             <JFXTextField fx:id="phoneTextField" layoutX="141.0" layoutY="320.0" />
+            <Text fx:id="firstNameAlert" fill="RED" layoutX="139.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pole nie może być puste" wrappingWidth="192.2480444908142">
+               <font>
+                  <Font name="Ubuntu" size="12.0" />
+               </font>
+            </Text>
+            <Text fx:id="lastNameAlert" fill="RED" layoutX="139.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pole nie może być puste" wrappingWidth="192.2480444908142">
+               <font>
+                  <Font name="Ubuntu" size="12.0" />
+               </font>
+            </Text>
+            <Text fx:id="streetNumberAlert" fill="RED" layoutX="139.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pole nie może być puste" wrappingWidth="192.2480444908142">
+               <font>
+                  <Font name="Ubuntu" size="12.0" />
+               </font>
+            </Text>
+            <Text fx:id="houseNumberAlert" fill="RED" layoutX="139.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pole nie może być puste" wrappingWidth="192.2480444908142">
+               <font>
+                  <Font name="Ubuntu" size="12.0" />
+               </font>
+            </Text>
+            <Text fx:id="apartmentNumberAlert" fill="RED" layoutX="139.0" layoutY="284.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pole nie może być puste" wrappingWidth="192.2480444908142">
+               <font>
+                  <Font name="Ubuntu" size="12.0" />
+               </font>
+            </Text>
+            <Text fx:id="cityAlert" fill="RED" layoutX="139.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pole nie może być puste" wrappingWidth="192.2480444908142">
+               <font>
+                  <Font name="Ubuntu" size="12.0" />
+               </font>
+            </Text>
+            <Text fx:id="phoneAlert" fill="RED" layoutX="136.0" layoutY="369.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pole nie może być puste" wrappingWidth="192.2480444908142">
+               <font>
+                  <Font name="Ubuntu" size="12.0" />
+               </font>
+            </Text>
+            <Text fx:id="jpAlert" layoutX="38.0" layoutY="384.0" strokeType="OUTSIDE" strokeWidth="0.0" text="JP" />
          </children>
       </Pane>
    </children>

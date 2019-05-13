@@ -1,6 +1,7 @@
 package ur.inf.lab2.pz.servicemanmanagement.domain.validator;
 
 import javafx.scene.text.Text;
+import org.thymeleaf.util.NumberUtils;
 import org.thymeleaf.util.Validate;
 import ur.inf.lab2.pz.servicemanmanagement.utils.StringUtils;
 
@@ -31,24 +32,31 @@ public class FXFormValidator {
 
     public void validatePasswordEquality(String pass1, String pass2, Text errorLabel) {
 
-            if (pass1==null || pass2==null ||!pass1.equals(pass2)) {
-                errorLabel.setText(ValidateMessage.PASSWORDS_NOT_MATCH);
-                errorLabel.setVisible(true);
-                hasErrors = true;
-            }
+        if (pass1==null || pass2==null ||!pass1.equals(pass2)) {
+            errorLabel.setText(ValidateMessage.PASSWORDS_NOT_MATCH);
+            errorLabel.setVisible(true);
+            hasErrors = true;
+        }
     }
 
     public void validatePasswordLength(String password, Text errorLabel) {
 
-            if (password==null || password.length() < 6 || password.length() > 16) {
-                errorLabel.setText(ValidateMessage.INCORRECT_PASSWORD_LENGTH);
-                errorLabel.setVisible(true);
-                hasErrors = true;
-            }
+        if (password==null || password.length() < 6 || password.length() > 16) {
+            errorLabel.setText(ValidateMessage.INCORRECT_PASSWORD_LENGTH);
+            errorLabel.setVisible(true);
+            hasErrors = true;
         }
     }
 
+    public void  isNumber(String number, Text errorLabel){
 
-
-
-
+        try{
+            Integer.parseInt(number);
+        }
+        catch (Exception E){
+            errorLabel.setText(ValidateMessage.INCORRECT_NUMBER_FORMAT);
+            errorLabel.setVisible(true);
+            hasErrors = true;
+        }
+    }
+}
