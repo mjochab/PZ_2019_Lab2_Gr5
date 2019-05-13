@@ -1,5 +1,4 @@
 package ur.inf.lab2.pz.servicemanmanagement.services;
-
 import javafx.scene.text.Text;
 import org.springframework.stereotype.Service;
 import ur.inf.lab2.pz.servicemanmanagement.domain.User;
