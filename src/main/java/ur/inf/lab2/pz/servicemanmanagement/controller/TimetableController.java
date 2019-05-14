@@ -84,8 +84,7 @@ public class TimetableController implements Initializable {
 
     public void groupChanged(ActionEvent event) {
         GroupData selectedGroup = serviceTeamSelect.getSelectionModel().getSelectedItem();
-        Agenda agenda = timetableManager.load(selectedGroup.getLeaderId());
-        viewManager.loadComponentInto(placeForTimetable, agenda);
+        viewManager.loadComponentInto(placeForTimetable, timetableManager.load(selectedGroup.getLeaderId()));
     }
 
     @Override
