@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="deefcfe6-2333-47de-8eee-0fdac3c584d6">
+	<parameter name="title" class="java.lang.String"/>
+	<parameter name="details" class="java.lang.String"/>
+	<parameter name="teamLeader" class="java.lang.String"/>
+	<parameter name="clientFirstName" class="java.lang.String"/>
+	<parameter name="clientLastName" class="java.lang.String"/>
+	<parameter name="clientPhoneNumber" class="java.lang.String"/>
+	<parameter name="clientStreet" class="java.lang.String"/>
+	<parameter name="clientHouseNumber" class="java.lang.String"/>
+	<parameter name="clientApartmentNumber" class="java.lang.String"/>
+	<parameter name="clientCity" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="361" splitType="Stretch">
+			<textField pattern="dd MMMMMMMMMMM yyyy HH:mm:ss">
+				<reportElement x="470" y="0" width="100" height="30" uuid="88bbd9e5-1f26-4635-8e48-fbe875fbbdf4"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="20" width="555" height="30" uuid="ec4bca5b-56c9-4933-a6ec-6562ba8d598e"/>
+				<textElement textAlignment="Center">
+					<font fontName="DialogInput" size="24"/>
+				</textElement>
+				<text><![CDATA[Podsumowanie zadania]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="50" y="62" width="100" height="30" uuid="3baa8445-ee07-4b68-b434-49bc50290746"/>
+				<text><![CDATA[Pracownik:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="60" width="100" height="30" uuid="07e7fc02-99a2-4eb7-930e-df57a4871942"/>
+				<text><![CDATA[Klient:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="150" y="62" width="100" height="30" uuid="c1c20203-ff53-4bfc-8362-0bce8fb576f6"/>
+				<textFieldExpression><![CDATA[$P{teamLeader}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="150" y="100" width="100" height="30" uuid="e14203b4-31ea-4a37-9ec4-ce41d66d7c60"/>
+				<textFieldExpression><![CDATA[$P{title}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="430" y="90" width="100" height="30" uuid="4fe715d9-91f8-43e1-a33e-8bed7be1146b"/>
+				<textFieldExpression><![CDATA[$P{clientFirstName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="50" y="100" width="100" height="30" uuid="7794713c-f754-4a6a-93b6-7879c04a7c8e"/>
+				<text><![CDATA[Zadanie:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="90" width="100" height="30" uuid="7922ca95-9f8b-4ece-86d1-b04136196d8a"/>
+				<text><![CDATA[Imie:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="50" y="135" width="100" height="28" uuid="a50f0efb-7f7e-4728-91ff-77a7a51780f0"/>
+				<text><![CDATA[Dodatkowy opis:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="150" y="135" width="100" height="30" uuid="c809d322-1656-4551-8731-f26a5f6de6e3"/>
+				<textFieldExpression><![CDATA[$P{details}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="430" y="130" width="100" height="30" uuid="50e8e321-dd5f-4b53-a05e-7db1f2517ad8"/>
+				<textFieldExpression><![CDATA[$P{clientLastName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="320" y="130" width="100" height="30" uuid="f5b0f4ed-2fd3-4dc2-b484-97878c945f6d"/>
+				<text><![CDATA[Nazwisko:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="165" width="100" height="30" uuid="6f8a6be1-d0fe-47ec-9d26-597a380a0c53"/>
+				<text><![CDATA[Ulica:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="200" width="100" height="30" uuid="be493ed4-be96-404f-a483-72f80220c327"/>
+				<text><![CDATA[Numer domu:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="240" width="100" height="30" uuid="f8f32ace-905b-459b-83d4-e03f951e2597"/>
+				<text><![CDATA[Numer mieszkania:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="430" y="200" width="100" height="30" uuid="5fa1e3f8-1971-4b04-bb5f-f73f0f5b74ad"/>
+				<textFieldExpression><![CDATA[$P{clientHouseNumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="430" y="240" width="100" height="30" uuid="9dcb45e9-f95f-4683-8631-a10d2f7ce2ae"/>
+				<textFieldExpression><![CDATA[$P{clientApartmentNumber}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="320" y="280" width="100" height="30" uuid="343c2b4e-a5f5-4c92-adfb-95208093a78a"/>
+				<text><![CDATA[Miasto:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="430" y="280" width="100" height="30" uuid="602c765b-ad75-4301-ae02-c9ba2bcb98fe"/>
+				<textFieldExpression><![CDATA[$P{clientCity}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="320" y="310" width="100" height="30" uuid="d1337793-fb59-4ef6-bda1-bcf2f7a54516"/>
+				<text><![CDATA[Numer telefonu:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="430" y="310" width="100" height="30" uuid="7e2934b0-c106-4ce7-8b71-53f2c1add882"/>
+				<textFieldExpression><![CDATA[$P{clientPhoneNumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="430" y="165" width="100" height="30" uuid="28ed1a75-c75a-4a4a-b12a-22d99127792e"/>
+				<textFieldExpression><![CDATA[$P{clientStreet}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+</jasperReport>
