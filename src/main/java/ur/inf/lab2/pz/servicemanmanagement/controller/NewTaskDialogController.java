@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,13 +45,16 @@ public class NewTaskDialogController implements Initializable {
     private JFXTextArea detailsTextArea;
     @FXML
     private JFXTreeTableView<Client> tableView;
+    @FXML
+    private Text titleAlert, detailsAlert;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initTableColumns();
         loadTable();
+        titleAlert.setVisible(false);
+        detailsAlert.setVisible(false);
     }
-
 
     @FXML
     void closeDialog(ActionEvent event) {
@@ -58,22 +62,20 @@ public class NewTaskDialogController implements Initializable {
         stage.close();
     }
 
-
     @FXML
     void openNewClientDialog(ActionEvent event) throws IOException {
         viewManager.openDialog(ViewComponent.NEW_CLIENT_DIALOG);
     }
 
-
     @FXML
     void saveTask(ActionEvent event) {
-        TreeItem<Client> client = tableView.getSelectionModel().getSelectedItem();
-        NewTaskDTO newTaskDTO = new NewTaskDTO(titleTextField.getText(), detailsTextArea.getText(), client.getValue());
+            TreeItem<Client> client = tableView.getSelectionModel().getSelectedItem();
+            NewTaskDTO newTaskDTO = new NewTaskDTO(titleTextField.getText(), detailsTextArea.getText(), client.getValue());
 
-        taskService.saveNewTask(newTaskDTO);
-        Stage stage = (Stage) saveButton.getScene().getWindow();
-        stage.close();
-        timetableController.loadTable();
+            taskService.saveNewTask(newTaskDTO);
+            Stage stage = (Stage) saveButton.getScene().getWindow();
+            stage.close();
+            timetableController.loadTable();
     }
 
     public void loadTable() {
@@ -100,6 +102,5 @@ public class NewTaskDialogController implements Initializable {
         // apartmentNumberCol.setCellValueFactory(new TreeItemPropertyValueFactory<Client, Integer>("apartmentNumber"));
         cityCol.setCellValueFactory(new TreeItemPropertyValueFactory<Client, String>("city"));
     }
-
 
 }

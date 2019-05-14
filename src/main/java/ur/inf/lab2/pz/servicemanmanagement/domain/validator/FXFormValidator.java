@@ -51,10 +51,17 @@ public class FXFormValidator {
     public void  isNumber(String number, Text errorLabel){
 
         try{
-            Integer.parseInt(number);
-        }
+            Integer.parseInt(number); }
         catch (Exception E){
             errorLabel.setText(ValidateMessage.INCORRECT_NUMBER_FORMAT);
+            errorLabel.setVisible(true);
+            hasErrors = true;
+        }
+    }
+
+    public void validatePhoneLength(String phoneNumber, Text errorLabel){
+        if(phoneNumber.length() < 9 || phoneNumber.length() > 9){
+            errorLabel.setText(ValidateMessage.INCORRECT_NUMBER_LENGTH);
             errorLabel.setVisible(true);
             hasErrors = true;
         }

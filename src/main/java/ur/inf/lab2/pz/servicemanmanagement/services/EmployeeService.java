@@ -42,5 +42,6 @@ public class EmployeeService {
             emailSender.sendEmail(dto.getEmail(), "Account's First password", firstPassword);
 
         } else existingUserAlert.setVisible(true);
+               // throw new IOException();}
         }
 }

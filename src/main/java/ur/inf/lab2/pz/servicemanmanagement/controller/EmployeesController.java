@@ -9,6 +9,9 @@ import ur.inf.lab2.pz.servicemanmanagement.domain.validator.WorkerAddValidator;
 import ur.inf.lab2.pz.servicemanmanagement.services.EmployeeService;
 import ur.inf.lab2.pz.servicemanmanagement.domain.dto.workerAddDTO;
 
+import java.awt.event.ActionEvent;
+import java.io.IOException;
+
 @Controller
 public class EmployeesController {
 
@@ -37,7 +40,7 @@ public class EmployeesController {
         emptyGroupAlert.setVisible(false);
     }
 
-    public void addWorker(){
+    public void addWorker() {
         if(validate()){
             workerAddDTO dto = new workerAddDTO(emailInput.getText(), groupNameInput.getText());
             employeeService.addWorker(dto, existingUserAlert);

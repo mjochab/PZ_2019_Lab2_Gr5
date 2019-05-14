@@ -58,6 +58,7 @@ public class NewClientValidator {
         validator.isNumber(houseNumberTextField, houseNumberAlert);
         validator.isNumber(apartmentNumberTextField, apartmentNumberAlert);
         validator.isNumber(phoneTextField, phoneAlert);
+        validator.validatePhoneLength(phoneTextField, phoneAlert);
     }
 
     private void clearAlerts() {

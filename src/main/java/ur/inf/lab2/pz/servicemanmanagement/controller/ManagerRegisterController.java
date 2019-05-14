@@ -88,7 +88,6 @@ public class ManagerRegisterController {
                 existingUserAlert);
         validator.validate();
         return validator.getValidator().isClean();
-
     }
 
     public void navigateToLogin(ActionEvent event) throws IOException {

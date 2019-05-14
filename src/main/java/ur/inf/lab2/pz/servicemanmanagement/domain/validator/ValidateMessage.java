@@ -6,7 +6,8 @@ public class ValidateMessage {
     public static final String INCORRECT_TEXT_VALUE = "Nieprawidłowa wartość";
     public static final String PASSWORDS_NOT_MATCH = "Hasła nie zgadzają się";
     public static final String INCORRECT_PASSWORD_LENGTH = "Prawidłowa długość hasła to 6-16 znaków";
-    public static  final String INCORRECT_NUMBER_FORMAT = "Wymagana liczba";
+    public static final String INCORRECT_NUMBER_FORMAT = "Wymagana liczba";
+    public static final String INCORRECT_NUMBER_LENGTH = "Długość jest nieprawidłowa";
 
     private ValidateMessage(){}
 }
