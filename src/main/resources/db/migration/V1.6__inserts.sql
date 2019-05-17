@@ -1,5 +1,3 @@
-insert into user (id, first_name, last_name, email, password, company_name, id_role)
-values (1, 'Patryk', 'Kleczkowski', 'admin@o2.pl', 'lol123', 'Dajszmal SA', 1);
 
 
 insert into client(id, first_name, last_name, phone_number, street, house_number, apartment_number, city)

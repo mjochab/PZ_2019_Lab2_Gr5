@@ -9,7 +9,6 @@ import javafx.scene.control.Label;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ur.inf.lab2.pz.servicemanmanagement.domain.dto.ServicemanFirstLoginDTO;
-import ur.inf.lab2.pz.servicemanmanagement.repository.UserRepository;
 import ur.inf.lab2.pz.servicemanmanagement.services.ServicemanFirstLoginService;
 
 import java.io.IOException;
@@ -18,8 +17,6 @@ import java.io.IOException;
 public class ServicemanFirstLoginController {
 
 
-    @Autowired
-    UserRepository userRepository;
     @Autowired
     ServicemanFirstLoginService servicemanFirstLoginService;
 
