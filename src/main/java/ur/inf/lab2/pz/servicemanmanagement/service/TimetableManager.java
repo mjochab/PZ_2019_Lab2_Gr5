@@ -1,5 +1,6 @@
 package ur.inf.lab2.pz.servicemanmanagement.service;
 
+import javafx.collections.ListChangeListener;
 import jfxtras.scene.control.agenda.Agenda;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,31 +13,39 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 interface TimetableDatasource {
-    Set<Task> getTasksByDateRange(Long leaderId, DateRange peroidOfTime);
+    Set<TimetableTask> getTasksByDateRange(Long leaderId, DateRange peroidOfTime);
 }
 
 interface Timetable {
 
-    void loadTasks(Set<Task> tasksFromActualWeek);
+    void loadTasks(Set<TimetableTask> tasksFromActualWeek);
     DateRange getDateRange();
     Agenda generate();
 }
 
 class ManagerTimetable implements Timetable {
     private DateRange dateRange;
-    private Set<Task> rawTasks = new HashSet<>();
-    private static final String TASK_STYLE_CLASS_NAME = "task";
+    private Set<TimetableTask> rawTasks = new HashSet<>();
     private static final String DESCRIPTION_PATTERN = "{id} \n {tag} \n {description}";
     private static final String[] GLOBAL_STYLE_CLASSES = { "global-font" };
+    private static final String EMPTY_TASK_ID = "empty-task-id";
+
+    private static final String TASK_STYLE_CLASS_NAME = "task";
+    private static final String TASK_SELECTED_STYLE_CLASSNAME = "task-selected";
+    private static final String EMPTY_TASK_CLASS_NAME = "empty-task";
     private Agenda.AppointmentGroup appointmentGroup;
+    private Agenda.AppointmentGroup appointmentSelectedGroup;
+    private Agenda.AppointmentGroup appointmentEmptyGroup;
 
     public ManagerTimetable(DateRange dateRange) {
         this.dateRange = dateRange;
         appointmentGroup = new Agenda.AppointmentGroupImpl().withStyleClass(TASK_STYLE_CLASS_NAME);
+        appointmentSelectedGroup = new Agenda.AppointmentGroupImpl().withStyleClass(TASK_SELECTED_STYLE_CLASSNAME);
+        appointmentEmptyGroup = new Agenda.AppointmentGroupImpl().withStyleClass(EMPTY_TASK_CLASS_NAME);
     }
 
     @Override
-    public void loadTasks(Set<Task> tasksFromActualWeek) {
+    public void loadTasks(Set<TimetableTask> tasksFromActualWeek) {
         if (tasksFromActualWeek == null)
             throw new NullPointerException();
 
@@ -56,9 +65,33 @@ class ManagerTimetable implements Timetable {
         agenda.displayedLocalDateTime().set(toLocalDateTime(dateRange.getFrom()));
         agenda.appointments().addAll(transformTasksToAppointments());
 
+
+        setStyleOnSelected(agenda);
         allowCreatingTasksByDrag(agenda);
         agenda.getStyleClass().addAll(GLOBAL_STYLE_CLASSES);
         return agenda;
+    }
+
+    private void setStyleOnSelected(Agenda agenda) {
+        agenda.selectedAppointments().addListener((ListChangeListener<Agenda.Appointment>) changeListener -> {
+            changeListener.next();
+            if (changeListener.wasAdded()) {
+                changeListener.getList().forEach(app -> app.setAppointmentGroup(appointmentSelectedGroup));
+            }
+
+            if (changeListener.wasRemoved()) {
+                changeListener.getRemoved().forEach(app -> {
+
+                    if (EMPTY_TASK_ID.equals(app.getDescription()))
+                        app.setAppointmentGroup(appointmentEmptyGroup);
+                    else
+                        app.setAppointmentGroup(appointmentGroup);
+
+                });
+            }
+
+            agenda.refresh();
+        });
     }
 
     private void allowCreatingTasksByDrag(Agenda agenda) {
@@ -66,7 +99,9 @@ class ManagerTimetable implements Timetable {
                 new Agenda.AppointmentImplLocal()
                     .withStartLocalDateTime(dateTimeRange.getStartLocalDateTime())
                     .withEndLocalDateTime(dateTimeRange.getEndLocalDateTime())
-                    .withAppointmentGroup(appointmentGroup)
+                    .withSummary("PUSTE ZADANIE")
+                        .withDescription(EMPTY_TASK_ID)
+                    .withAppointmentGroup(appointmentEmptyGroup)
         );
     }
 
@@ -82,7 +117,7 @@ class ManagerTimetable implements Timetable {
                 .collect(Collectors.toList());
     }
 
-    private String prepareTaskDescription(Task task) {
+    private String prepareTaskDescription(TimetableTask task) {
         return DESCRIPTION_PATTERN.replace("{id}", task.getId())
                 .replace("{tag}", task.getTag())
                 .replace("{description}", task.getDescription());
@@ -94,7 +129,7 @@ class ManagerTimetable implements Timetable {
 
 }
 
-interface Task {
+interface TimetableTask {
 
     String getId(); // np. M1  (Pierwsza litera taga + numer, następny task z tagiem montaż byłby M2)
     String getTag(); //np. Montaż
@@ -128,7 +163,7 @@ public class TimetableManager {
         Date now = new Date();
         Timetable timetable = new ManagerTimetable(getWeekDateRangeByDate(now));
 
-        Set<Task> tasksFromActualWeek = datasource.getTasksByDateRange(leaderId, timetable.getDateRange());
+        Set<TimetableTask> tasksFromActualWeek = datasource.getTasksByDateRange(leaderId, timetable.getDateRange());
         timetable.loadTasks(tasksFromActualWeek);
         return timetable.generate();
 //
