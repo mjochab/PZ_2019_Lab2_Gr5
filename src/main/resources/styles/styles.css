@@ -45,4 +45,17 @@
 
 .task {
     -fx-background-color: #CFD8DC;
+    -fx-font-size: 14;
 }
+
+.task-selected {
+    -fx-background-color: #00BCD4;
+    -fx-font-size: 14;
+}
+
+.empty-task {
+    -fx-opacity: 80%;
+    -fx-background-color: #f2fbff;
+    -fx-font-size: 14;
+}
+

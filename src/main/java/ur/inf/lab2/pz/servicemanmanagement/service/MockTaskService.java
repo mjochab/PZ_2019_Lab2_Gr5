@@ -13,7 +13,7 @@ import java.util.Set;
 @Service
 public class MockTaskService implements TimetableDatasource {
 
-    class SimpleTask implements Task {
+    class SimpleTimetableTask implements TimetableTask {
 
         private String id;
         private String tag;
@@ -21,7 +21,7 @@ public class MockTaskService implements TimetableDatasource {
         private LocalDateTime dateTimeFrom;
         private LocalDateTime dateTimeTo;
 
-        public SimpleTask(String id, String tag, String description, LocalDateTime dateTimeFrom, LocalDateTime dateTimeTo) {
+        public SimpleTimetableTask(String id, String tag, String description, LocalDateTime dateTimeFrom, LocalDateTime dateTimeTo) {
             this.id = id;
             this.tag = tag;
             this.description = description;
@@ -58,7 +58,7 @@ public class MockTaskService implements TimetableDatasource {
         public boolean equals(Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
-            SimpleTask that = (SimpleTask) o;
+            SimpleTimetableTask that = (SimpleTimetableTask) o;
             return Objects.equals(id, that.id);
         }
 
@@ -69,27 +69,27 @@ public class MockTaskService implements TimetableDatasource {
     }
 
     @Override
-    public Set<Task> getTasksByDateRange(Long leaderId, DateRange peroidOfTime) {
-        Task simpleTask1 = new SimpleTask(
+    public Set<TimetableTask> getTasksByDateRange(Long leaderId, DateRange peroidOfTime) {
+        TimetableTask simpleTask1 = new SimpleTimetableTask(
                 "M1",
                 "Montaż",
                 "Pojechać, zniszczyć i wrócić",
                 LocalDate.parse("2019-05-14").atTime(12, 0),
                 LocalDate.parse("2019-05-14").atTime(13, 30));
-        Task simpleTask2 = new SimpleTask(
+        TimetableTask simpleTask2 = new SimpleTimetableTask(
                 "M2",
                 "Montaż",
                 "Montaż aparatury do bimbru",
                 LocalDate.parse("2019-05-14").atTime(14, 0),
                 LocalDate.parse("2019-05-14").atTime(16, 30));
-        Task simpleTask3 = new SimpleTask(
+        TimetableTask simpleTask3 = new SimpleTimetableTask(
                 "R1",
                 "Rozbiórka",
                 "Rozebrać siostrę klienta",
                 LocalDate.parse("2019-05-15").atTime(9, 0),
                 LocalDate.parse("2019-05-15").atTime(10, 0));
 
-        Set<Task> tasks = new HashSet<>();
+        Set<TimetableTask> tasks = new HashSet<>();
         tasks.addAll(Arrays.asList(simpleTask1, simpleTask2, simpleTask3));
         return tasks;
     }
