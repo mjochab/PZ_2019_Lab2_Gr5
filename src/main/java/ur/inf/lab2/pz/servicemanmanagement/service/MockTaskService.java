@@ -2,6 +2,7 @@ package ur.inf.lab2.pz.servicemanmanagement.service;
 
 import org.springframework.stereotype.Service;
 import ur.inf.lab2.pz.servicemanmanagement.domain.DateRange;
+import ur.inf.lab2.pz.servicemanmanagement.domain.timetable.TimetableTask;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -91,6 +92,25 @@ public class MockTaskService implements TimetableDatasource {
 
         Set<Task> tasks = new HashSet<>();
         tasks.addAll(Arrays.asList(simpleTask1, simpleTask2, simpleTask3));
+        return tasks;
+    }
+
+    @Override
+    public Set<TimetableTask> getUnallocatedTasks() {
+        TimetableTask simpleTask1 = new SimpleTimetableTask(
+                "N1",
+                "Nieprzydzielone",
+                "Hejka",
+                null,
+                null);
+        TimetableTask simpleTask2 = new SimpleTimetableTask(
+                "N2",
+                "Nieprzydzielone",
+                "Hejka2",
+                null,
+                null);
+        Set<TimetableTask> tasks = new HashSet<>();
+        tasks.addAll(Arrays.asList(simpleTask1, simpleTask2));
         return tasks;
     }
 }
