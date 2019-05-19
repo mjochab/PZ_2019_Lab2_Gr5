@@ -66,4 +66,12 @@ public class FXFormValidator {
             hasErrors = true;
         }
     }
+
+    public void validateEmpty(String text, Text errorLabel) {
+        if (StringUtils.isEmpty(text)) {
+            errorLabel.setText(ValidateMessage.INCORRECT_TEXT_VALUE);
+            errorLabel.setVisible(true);
+            hasErrors = true;
+        }
+    }
 }

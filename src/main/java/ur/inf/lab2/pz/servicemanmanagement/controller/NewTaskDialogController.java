@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ur.inf.lab2.pz.servicemanmanagement.domain.Client;
 import ur.inf.lab2.pz.servicemanmanagement.domain.dto.NewTaskDTO;
+import ur.inf.lab2.pz.servicemanmanagement.domain.validator.NewTaskValidator;
 import ur.inf.lab2.pz.servicemanmanagement.repository.ClientRepository;
 import ur.inf.lab2.pz.servicemanmanagement.services.TaskService;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewComponent;
@@ -69,6 +70,7 @@ public class NewTaskDialogController implements Initializable {
 
     @FXML
     void saveTask(ActionEvent event) {
+        if(validate()) {
             TreeItem<Client> client = tableView.getSelectionModel().getSelectedItem();
             NewTaskDTO newTaskDTO = new NewTaskDTO(titleTextField.getText(), detailsTextArea.getText(), client.getValue());
 
@@ -76,6 +78,7 @@ public class NewTaskDialogController implements Initializable {
             Stage stage = (Stage) saveButton.getScene().getWindow();
             stage.close();
             timetableController.loadTable();
+        }
     }
 
     public void loadTable() {
@@ -101,6 +104,18 @@ public class NewTaskDialogController implements Initializable {
         houseNumberCol.setCellValueFactory(new TreeItemPropertyValueFactory<Client, Integer>("houseNumber"));
         // apartmentNumberCol.setCellValueFactory(new TreeItemPropertyValueFactory<Client, Integer>("apartmentNumber"));
         cityCol.setCellValueFactory(new TreeItemPropertyValueFactory<Client, String>("city"));
+    }
+
+    private boolean validate() {
+
+        NewTaskValidator validator = new NewTaskValidator(
+                titleTextField.getText(),
+                detailsTextArea.getText(),
+                titleAlert,
+                detailsAlert);
+
+        validator.validate();
+        return validator.getValidator().isClean();
     }
 
 }
