@@ -31,6 +31,16 @@ public class StringUtils {
 
             return true;
         }
+
+        for (int i = 0; i < 2; i++) {
+
+            if (Character.isWhitespace(str.charAt(i))) {
+
+                return true;
+
+            }
+
+        }
         return false;
     }
 }

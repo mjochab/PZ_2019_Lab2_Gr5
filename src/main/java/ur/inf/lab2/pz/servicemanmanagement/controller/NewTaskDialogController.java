@@ -117,5 +117,4 @@ public class NewTaskDialogController implements Initializable {
         validator.validate();
         return validator.getValidator().isClean();
     }
-
 }
