@@ -55,7 +55,7 @@ public class PanelLayoutController {
             AnchorPane.setTopAnchor(timetableButton, 0.0);
 
             fullNameLabel.setText(SecurityContext.getLoggedUser().getFirstName()+" "+SecurityContext.getLoggedUser().getLastName());
-            roleLabel.setText("Pracownik");
+            roleLabel.setText("Serwisant");
         }
         if (SecurityContext.getLoggedUser().role.getRole().equals("ROLE_MANAGER")){
             fullNameLabel.setText(SecurityContext.getLoggedUser().getFirstName()+" "+SecurityContext.getLoggedUser().getLastName());
