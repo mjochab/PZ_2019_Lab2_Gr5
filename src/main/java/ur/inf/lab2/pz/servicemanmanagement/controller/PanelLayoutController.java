@@ -54,8 +54,12 @@ public class PanelLayoutController {
             employeeButton.getChildrenUnmodifiable().forEach(node -> node.setManaged(false));
             AnchorPane.setTopAnchor(timetableButton, 0.0);
 
-            fullNameLabel.setText("Andrzej Gołota");
-            roleLabel.setText("Głowa serwisantów");
+            fullNameLabel.setText(SecurityContext.getLoggedUser().getFirstName()+" "+SecurityContext.getLoggedUser().getLastName());
+            roleLabel.setText("Pracownik");
+        }
+        if (SecurityContext.getLoggedUser().role.getRole().equals("ROLE_MANAGER")){
+            fullNameLabel.setText(SecurityContext.getLoggedUser().getFirstName()+" "+SecurityContext.getLoggedUser().getLastName());
+            roleLabel.setText("Kierownik");
         }
     }
 
