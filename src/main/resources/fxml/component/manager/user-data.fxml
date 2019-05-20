@@ -14,11 +14,11 @@
          <children>
             <JFXButton fx:id="submitDataButton" buttonType="RAISED" layoutX="212.0" layoutY="341.0" onAction="#submitManagerData" style="-fx-background-color: #3a21f5;;" text="Zatwierdź" textFill="WHITE" />
             <Label layoutX="111.0" layoutY="85.0" text="Imię" />
-            <JFXTextField layoutX="253.0" layoutY="78.0" text="Jan" />
+            <JFXTextField fx:id="nameField" layoutX="253.0" layoutY="78.0"  />
             <Label layoutX="111.0" layoutY="135.0" text="Nazwisko" />
-            <JFXTextField layoutX="253.0" layoutY="128.0" text="Kowalski" />
+            <JFXTextField fx:id="lastNameField" layoutX="253.0" layoutY="128.0"  />
             <Label layoutX="111.0" layoutY="185.0" text="Nazwa firmy" />
-            <JFXTextField layoutX="253.0" layoutY="178.0" text="KowalSerwis" />
+            <JFXTextField fx:id="companyNameField" layoutX="253.0" layoutY="178.0"  />
             <Label layoutX="111.0" layoutY="235.0" text="Hasło" />
             <Label layoutX="111.0" layoutY="285.0" text="Powtórz Hasło" />
             <Label layoutX="146.0" layoutY="25.0" text="Dane Kierownika">
@@ -26,8 +26,8 @@
                   <Font name="KacstBook" size="26.0" />
                </font>
             </Label>
-            <JFXPasswordField layoutX="253.0" layoutY="278.0" />
-            <JFXPasswordField layoutX="253.0" layoutY="228.0" />
+            <JFXPasswordField fx:id="passwordField" layoutX="253.0" layoutY="278.0" />
+            <JFXPasswordField fx:id="confirmPassField" layoutX="253.0" layoutY="228.0" />
             <Label layoutX="290.0" layoutY="106.0" text="Pole wymagane" textFill="RED">
                <font>
                   <Font size="10.0" />
