@@ -17,6 +17,7 @@ import ur.inf.lab2.pz.servicemanmanagement.view.Layout;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewComponent;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewManager;
 
+import javax.swing.*;
 import java.io.IOException;
 
 @Controller
@@ -60,6 +61,17 @@ public class PanelLayoutController {
         if (SecurityContext.getLoggedUser().role.getRole().equals("ROLE_MANAGER")){
             fullNameLabel.setText(SecurityContext.getLoggedUser().getFirstName()+" "+SecurityContext.getLoggedUser().getLastName());
             roleLabel.setText("Kierownik");
+        }
+    }
+
+    @FXML
+    public void newName(String firstName, String lastName){
+        if (SecurityContext.getLoggedUser().role.getRole().equals("ROLE_MANAGER")){
+            fullNameLabel.setText(firstName+" "+lastName);
+            roleLabel.setText("Kierownik");
+        } else{
+            fullNameLabel.setText(firstName+" "+lastName);
+            roleLabel.setText("Serwisant");
         }
     }
 

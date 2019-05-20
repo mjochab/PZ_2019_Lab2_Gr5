@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import ur.inf.lab2.pz.servicemanmanagement.domain.dto.ManagerDataDTO;
 import ur.inf.lab2.pz.servicemanmanagement.domain.validator.ManagerDataValidator;
 import ur.inf.lab2.pz.servicemanmanagement.services.ManagerDataService;
+import ur.inf.lab2.pz.servicemanmanagement.services.PanelLayoutService;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewManager;
 
 import java.io.IOException;
@@ -29,8 +30,8 @@ public class ManagerDataController {
     @FXML
     private Text nameAlert, lastNameAlert, companyNameAlert, passwordAlert, confirmPassAlert;
 
-    @FXML
-    private PanelLayoutController panelLayoutController;
+    @Autowired
+    private PanelLayoutService panelLayoutService;
 
     private ViewManager viewManager;
 
@@ -54,6 +55,7 @@ public void initialize() {
             ManagerDataDTO dto = new ManagerDataDTO(nameField.getText(), lastNameField.getText(), companyNameField.getText(),
                     passwordField.getText(), confirmPassField.getText());
             managerDataService.submitManagerData(dto);
+            panelLayoutService.changeName(nameField.getText(), lastNameField.getText());
         }
     }
 

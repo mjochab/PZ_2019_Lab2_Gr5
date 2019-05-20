@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ur.inf.lab2.pz.servicemanmanagement.domain.dto.ServicemanDataDTO;
 import ur.inf.lab2.pz.servicemanmanagement.domain.validator.ServicemanDataValidator;
+import ur.inf.lab2.pz.servicemanmanagement.services.PanelLayoutService;
 import ur.inf.lab2.pz.servicemanmanagement.services.ServicemanDataService;
 
 @Controller
@@ -25,8 +26,10 @@ public class ServicemanDataController {
     @FXML
     private Text nameAlert, lastNameAlert, passwordAlert, confirmPassAlert;
 
-    @FXML
-    private PanelLayoutController panelLayoutController;
+    @Autowired
+    private PanelLayoutService panelLayoutService;
+
+
 
     public void submitServicemanData() {
 
@@ -34,6 +37,7 @@ public class ServicemanDataController {
             ServicemanDataDTO dto = new ServicemanDataDTO(firstNameTextField.getText(), lastNameTextField.getText(), passwordField.getText(),
                     confirmPassField.getText());
             servicemanDataService.submitServicemanData(dto);
+            panelLayoutService.changeName(firstNameTextField.getText(), lastNameTextField.getText());
         }
     }
 
