@@ -4,40 +4,32 @@ package ur.inf.lab2.pz.servicemanmanagement.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name="user")
+@Table(name = "user")
 @Inheritance
 public abstract class User {
 
+    @ManyToOne
+    @JoinColumn(name = "id_role")
+    public Role role;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String firstName;
-
     private String lastName;
-
     private String email;
-
     private String password;
-
     private String companyName;
-
     private String groupName;
-
     private boolean enabled = false;
 
-    @ManyToOne
-    @JoinColumn(name="id_role")
-    public Role role;
-
-    public User() { }
+    public User() {
+    }
 
     public User(String email, String password, String groupName) {
         this.email = email;
         this.password = password;
         this.groupName = groupName;
     }
-
 
 
     public Long getId() {
@@ -52,7 +44,7 @@ public abstract class User {
         return firstName;
     }
 
-    public void setFirstName( String firstName) {
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
@@ -61,7 +53,7 @@ public abstract class User {
         return lastName;
     }
 
-    public void setLastName( String lastName) {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
@@ -79,7 +71,7 @@ public abstract class User {
         return password;
     }
 
-    public void setPassword( String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
@@ -88,7 +80,7 @@ public abstract class User {
         return companyName;
     }
 
-    public void setCompanyName( String companyName) {
+    public void setCompanyName(String companyName) {
         this.companyName = companyName;
     }
 
