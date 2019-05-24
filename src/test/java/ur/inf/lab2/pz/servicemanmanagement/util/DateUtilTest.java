@@ -3,6 +3,7 @@ package ur.inf.lab2.pz.servicemanmanagement.util;
 import org.junit.Test;
 import ur.inf.lab2.pz.servicemanmanagement.domain.DateRange;
 import ur.inf.lab2.pz.servicemanmanagement.service.TimetableManager;
+import ur.inf.lab2.pz.servicemanmanagement.utils.DateUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,12 +25,22 @@ public class DateUtilTest {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date wednesdayDate = format.parse(date);
 
-        DateRange weekDateRangeByDate = TimetableManager.getWeekDateRangeByDate(wednesdayDate);
+        DateRange weekDateRangeByDate = DateUtils.getWeekDateRangeByDate(wednesdayDate);
         String mondayDateRaw = format.format(weekDateRangeByDate.getFrom());
         String sundayDateRaw = format.format(weekDateRangeByDate.getTo());
 
         assertEquals(expectedDateMonday, mondayDateRaw);
         assertEquals(expectedDateSunday, sundayDateRaw);
+    }
+
+    @Test
+    public void minusDays_oneDay_returnDayBefore() throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date secondOfMay = format.parse("2019-05-02");
+
+        String firstOfMayAsString = format.format(DateUtils.minusDays(secondOfMay, 1));
+
+        assertEquals("2019-05-01", firstOfMayAsString);
     }
 
 }

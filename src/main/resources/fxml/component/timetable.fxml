@@ -55,10 +55,10 @@
                   <Insets left="5.0" />
                </FlowPane.margin>
             </JFXComboBox>
-            <FlowPane alignment="CENTER" prefHeight="40.0" prefWidth="400.0" style="-fx-background-radius: 20 20 20 20; -fx-background-color: #ebebeb;">
+            <FlowPane fx:id="datePanel" alignment="CENTER" prefHeight="40.0" prefWidth="400.0" style="-fx-background-radius: 20 20 20 20; -fx-background-color: #ebebeb;">
                <children>
-                  <FontAwesomeIconView glyphName="ARROW_CIRCLE_LEFT" size="32" />
-                  <Label text="05.05.2019">
+                  <FontAwesomeIconView glyphName="ARROW_CIRCLE_LEFT" onMouseClicked="#moveToPrevWeek" size="32" />
+                  <Label fx:id="dateFromLabel" text="05.05.2019">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -71,7 +71,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label text="12.05.2019">
+                  <Label fx:id="dateToLabel" text="12.05.2019">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -79,7 +79,7 @@
                         <Insets left="5.0" right="10.0" />
                      </FlowPane.margin>
                   </Label>
-                  <FontAwesomeIconView glyphName="ARROW_CIRCLE_RIGHT" size="32" />
+                  <FontAwesomeIconView glyphName="ARROW_CIRCLE_RIGHT" onMouseClicked="#moveToNextWeek" size="32" />
                </children>
                <effect>
                   <DropShadow color="#00000053" height="40.0" radius="19.5" width="40.0" />
@@ -88,6 +88,16 @@
                   <Insets left="20.0" />
                </FlowPane.margin>
             </FlowPane>
+            <JFXButton fx:id="undoButton" buttonType="RAISED" onAction="#undoTasks" text="Cofnij">
+               <FlowPane.margin>
+                  <Insets left="10.0" />
+               </FlowPane.margin>
+            </JFXButton>
+            <JFXButton fx:id="persistButton" onAction="#persistTasks" text="Zapisz">
+               <FlowPane.margin>
+                  <Insets left="10.0" />
+               </FlowPane.margin>
+            </JFXButton>
          </children>
       </FlowPane>
    </children>
