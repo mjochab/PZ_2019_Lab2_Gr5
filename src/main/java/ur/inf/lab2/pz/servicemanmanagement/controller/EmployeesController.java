@@ -1,16 +1,17 @@
 package ur.inf.lab2.pz.servicemanmanagement.controller;
 
-import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.controls.JFXTreeTableView;
-import com.jfoenix.controls.RecursiveTreeItem;
+import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +23,10 @@ import ur.inf.lab2.pz.servicemanmanagement.domain.dto.workerAddDTO;
 import ur.inf.lab2.pz.servicemanmanagement.domain.validator.WorkerAddValidator;
 import ur.inf.lab2.pz.servicemanmanagement.repository.ServicemanRepository;
 import ur.inf.lab2.pz.servicemanmanagement.services.EmployeeService;
+import ur.inf.lab2.pz.servicemanmanagement.view.ViewComponent;
+import ur.inf.lab2.pz.servicemanmanagement.view.ViewManager;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +42,9 @@ public class EmployeesController implements Initializable {
 
     @Autowired
     private ServicemanRepository servicemanRepository;
+
+    @Autowired
+    private ViewManager viewManager;
 
     @FXML
     private JFXTextField emailInput;
@@ -57,6 +64,10 @@ public class EmployeesController implements Initializable {
     @FXML
     private JFXTreeTableView<ServicemanDTO> servicemansTableView;
 
+    @FXML
+    private StackPane stackPane;
+
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -70,14 +81,14 @@ public class EmployeesController implements Initializable {
 
     private void initTableColumns() {
         TreeTableColumn emailCol = new TreeTableColumn("Adres email");
-        TreeTableColumn isActiveCol = new TreeTableColumn("Stan konta");
+        TreeTableColumn isActiveCol = new TreeTableColumn("Aktywny");
         TreeTableColumn groupNameCol = new TreeTableColumn("Nazwa grupy");
 
         servicemansTableView.getColumns().addAll(emailCol, isActiveCol, groupNameCol);
 
         emailCol.setCellValueFactory(new TreeItemPropertyValueFactory<User, String>("email"));
         isActiveCol.setCellValueFactory(new TreeItemPropertyValueFactory<User, String>("enabled"));
-        groupNameCol.setCellValueFactory(new TreeItemPropertyValueFactory<User, Boolean>("groupName"));
+        groupNameCol.setCellValueFactory(new TreeItemPropertyValueFactory<User, String>("groupName"));
     }
 
     public void loadTable() {
@@ -95,16 +106,24 @@ public class EmployeesController implements Initializable {
             ServicemanDTO servicemanDTO = new ServicemanDTO();
             servicemanDTO.setEmail(serviceman.getEmail());
             servicemanDTO.setGroupName(serviceman.getGroupName());
-            servicemanDTO.setEnabled(serviceman.isEnabled());
+
+            if (serviceman.isEnabled()) servicemanDTO.setEnabled("TAK");
+            else servicemanDTO.setEnabled("NIE");
+
+
             servicemanDTOS.add(servicemanDTO);
         }
         servicemansDTO = FXCollections.observableArrayList(servicemanDTOS);
     }
 
-    public void addWorker() {
+    public void addWorker() throws IOException {
         if (validate()) {
             workerAddDTO dto = new workerAddDTO(emailInput.getText(), groupNameInput.getText());
             employeeService.addWorker(dto, existingUserAlert);
+
+            String emailAddress = emailInput.getText();
+            viewManager.loadComponent(ViewComponent.EMPLOYEES);
+            loadDialog(emailAddress);
         }
     }
 
@@ -117,6 +136,24 @@ public class EmployeesController implements Initializable {
                 existingUserAlert);
         validator.validate();
         return validator.getValidator().isClean();
+    }
+
+
+    @FXML
+    private void loadDialog(String email) {
+        JFXDialogLayout content = new JFXDialogLayout();
+        content.setHeading(new Text("Sukces"));
+        content.setBody(new Text("Wysłano początkowe dane do logowania na adres: " + email));
+        JFXDialog dialog = new JFXDialog(stackPane, content, JFXDialog.DialogTransition.CENTER);
+        JFXButton button = new JFXButton("OK");
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                dialog.close();
+            }
+        });
+        content.setActions(button);
+        dialog.show();
     }
 
 

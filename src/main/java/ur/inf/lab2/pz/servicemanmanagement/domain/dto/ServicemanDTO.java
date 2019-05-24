@@ -5,7 +5,7 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 public class ServicemanDTO extends RecursiveTreeObject<ServicemanDTO> {
 
     private String email;
-    private boolean enabled;
+    private String enabled;
     private String groupName;
 
     public String getEmail() {
@@ -16,11 +16,11 @@ public class ServicemanDTO extends RecursiveTreeObject<ServicemanDTO> {
         this.email = email;
     }
 
-    public boolean isEnabled() {
+    public String getEnabled() {
         return enabled;
     }
 
-    public void setEnabled(boolean enabled) {
+    public void setEnabled(String enabled) {
         this.enabled = enabled;
     }
 
