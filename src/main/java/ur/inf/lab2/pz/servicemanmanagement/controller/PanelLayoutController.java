@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,6 +44,7 @@ public class PanelLayoutController {
     @FXML
     private JFXButton employeeButton;
 
+
     @FXML
     public void initialize() {
         if (SecurityContext.getLoggedUser().role.getRole().equals("ROLE_SERVICEMAN")) {
@@ -67,6 +69,7 @@ public class PanelLayoutController {
         notificationsButton.setOnAction(evt -> {
             if (drawer.getTranslateX() != 0) {
                 openNav.play();
+                drawer.getChildren().add(new Rectangle());
             } else {
                 closeNav.setToX(-(drawer.getWidth()));
                 closeNav.play();
