@@ -2,6 +2,8 @@ package ur.inf.lab2.pz.servicemanmanagement.domain;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="user")
@@ -25,6 +27,9 @@ public abstract class User {
     private String groupName;
 
     private boolean enabled = false;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+    private List<Notification> notifications = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name="id_role")
@@ -114,5 +119,13 @@ public abstract class User {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public List<Notification> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(List<Notification> notifications) {
+        this.notifications = notifications;
     }
 }
