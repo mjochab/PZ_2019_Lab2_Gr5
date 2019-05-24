@@ -5,33 +5,32 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.scene.Scene;
 import javafx.scene.control.Control;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableView;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import jfxtras.scene.control.agenda.Agenda;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ur.inf.lab2.pz.servicemanmanagement.domain.DateRange;
-import ur.inf.lab2.pz.servicemanmanagement.domain.timetable.Timetable;
-import ur.inf.lab2.pz.servicemanmanagement.domain.timetable.TimetableTask;
-import ur.inf.lab2.pz.servicemanmanagement.domain.timetable.UnallocatedTask;
+import ur.inf.lab2.pz.servicemanmanagement.domain.timetable.*;
+import ur.inf.lab2.pz.servicemanmanagement.utils.DateUtils;
 import ur.inf.lab2.pz.servicemanmanagement.utils.StringUtils;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
-interface TimetableDatasource {
-    Set<TimetableTask> getTasksByDateRange(Long leaderId, DateRange peroidOfTime);
+import static ur.inf.lab2.pz.servicemanmanagement.utils.DateUtils.toLocalDateTime;
 
-    Set<TimetableTask> getUnallocatedTasks();
+interface TimetableDatasource {
+
+    Set<AllocatedTask> getAllocatedTasks(Long leaderId);
+
+    Set<UnallocatedTask> getUnallocatedTasks();
+
+    void saveAllocated(Collection<AllocatedTask> allocatedTasks);
+
+    void saveUnallocated(Collection<UnallocatedTask> unallocatedTasks);
 }
 
 
@@ -42,31 +41,25 @@ class ManagerTimetable implements Timetable {
     private static final String TASK_STYLE_CLASS_NAME = "task";
     private static final String TASK_SELECTED_STYLE_CLASSNAME = "task-selected";
     private static final String EMPTY_TASK_CLASS_NAME = "empty-task";
-    private DateRange dateRange;
+    private DateRange weekDateRange;
     private Agenda.AppointmentGroup appointmentGroup;
     private Agenda.AppointmentGroup appointmentSelectedGroup;
     private Agenda.AppointmentGroup appointmentEmptyGroup;
 
-
     private Agenda agenda;
 
-    public ManagerTimetable(DateRange dateRange, TreeTableView<UnallocatedTask> unallocatedTaskTable) {
-        this.dateRange = dateRange;
+    public ManagerTimetable(TreeTableView<UnallocatedTaskTableItem> unallocatedTaskTable) {
+        Date now = new Date();
+        this.weekDateRange = DateUtils.getWeekDateRangeByDate(now);
         initGroups();
         initAgenda(unallocatedTaskTable);
     }
 
-    public static LocalDateTime toLocalDateTime(Date date) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        String rawDate = format.format(date);
 
-        return LocalDate.parse(rawDate).atTime(0, 0);
-    }
 
-    private void initAgenda(TreeTableView<UnallocatedTask> unallocatedTaskTable) {
+    private void initAgenda(TreeTableView<UnallocatedTaskTableItem> unallocatedTaskTable) {
         agenda = new Agenda();
-        agenda.displayedLocalDateTime().set(toLocalDateTime(dateRange.getFrom()));
-
+        agenda.displayedLocalDateTime().set(toLocalDateTime(weekDateRange.getFrom()));
 
 //        agenda.setEditAppointmentCallback(app -> { TODO custom edit dialog
 //            final Stage dialog = new Stage();
@@ -88,33 +81,36 @@ class ManagerTimetable implements Timetable {
         agenda.getStyleClass().addAll(GLOBAL_STYLE_CLASSES);
     }
 
-    private void allowDetachTask(TreeTableView<UnallocatedTask> unallocatedTaskTable) {
+    private void allowDetachTask(TreeTableView<UnallocatedTaskTableItem> unallocatedTaskTable) {
         agenda.appointments().addListener((ListChangeListener<? super Agenda.Appointment>) changeListener -> {
             changeListener.next();
             if (changeListener.wasRemoved()) {
                 List<? extends Agenda.Appointment> detachedAppointments = changeListener.getRemoved();
-                Set<UnallocatedTask> detachedTasks = transformAppointmentsToUnallocatedTasks(detachedAppointments);
+                List<? extends Agenda.Appointment> notEmptyDetachedAppointments = detachedAppointments.stream()
+                        .filter(app -> !app.getDescription().equals(EMPTY_TASK_ID))
+                        .collect(Collectors.toList());
+                Set<UnallocatedTaskTableItem> detachedTasks = transformAppointmentsToUnallocatedTasks(notEmptyDetachedAppointments);
 
                 addDetachedTasksToTable(detachedTasks, unallocatedTaskTable);
             }
         });
     }
 
-    private void addDetachedTasksToTable(Set<UnallocatedTask> detachedTasks, TreeTableView<UnallocatedTask> unallocatedTaskTable) {
-        List<TreeItem<UnallocatedTask>> newTableItems = detachedTasks.stream()
+    private void addDetachedTasksToTable(Set<UnallocatedTaskTableItem> detachedTasks, TreeTableView<UnallocatedTaskTableItem> unallocatedTaskTable) {
+        List<TreeItem<UnallocatedTaskTableItem>> newTableItems = detachedTasks.stream()
                 .map(TreeItem::new)
                 .collect(Collectors.toList());
 
         unallocatedTaskTable.getRoot().getChildren().addAll(newTableItems);
     }
 
-    private void allowAllocateUnallocatedTaskToEmptyTask(TreeTableView<UnallocatedTask> unallocatedTaskTable) {
+    private void allowAllocateUnallocatedTaskToEmptyTask(TreeTableView<UnallocatedTaskTableItem> unallocatedTaskTable) {
         agenda.setActionCallback(appointment -> {
             if (appointment.getDescription().equals(EMPTY_TASK_ID)) {
-                TreeItem<UnallocatedTask> selectedItem = unallocatedTaskTable.getSelectionModel().getSelectedItem();
+                TreeItem<UnallocatedTaskTableItem> selectedItem = unallocatedTaskTable.getSelectionModel().getSelectedItem();
 
                 if (selectedItem != null) {
-                    UnallocatedTask unallocatedTask = selectedItem.getValue();
+                    UnallocatedTaskTableItem unallocatedTask = selectedItem.getValue();
                     allocateTaskToAppointment(unallocatedTask, appointment);
                     removeItemFromTreeTableView(selectedItem, unallocatedTaskTable);
                     agenda.refresh();
@@ -126,13 +122,13 @@ class ManagerTimetable implements Timetable {
         });
     }
 
-    private void removeItemFromTreeTableView(TreeItem<UnallocatedTask> selectedItem,
-                                             TreeTableView<UnallocatedTask> unallocatedTaskTable) {
+    private void removeItemFromTreeTableView(TreeItem<UnallocatedTaskTableItem> selectedItem,
+                                             TreeTableView<UnallocatedTaskTableItem> unallocatedTaskTable) {
         unallocatedTaskTable.getSelectionModel().clearSelection();
         unallocatedTaskTable.getRoot().getChildren().remove(selectedItem);
     }
 
-    private void allocateTaskToAppointment(UnallocatedTask unallocatedTask, Agenda.Appointment appointment) {
+    private void allocateTaskToAppointment(UnallocatedTaskTableItem unallocatedTask, Agenda.Appointment appointment) {
         appointment.setAppointmentGroup(appointmentGroup);
         appointment.setSummary(prepareTaskSummary(unallocatedTask));
         appointment.setDescription(unallocatedTask.getId());
@@ -145,29 +141,62 @@ class ManagerTimetable implements Timetable {
     }
 
     @Override
-    public void loadTasks(Set<TimetableTask> tasks) {
+    public void loadTasks(Collection<AllocatedTask> tasks) {
         if (tasks == null)
             throw new NullPointerException();
 
-        agenda.appointments().addAll(transformTasksToAppointments(tasks));
-    }
-
-    @Override
-    public Agenda generate() {
-        Agenda agenda = new Agenda();
-//        agenda.displayedLocalDateTime().set(toLocalDateTime(dateRange.getFrom()));
-//        agenda.appointments().addAll(transformTasksToAppointments());
-//
-//
-//        setStyleOnSelected(agenda);
-//        allowCreatingTasksByDrag(agenda);
-//        agenda.getStyleClass().addAll(GLOBAL_STYLE_CLASSES);
-        return agenda;
+        Collection<? extends Agenda.Appointment> c = transformTasksToAppointments(tasks);
+        agenda.appointments().addAll(c);
     }
 
     @Override
     public Control getView() {
         return agenda;
+    }
+
+    @Override
+    public Set<AllocatedTask> getAllocatedTasks() {
+        return agenda.appointments().stream()
+                .filter(appointment -> !EMPTY_TASK_ID.equals(appointment.getDescription()))
+                .map(this::transformAppointmentToTask)
+                .collect(Collectors.toSet());
+    }
+
+    @Override
+    public void clear() {
+        agenda.appointments().clear();
+    }
+
+    @Override
+    public DateRange nextWeek() {
+        Date actualWeekSunday = weekDateRange.getTo();
+        Date nextWeekMonday = DateUtils.plusDays(actualWeekSunday, 1);
+        agenda.displayedLocalDateTime().set(toLocalDateTime(nextWeekMonday));
+
+        weekDateRange = DateUtils.getWeekDateRangeByDate(nextWeekMonday);
+        return weekDateRange;
+    }
+
+    @Override
+    public DateRange prevWeek() {
+        Date actualWeekMonday = weekDateRange.getFrom();
+        Date lastWeekSunday = DateUtils.minusDays(actualWeekMonday, 1);
+        agenda.displayedLocalDateTime().set(toLocalDateTime(lastWeekSunday));
+
+        weekDateRange = DateUtils.getWeekDateRangeByDate(lastWeekSunday);
+        return weekDateRange;
+    }
+
+    private AllocatedTask transformAppointmentToTask(Agenda.Appointment appointment) {
+        String summary = appointment.getSummary();
+
+        String taskId = appointment.getDescription();
+        String tagFromSummary = StringUtils.reverseFormat(DESCRIPTION_PATTERN, "{tag}", summary, '/');
+        String descFromSummary = StringUtils.reverseFormat(DESCRIPTION_PATTERN, "{description}", summary, '/');
+        LocalDateTime startDateTime = appointment.getStartLocalDateTime();
+        LocalDateTime endDateTime = appointment.getEndLocalDateTime();
+
+        return new TimetableTaskData(taskId, tagFromSummary, descFromSummary, startDateTime, endDateTime);
     }
 
     private void setStyleOnSelected() {
@@ -203,7 +232,7 @@ class ManagerTimetable implements Timetable {
         );
     }
 
-    private Collection<? extends Agenda.Appointment> transformTasksToAppointments(Set<TimetableTask> tasks) {
+    private Collection<? extends Agenda.Appointment> transformTasksToAppointments(Collection<AllocatedTask> tasks) {
         return tasks.stream()
                 .map(rawTask ->
                         new Agenda.AppointmentImplLocal()
@@ -215,7 +244,7 @@ class ManagerTimetable implements Timetable {
                 .collect(Collectors.toList());
     }
 
-    private Set<UnallocatedTask> transformAppointmentsToUnallocatedTasks(List<? extends Agenda.Appointment> detachedAppointments) {
+    private Set<UnallocatedTaskTableItem> transformAppointmentsToUnallocatedTasks(List<? extends Agenda.Appointment> detachedAppointments) {
         return detachedAppointments.stream()
                 .map(appointment -> {
                     String summary = appointment.getSummary();
@@ -224,7 +253,7 @@ class ManagerTimetable implements Timetable {
                     String tagFromSummary = StringUtils.reverseFormat(DESCRIPTION_PATTERN, "{tag}", summary, '/');
                     String descFromSummary = StringUtils.reverseFormat(DESCRIPTION_PATTERN, "{description}", summary, '/');
 
-                    return new UnallocatedTask(taskId, tagFromSummary, descFromSummary);
+                    return new UnallocatedTaskTableItem(taskId, tagFromSummary, descFromSummary);
                 }).collect(Collectors.toSet());
     }
 
@@ -232,10 +261,6 @@ class ManagerTimetable implements Timetable {
         return DESCRIPTION_PATTERN.replace("{id}", task.getId())
                 .replace("{tag}", task.getTag())
                 .replace("{description}", task.getDescription());
-    }
-
-    public DateRange getDateRange() {
-        return dateRange;
     }
 
 }
@@ -247,74 +272,27 @@ public class TimetableManager {
     @Autowired
     private TimetableDatasource datasource;
 
-    public static DateRange getWeekDateRangeByDate(Date date) {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
 
-        Date actualWeekMondaysDate = cal.getTime();
-        cal.add(Calendar.DAY_OF_WEEK, 6);
 
-        Date actualWeekSundaysDate = cal.getTime();
-
-        return new DateRange(actualWeekMondaysDate, actualWeekSundaysDate);
-    }
-
-    public Agenda load(Long leaderId) {
-        Date now = new Date();
-        Timetable timetable = new ManagerTimetable(getWeekDateRangeByDate(now), null);
-
-        Set<TimetableTask> tasksFromActualWeek = datasource.getTasksByDateRange(leaderId, timetable.getDateRange());
-        timetable.loadTasks(tasksFromActualWeek);
-        return timetable.generate();
-//
-//        Agenda agenda = new Agenda();
-//        agenda.displayedLocalDateTime().set(LocalDate.parse("2019-05-01").atTime(2, 10));
-//        Agenda.AppointmentGroupImpl taskGroup = new Agenda.AppointmentGroupImpl().withStyleClass("task");
-//        Agenda.AppointmentImplLocal task = new Agenda.AppointmentImplLocal()
-//                .withStartLocalDateTime(LocalDate.parse("2019-05-01").atTime(4, 00))
-//                .withEndLocalDateTime(LocalDate.parse("2019-05-01").atTime(15, 30))
-//                .withDescription("It's time")
-//                .withSummary("TO JEST ZADANIE KOLEŻKO")
-//                .withAppointmentGroup(taskGroup);
-//
-//        agenda.appointments().addAll(
-//                task // you should use a map of AppointmentGroups
-//        );
-//
-//        agenda.setOnDragDropped(val -> {
-//            System.out.println(val.getX());
-//        });
-//
-//        agenda.newAppointmentCallbackProperty().set( (localDateTimeRange) -> {
-//            return new Agenda.AppointmentImplLocal()
-//                    .withStartLocalDateTime(localDateTimeRange.getStartLocalDateTime())
-//                    .withEndLocalDateTime(localDateTimeRange.getEndLocalDateTime())
-//                    .withAppointmentGroup(new Agenda.AppointmentGroupImpl().withStyleClass("task")); // it is better to have a map of appointment groups to get from
-//        });
-//
-////        agenda.setStyle("-fx-font-size: 40");
-//        agenda.getStyleClass().add("global-font");
-//        return agenda;
-//        viewManager.getStae().getScene().getStylesheets().forEach(stylesheet -> agenda.getStylesheets().add(stylesheet));
-    }
-
-    public TreeItem<UnallocatedTask> getUnallocatedTasksAsTreeItem() {
-        Set<UnallocatedTask> unallocatedTasks = datasource.getUnallocatedTasks().stream()
-                .map(UnallocatedTask::new)
+    public TreeItem<UnallocatedTaskTableItem> getUnallocatedTasksAsTreeItem() {
+        Set<UnallocatedTaskTableItem> unallocatedTasks = datasource.getUnallocatedTasks().stream()
+                .map(UnallocatedTaskTableItem::new)
                 .collect(Collectors.toSet());
 
-        ObservableList<UnallocatedTask> unallocatedTasksList = FXCollections.observableArrayList(unallocatedTasks);
+        ObservableList<UnallocatedTaskTableItem> unallocatedTasksList = FXCollections.observableArrayList(unallocatedTasks);
         return new RecursiveTreeItem<>(unallocatedTasksList, RecursiveTreeObject::getChildren);
     }
 
-    public Timetable createTimetable(TreeTableView<UnallocatedTask> unallocatedTaskTable) {
-        Date now = new Date();
-        return new ManagerTimetable(getWeekDateRangeByDate(now), unallocatedTaskTable);
+    public Timetable createTimetable(TreeTableView<UnallocatedTaskTableItem> unallocatedTaskTable) {
+        return new ManagerTimetable(unallocatedTaskTable);
     }
 
-    public Set<TimetableTask> getTasksFromActualWeek(Long leaderId) {
-        Date now = new Date();
-        return datasource.getTasksByDateRange(leaderId, getWeekDateRangeByDate(now));
+    public Set<AllocatedTask> getAllAllocatedTasks(Long leaderId) {
+        return datasource.getAllocatedTasks(leaderId);
+    }
+
+    public void save(Set<AllocatedTask> allocatedTasks, Set<UnallocatedTask> unallocatedTasks) {
+        datasource.saveAllocated(allocatedTasks);
+        datasource.saveUnallocated(unallocatedTasks);
     }
 }

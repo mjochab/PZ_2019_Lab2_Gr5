@@ -3,34 +3,35 @@ package ur.inf.lab2.pz.servicemanmanagement.controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTreeTableView;
-import com.jfoenix.controls.RecursiveTreeItem;
-import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
+import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import jfxtras.scene.control.agenda.Agenda;
+import javafx.scene.layout.FlowPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ur.inf.lab2.pz.servicemanmanagement.domain.*;
+import ur.inf.lab2.pz.servicemanmanagement.domain.timetable.AllocatedTask;
 import ur.inf.lab2.pz.servicemanmanagement.domain.timetable.Timetable;
-import ur.inf.lab2.pz.servicemanmanagement.domain.timetable.TimetableTask;
 import ur.inf.lab2.pz.servicemanmanagement.domain.timetable.UnallocatedTask;
+import ur.inf.lab2.pz.servicemanmanagement.domain.timetable.UnallocatedTaskTableItem;
 import ur.inf.lab2.pz.servicemanmanagement.repository.TaskRepository;
 import ur.inf.lab2.pz.servicemanmanagement.service.TimetableManager;
+import ur.inf.lab2.pz.servicemanmanagement.utils.DateUtils;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewComponent;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewManager;
 
-import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 class GroupData {
     private Long leaderId;
@@ -67,7 +68,7 @@ class GroupData {
 @Controller
 public class TimetableController implements Initializable {
 
-//    ObservableList<TimetableTask> tasks;
+//    ObservableList<AllocatedTask> tasks;
     @Autowired
     private ViewManager viewManager;
     @Autowired
@@ -75,7 +76,7 @@ public class TimetableController implements Initializable {
     @FXML
     private JFXButton NewTaskButton;
     @FXML
-    private JFXTreeTableView<UnallocatedTask> tasksTableView;
+    private JFXTreeTableView<UnallocatedTaskTableItem> tasksTableView;
 
     @FXML
     private AnchorPane placeForTimetable;
@@ -86,30 +87,48 @@ public class TimetableController implements Initializable {
     private TimetableManager timetableManager;
     private Timetable timetable;
 
+    @FXML private Label dateFromLabel;
+    @FXML private Label dateToLabel;
+    @FXML private JFXButton undoButton;
+    @FXML private JFXButton persistButton;
+    @FXML private FlowPane datePanel;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        initTableColumns();
-        loadTable();
-
         //TODO DEV
         serviceTeamSelect.getItems().add(new GroupData(1L, "Grupa śmieci"));
         serviceTeamSelect.getItems().add(new GroupData(1L, "Grupa upośledzonych"));
         serviceTeamSelect.getItems().add(new GroupData(1L, "Grupa kretynów"));
         //
 
+        initUnallocatedTaskTable();
         initTimetable();
+        turnOffTimetableSettingControls();
+        initDatePanel();
         viewManager.loadComponentInto(placeForTimetable, ViewComponent.TIMETABLE_GROUP_NOT_SELECTED);
     }
 
-    private void initTimetable() {
-        timetable = timetableManager.createTimetable(tasksTableView);
+    private void initDatePanel() {
+        Date now = new Date();
+        updateDateRangeLabels(DateUtils.getWeekDateRangeByDate(now));
     }
 
-    public void groupChanged(ActionEvent event) {
-        GroupData selectedGroup = serviceTeamSelect.getSelectionModel().getSelectedItem();
+    private void turnOffTimetableSettingControls() {
+        undoButton.setVisible(false);
+        persistButton.setVisible(false);
+        datePanel.setVisible(false);
+    }
 
-        timetable.loadTasks(timetableManager.getTasksFromActualWeek(selectedGroup.getLeaderId()));
-        viewManager.loadComponentInto(placeForTimetable, timetable.getView());
+    private void turnOnTimetableSettingControls() {
+        undoButton.setVisible(true);
+        persistButton.setVisible(true);
+        datePanel.setVisible(true);
+    }
+
+
+    private void initUnallocatedTaskTable() {
+        initTableColumns();
+        fetchUnallocatedTasksToTable();
     }
 
     private void initTableColumns() {
@@ -125,16 +144,71 @@ public class TimetableController implements Initializable {
 
     }
 
-    public void loadTable() {
-//        tasks = FXCollections.observableArrayList(timetableManager.getUnallocatedTasks());
-//        TreeItem<TimetableTask> root = new RecursiveTreeItem<>(tasks, RecursiveTreeObject::getChildren);
-
+    public void fetchUnallocatedTasksToTable() {
         tasksTableView.setRoot(timetableManager.getUnallocatedTasksAsTreeItem());
         tasksTableView.setShowRoot(false);
     }
 
+    private void initTimetable() {
+        timetable = timetableManager.createTimetable(tasksTableView);
+    }
+
+    public void groupChanged(ActionEvent event) {
+        GroupData selectedGroup = serviceTeamSelect.getSelectionModel().getSelectedItem();
+        fetchTasks(selectedGroup.getLeaderId());
+        turnOnTimetableSettingControls();
+    }
+
+
+
     @FXML
-    void openNewTaskDialog(ActionEvent event) throws IOException {
+    public void undoTasks() {
+        GroupData selectedGroup = serviceTeamSelect.getSelectionModel().getSelectedItem();
+        fetchTasks(selectedGroup.getLeaderId());
+    }
+
+    private void fetchTasks(Long leaderId) {
+        fetchUnallocatedTasksToTable();
+        initTimetable();
+        timetable.loadTasks(timetableManager.getAllAllocatedTasks(leaderId));
+        viewManager.loadComponentInto(placeForTimetable, timetable.getView());
+    }
+
+    @FXML
+    public void moveToNextWeek() {
+        DateRange weekRange = timetable.nextWeek();
+        updateDateRangeLabels(weekRange);
+    }
+
+    @FXML
+    public void moveToPrevWeek() {
+        DateRange weekRange = timetable.prevWeek();
+        updateDateRangeLabels(weekRange);
+    }
+
+    private void updateDateRangeLabels(DateRange weekRange) {
+        DateFormat format = DateUtils.DATE_FORMAT;
+
+        String dateFromAsText = format.format(weekRange.getFrom());
+        dateFromLabel.setText(dateFromAsText);
+
+        String dateToAsText = format.format(weekRange.getTo());
+        dateToLabel.setText(dateToAsText);
+    }
+
+    @FXML
+    private void persistTasks() {
+        Set<AllocatedTask> allocatedTasks = timetable.getAllocatedTasks();
+        Set<UnallocatedTask> unallocatedTasks = tasksTableView.getRoot().getChildren().stream()
+                .map(TreeItem::getValue)
+                .collect(Collectors.toSet());
+
+        timetableManager.save(allocatedTasks, unallocatedTasks);
+    }
+
+
+    @FXML
+    void openNewTaskDialog(ActionEvent event) {
         viewManager.openDialog(ViewComponent.NEW_TASK_DIALOG);
     }
 
