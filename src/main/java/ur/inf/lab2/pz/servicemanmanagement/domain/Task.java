@@ -2,13 +2,14 @@ package ur.inf.lab2.pz.servicemanmanagement.domain;
 
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import org.jetbrains.annotations.NotNull;
 import ur.inf.lab2.pz.servicemanmanagement.domain.enums.TaskStatus;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-public class Task extends RecursiveTreeObject<Task> {
+public class Task extends RecursiveTreeObject<Task> implements Comparable<Task> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -124,5 +125,19 @@ public class Task extends RecursiveTreeObject<Task> {
 
     public void setVisitDate(Date visitDate) {
         this.visitDate = visitDate;
+    }
+
+    public boolean hasTeamLeader() {
+        return this.getTeamLeader() != null;
+    }
+
+
+
+    @Override
+    public int compareTo(Task o) {
+        if (getCreationDate() == null || o.getCreationDate() == null) {
+            return 0;
+        }
+        return getCreationDate().compareTo(o.getCreationDate());
     }
 }
