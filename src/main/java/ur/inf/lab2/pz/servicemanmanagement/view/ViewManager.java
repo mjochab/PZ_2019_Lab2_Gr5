@@ -1,10 +1,14 @@
 package ur.inf.lab2.pz.servicemanmanagement.view;
 
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +32,14 @@ public class ViewManager {
     private Layout actualLayoutType;
     private String globalStylePath = getClass().getResource("/styles/styles.css").toExternalForm();
 
+    private StackPane root;
+
     public void init(Stage stage) throws IOException {
         this.stage = stage;
 
+        root = new StackPane();
         Scene scene = new Scene(
-                getView(stageConfig.getInitialView().getFxmlPath()),
+                root,
                 stageConfig.getMinWidth(),
                 stageConfig.getMinHeight());
         this.stage.setScene(scene);
@@ -130,7 +137,8 @@ public class ViewManager {
 
         actualLayout = layoutComponent;
         actualLayoutType = layout;
-        stage.getScene().setRoot(layoutComponent);
+        root.getChildren().clear();
+        root.getChildren().add(layoutComponent);
     }
 
     public void fillToAnchorPane(Parent childComponent) {
@@ -171,5 +179,18 @@ public class ViewManager {
         this.stageConfig = stageConfig;
     }
 
+
+    public StackPane getRoot() {
+        return root;
+    }
+
+    public Parent getComponent(ViewComponent editTaskDialog) {
+        try {
+            return getView(editTaskDialog.getFxmlPath());
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 }

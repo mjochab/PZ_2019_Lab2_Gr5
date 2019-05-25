@@ -1,13 +1,17 @@
 package ur.inf.lab2.pz.servicemanmanagement.service;
 
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
+import com.jfoenix.controls.JFXTimePicker;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Control;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeTableView;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.control.*;
+import javafx.scene.layout.StackPane;
 import jfxtras.scene.control.agenda.Agenda;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +21,8 @@ import ur.inf.lab2.pz.servicemanmanagement.utils.DateUtils;
 import ur.inf.lab2.pz.servicemanmanagement.utils.StringUtils;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -48,31 +54,20 @@ class ManagerTimetable implements Timetable {
 
     private Agenda agenda;
 
-    public ManagerTimetable(TreeTableView<UnallocatedTaskTableItem> unallocatedTaskTable) {
+    public ManagerTimetable(TreeTableView<UnallocatedTaskTableItem> unallocatedTaskTable, TimetableTaskEditDialogData editTaskDialogData) {
         Date now = new Date();
         this.weekDateRange = DateUtils.getWeekDateRangeByDate(now);
         initGroups();
-        initAgenda(unallocatedTaskTable);
+        initAgenda(unallocatedTaskTable, editTaskDialogData);
     }
 
 
 
-    private void initAgenda(TreeTableView<UnallocatedTaskTableItem> unallocatedTaskTable) {
+    private void initAgenda(TreeTableView<UnallocatedTaskTableItem> unallocatedTaskTable, TimetableTaskEditDialogData editTaskDialogData) {
         agenda = new Agenda();
         agenda.displayedLocalDateTime().set(toLocalDateTime(weekDateRange.getFrom()));
 
-//        agenda.setEditAppointmentCallback(app -> { TODO custom edit dialog
-//            final Stage dialog = new Stage();
-//            dialog.initModality(Modality.APPLICATION_MODAL);
-//            VBox dialogVbox = new VBox(20);
-//            dialogVbox.getChildren().add(new Text("This is a Dialog"));
-//            Scene dialogScene = new Scene(dialogVbox, 300, 200);
-//            dialog.setScene(dialogScene);
-//            dialog.show();
-//
-//            return null;
-//        });
-
+        initTaskEditDialog(editTaskDialogData);
 
         setStyleOnSelected();
         allowCreatingTasksByDrag();
@@ -81,13 +76,65 @@ class ManagerTimetable implements Timetable {
         agenda.getStyleClass().addAll(GLOBAL_STYLE_CLASSES);
     }
 
+    private void initTaskEditDialog(TimetableTaskEditDialogData editTaskDialogData) {
+        agenda.setEditAppointmentCallback(app -> {
+
+            if (isEmptyTask(app)) {
+                agenda.appointments().remove(app);
+            } else {
+                JFXDialog editTaskDialog = prepareEditTaskDialog(editTaskDialogData.getStackPane(), editTaskDialogData.getView());
+                setDialogActions(app, editTaskDialog, editTaskDialogData);
+                setTaskData(app, editTaskDialogData);
+                editTaskDialog.show();
+            }
+
+
+//            JFXDialogLayout content = new JFXDialogLayout();
+//            content.setHeading(new Text("Sukces"));
+//            content.setBody(editTaskDialogData);
+//            JFXDialog dialog = new JFXDialog(regionPanelForDialog, content, JFXDialog.DialogTransition.CENTER);
+
+
+            return null;
+        });
+    }
+
+    private boolean isEmptyTask(Agenda.Appointment app) {
+        return app.getDescription().equals(EMPTY_TASK_ID);
+    }
+
+    private void setTaskData(Agenda.Appointment app, TimetableTaskEditDialogData editTaskDialogData) {
+        AllocatedTask task = transformAppointmentToTask(app);
+        editTaskDialogData.setTaskId(task.getId());
+        editTaskDialogData.setTaskTag(task.getTag());
+        editTaskDialogData.setTaskDescription(task.getDescription());
+        editTaskDialogData.setDateTimeFrom(task.getDateTimeFrom());
+        editTaskDialogData.setDateTimeTo(task.getDateTimeTo());
+        editTaskDialogData.setWholeDay(task.isWholeDayTask());
+
+    }
+
+    private void setDialogActions(Agenda.Appointment appointment, JFXDialog editTaskDialog, TimetableTaskEditDialogData editTaskDialogData) {
+        Node exitNode = editTaskDialogData.getExitNode();
+        exitNode.setOnMouseClicked(event -> editTaskDialog.close());
+
+
+    }
+
+    private JFXDialog prepareEditTaskDialog(StackPane stackPane, Node view) {
+        JFXDialogLayout layout = new JFXDialogLayout();
+        layout.setBody(view);
+
+        return new JFXDialog(stackPane, layout, JFXDialog.DialogTransition.CENTER);
+    }
+
     private void allowDetachTask(TreeTableView<UnallocatedTaskTableItem> unallocatedTaskTable) {
         agenda.appointments().addListener((ListChangeListener<? super Agenda.Appointment>) changeListener -> {
             changeListener.next();
             if (changeListener.wasRemoved()) {
                 List<? extends Agenda.Appointment> detachedAppointments = changeListener.getRemoved();
                 List<? extends Agenda.Appointment> notEmptyDetachedAppointments = detachedAppointments.stream()
-                        .filter(app -> !app.getDescription().equals(EMPTY_TASK_ID))
+                        .filter(app -> !isEmptyTask(app))
                         .collect(Collectors.toList());
                 Set<UnallocatedTaskTableItem> detachedTasks = transformAppointmentsToUnallocatedTasks(notEmptyDetachedAppointments);
 
@@ -106,7 +153,7 @@ class ManagerTimetable implements Timetable {
 
     private void allowAllocateUnallocatedTaskToEmptyTask(TreeTableView<UnallocatedTaskTableItem> unallocatedTaskTable) {
         agenda.setActionCallback(appointment -> {
-            if (appointment.getDescription().equals(EMPTY_TASK_ID)) {
+            if (isEmptyTask(appointment)) {
                 TreeItem<UnallocatedTaskTableItem> selectedItem = unallocatedTaskTable.getSelectionModel().getSelectedItem();
 
                 if (selectedItem != null) {
@@ -157,7 +204,7 @@ class ManagerTimetable implements Timetable {
     @Override
     public Set<AllocatedTask> getAllocatedTasks() {
         return agenda.appointments().stream()
-                .filter(appointment -> !EMPTY_TASK_ID.equals(appointment.getDescription()))
+                .filter(appointment -> !isEmptyTask(appointment))
                 .map(this::transformAppointmentToTask)
                 .collect(Collectors.toSet());
     }
@@ -209,7 +256,7 @@ class ManagerTimetable implements Timetable {
             if (changeListener.wasRemoved()) {
                 changeListener.getRemoved().forEach(app -> {
 
-                    if (EMPTY_TASK_ID.equals(app.getDescription()))
+                    if (isEmptyTask(app))
                         app.setAppointmentGroup(appointmentEmptyGroup);
                     else
                         app.setAppointmentGroup(appointmentGroup);
@@ -263,7 +310,10 @@ class ManagerTimetable implements Timetable {
                 .replace("{description}", task.getDescription());
     }
 
+
+
 }
+
 
 
 @Service
@@ -283,8 +333,10 @@ public class TimetableManager {
         return new RecursiveTreeItem<>(unallocatedTasksList, RecursiveTreeObject::getChildren);
     }
 
-    public Timetable createTimetable(TreeTableView<UnallocatedTaskTableItem> unallocatedTaskTable) {
-        return new ManagerTimetable(unallocatedTaskTable);
+    public Timetable createTimetable(TreeTableView<UnallocatedTaskTableItem> unallocatedTaskTable, StackPane rootStackPane, Parent editTaskDialogBody) {
+        TimetableTaskEditDialogData dialogData = new TaskEditDialogData(editTaskDialogBody, rootStackPane);
+
+        return new ManagerTimetable(unallocatedTaskTable, dialogData);
     }
 
     public Set<AllocatedTask> getAllAllocatedTasks(Long leaderId) {
@@ -294,5 +346,77 @@ public class TimetableManager {
     public void save(Set<AllocatedTask> allocatedTasks, Set<UnallocatedTask> unallocatedTasks) {
         datasource.saveAllocated(allocatedTasks);
         datasource.saveUnallocated(unallocatedTasks);
+    }
+
+
+    private class TaskEditDialogData implements TimetableTaskEditDialogData {
+
+        private static final String EXIT_NODE_ID = "exit";
+        private static final String TASK_ID_NODE_ID = "taskId";
+        private static final String TASK_TAG_NODE_ID = "taskTag";
+        private static final String DESCRIPTION_NODE_ID = "taskDescription";
+        private static final String DATE_FROM_NODE_ID = "dateFrom";
+        private static final String TIME_FROM_NODE_ID = "timeFrom";
+        private static final String DATE_TO_NODE_ID = "dateTo";
+        private static final String TIME_TO_NODE_ID = "timeTo";
+        private static final String WHOLE_DAY_NODE_ID = "wholeDay";
+        private Parent dialogBody;
+        private StackPane stackPaneForDialog;
+
+        public TaskEditDialogData(Parent dialogBody, StackPane stackPane) {
+            this.dialogBody = dialogBody;
+            this.stackPaneForDialog = stackPane;
+        }
+
+        @Override
+        public StackPane getStackPane() {
+            return stackPaneForDialog;
+        }
+
+        @Override
+        public Node getView() {
+            return dialogBody;
+        }
+
+        @Override
+        public Node getExitNode() {
+            return findNodeInDialogBody(EXIT_NODE_ID);
+        }
+
+        private Node findNodeInDialogBody(String nodeId) {
+            return dialogBody.lookup("#" + nodeId);
+        }
+
+        @Override
+        public void setTaskId(String id) {
+            ((Label) findNodeInDialogBody(TASK_ID_NODE_ID)).setText(id);
+        }
+
+        @Override
+        public void setTaskTag(String tag) {
+            ((Label) findNodeInDialogBody(TASK_TAG_NODE_ID)).setText(tag);
+        }
+
+        @Override
+        public void setTaskDescription(String description) {
+            ((TextArea) findNodeInDialogBody(DESCRIPTION_NODE_ID)).setText(description);
+        }
+
+        @Override
+        public void setDateTimeFrom(LocalDateTime dateTimeFrom) {
+            ((DatePicker) findNodeInDialogBody(DATE_FROM_NODE_ID)).setValue(dateTimeFrom.toLocalDate());
+            ((ComboBoxBase<LocalTime>) findNodeInDialogBody(TIME_FROM_NODE_ID)).setValue(dateTimeFrom.toLocalTime());
+        }
+
+        @Override
+        public void setDateTimeTo(LocalDateTime dateTimeTo) {
+            ((DatePicker) findNodeInDialogBody(DATE_TO_NODE_ID)).setValue(dateTimeTo.toLocalDate());
+            ((ComboBoxBase<LocalTime>) findNodeInDialogBody(TIME_TO_NODE_ID)).setValue(dateTimeTo.toLocalTime());
+        }
+
+        @Override
+        public void setWholeDay(boolean wholeDayTask) {
+            ((CheckBox) findNodeInDialogBody(WHOLE_DAY_NODE_ID)).setSelected(wholeDayTask);
+        }
     }
 }

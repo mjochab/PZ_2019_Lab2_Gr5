@@ -42,4 +42,9 @@ public class TimetableTaskData implements AllocatedTask {
     public LocalDateTime getDateTimeTo() {
         return endDateTime;
     }
+
+    @Override
+    public boolean isWholeDayTask() {
+        return false;
+    }
 }

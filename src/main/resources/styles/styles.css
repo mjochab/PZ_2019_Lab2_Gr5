@@ -34,6 +34,10 @@
     -fx-text-fill: #757575;
 }
 
+.very-light-bg {
+    -fx-background-color: #efefef;
+}
+
 .bg-divider {
     -fx-background-color: #BDBDBD;
 }
@@ -45,4 +49,15 @@
 
 .task {
     -fx-background-color: #CFD8DC;
+    -fx-font-size: 14;
+}
+
+.task-selected {
+    -fx-background-color: #00BCD4;
+    -fx-font-size: 14;
+}
+
+.empty-task {
+    -fx-background-color: #FFFFFF;
+    -fx-font-size: 14;
 }

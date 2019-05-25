@@ -6,12 +6,15 @@ import com.jfoenix.controls.JFXTreeTableView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.StackPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ur.inf.lab2.pz.servicemanmanagement.domain.*;
@@ -25,9 +28,9 @@ import ur.inf.lab2.pz.servicemanmanagement.utils.DateUtils;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewComponent;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewManager;
 
+import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -150,7 +153,9 @@ public class TimetableController implements Initializable {
     }
 
     private void initTimetable() {
-        timetable = timetableManager.createTimetable(tasksTableView);
+        Parent editTaskDialog = viewManager.getComponent(ViewComponent.EDIT_TASK_DIALOG);
+        StackPane rootStackPane = viewManager.getRoot();
+        timetable = timetableManager.createTimetable(tasksTableView, rootStackPane, editTaskDialog);
     }
 
     public void groupChanged(ActionEvent event) {
