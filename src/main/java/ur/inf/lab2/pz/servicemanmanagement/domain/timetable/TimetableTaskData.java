@@ -9,13 +9,19 @@ public class TimetableTaskData implements AllocatedTask {
     private String description;
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
+    private boolean isWholeDay;
+    private ClientData clientData;
+    private TaskState state;
 
-    public TimetableTaskData(String id, String tag, String description, LocalDateTime startDateTime, LocalDateTime endDateTime) {
+    public TimetableTaskData(String id, String tag, String description, LocalDateTime startDateTime, LocalDateTime endDateTime, boolean isWholeDay, ClientData clientData, TaskState state) {
         this.id = id;
         this.tag = tag;
         this.description = description;
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
+        this.isWholeDay = isWholeDay;
+        this.clientData = clientData;
+        this.state = state;
     }
 
     @Override
@@ -34,6 +40,11 @@ public class TimetableTaskData implements AllocatedTask {
     }
 
     @Override
+    public ClientData getClientData() {
+        return clientData;
+    }
+
+    @Override
     public LocalDateTime getDateTimeFrom() {
         return startDateTime;
     }
@@ -45,6 +56,11 @@ public class TimetableTaskData implements AllocatedTask {
 
     @Override
     public boolean isWholeDayTask() {
-        return false;
+        return isWholeDay;
+    }
+
+    @Override
+    public TaskState getState() {
+        return state;
     }
 }

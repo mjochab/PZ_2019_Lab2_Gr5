@@ -23,4 +23,38 @@ public interface TimetableTaskEditDialogData {
     void setDateTimeTo(LocalDateTime dateTimeTo);
 
     void setWholeDay(boolean wholeDayTask);
+
+    Node getDetachNode();
+
+    Node getSaveNode();
+
+    String getTaskDescription();
+
+    LocalDateTime getDateTimeFrom();
+
+    boolean isWholeDayTask();
+
+    LocalDateTime getDateTimeTo();
+
+    Node getPrintNode();
+
+    void setClientData(ClientData clientData);
+
+    void setState(String name);
+
+    void disableDetachNode();
+
+    void disableDescriptionNode();
+
+    void disableDateFromNode();
+
+    void disableTimeFromNode();
+
+    void disableDateToNode();
+
+    void disableTimeToNode();
+
+    void disableWholeDayNode();
+
+    void disableSaveNode();
 }
