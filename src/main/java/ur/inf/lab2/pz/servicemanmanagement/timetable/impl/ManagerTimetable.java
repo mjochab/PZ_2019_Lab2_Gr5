@@ -211,7 +211,7 @@ public class ManagerTimetable implements Timetable {
                     UnallocatedTaskTableItem unallocatedTask = selectedItem.getValue();
 
                     saveClientData(unallocatedTask.getId(), unallocatedTask.getClientData());
-                    System.out.println(unallocatedTask.getId() + " " + unallocatedTask.getClientData());
+                    saveTaskState(unallocatedTask.getId(), TaskState.TODO);
                     allocateTaskToAppointment(unallocatedTask, appointment);
                     removeItemFromTreeTableView(selectedItem, unallocatedTaskTable);
                     agenda.refresh();
