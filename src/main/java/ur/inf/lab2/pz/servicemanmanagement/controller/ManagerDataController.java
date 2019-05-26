@@ -2,11 +2,13 @@ package ur.inf.lab2.pz.servicemanmanagement.controller;
 
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import com.sun.corba.se.impl.encoding.CodeSetComponentInfo;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import ur.inf.lab2.pz.servicemanmanagement.domain.SecurityContext;
 import ur.inf.lab2.pz.servicemanmanagement.domain.dto.ManagerDataDTO;
 import ur.inf.lab2.pz.servicemanmanagement.domain.validator.ManagerDataValidator;
 import ur.inf.lab2.pz.servicemanmanagement.services.ManagerDataService;
@@ -47,6 +49,10 @@ public void initialize() {
     companyNameAlert.setVisible(false);
     passwordAlert.setVisible(false);
     confirmPassAlert.setVisible(false);
+    nameField.setText(SecurityContext.getLoggedUser().getFirstName());
+    lastNameField.setText(SecurityContext.getLoggedUser().getLastName());
+    companyNameField.setText(SecurityContext.getLoggedUser().getCompanyName());
+
 }
 
     @FXML
@@ -56,6 +62,15 @@ public void initialize() {
                     passwordField.getText(), confirmPassField.getText());
             managerDataService.submitManagerData(dto);
             panelLayoutService.changeName(nameField.getText(), lastNameField.getText());
+        }
+    }
+
+    @FXML
+    public void newName(String firstName, String lastName, String companyName){
+        if (SecurityContext.getLoggedUser().role.getRole().equals("ROLE_MANAGER")){
+            nameField.setText(firstName);
+            lastNameField.setText(lastName);
+            companyNameField.setText(companyName);
         }
     }
 

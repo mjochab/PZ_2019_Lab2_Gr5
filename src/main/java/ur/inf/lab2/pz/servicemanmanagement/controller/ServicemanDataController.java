@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import ur.inf.lab2.pz.servicemanmanagement.domain.SecurityContext;
 import ur.inf.lab2.pz.servicemanmanagement.domain.dto.ServicemanDataDTO;
 import ur.inf.lab2.pz.servicemanmanagement.domain.validator.ServicemanDataValidator;
 import ur.inf.lab2.pz.servicemanmanagement.services.PanelLayoutService;
@@ -29,7 +30,11 @@ public class ServicemanDataController {
     @Autowired
     private PanelLayoutService panelLayoutService;
 
-
+    @FXML
+    public void initialize(){
+        firstNameTextField.setText(SecurityContext.getLoggedUser().getFirstName());
+        lastNameTextField.setText(SecurityContext.getLoggedUser().getLastName());
+    }
 
     public void submitServicemanData() {
 

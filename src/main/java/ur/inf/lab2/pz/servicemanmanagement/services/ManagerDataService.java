@@ -26,6 +26,10 @@ public class ManagerDataService {
     @Autowired
     private EncryptionService encryptionService;
 
+    public void setField(ManagerDataDTO dto){
+
+    }
+
     public void submitManagerData(ManagerDataDTO data)  {
         User currentUser = SecurityContext.getLoggedUser();
         currentUser.setFirstName(data.getFirstName());
