@@ -77,6 +77,7 @@ public class ManagerTimetable implements Timetable {
             if (isEmptyTask(app)) {
                 agenda.appointments().remove(app);
             } else {
+                editTaskDialogData.clean();
                 JFXDialog editTaskDialog = prepareEditTaskDialog(editTaskDialogData.getStackPane(), editTaskDialogData.getView());
                 setDialogActions(app, editTaskDialog, editTaskDialogData);
                 setTaskData(app, editTaskDialogData);

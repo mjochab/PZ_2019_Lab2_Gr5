@@ -58,4 +58,6 @@ public interface TimetableTaskEditDialogData {
     void disableWholeDayNode();
 
     void disableSaveNode();
+
+    void clean();
 }

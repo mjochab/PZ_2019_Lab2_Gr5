@@ -256,6 +256,24 @@ public class TimetableManager {
             findNodeInDialogBody(SAVE_TASK_NODE_ID).setDisable(true);
         }
 
+        @Override
+        public void clean() {
+            enableNodes(
+                    DETACH_TASK_NODE_ID,
+                    DESCRIPTION_NODE_ID,
+                    DATE_FROM_NODE_ID,
+                    TIME_FROM_NODE_ID,
+                    DATE_TO_NODE_ID,
+                    TIME_TO_NODE_ID,
+                    WHOLE_DAY_NODE_ID,
+                    SAVE_TASK_NODE_ID);
+        }
+
+        private void enableNodes(String... ids) {
+            for (String id : ids)
+                findNodeInDialogBody(id).setDisable(false);
+        }
+
         private void setLabelNode(String nodeId, String value) {
             ((Label) findNodeInDialogBody(nodeId)).setText(value);
         }
