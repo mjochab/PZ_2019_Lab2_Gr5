@@ -1,10 +1,11 @@
 package ur.inf.lab2.pz.servicemanmanagement.controller;
 
-import com.jfoenix.controls.JFXPasswordField;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import com.sun.corba.se.impl.encoding.CodeSetComponentInfo;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +32,9 @@ public class ManagerDataController {
 
     @FXML
     private Text nameAlert, lastNameAlert, companyNameAlert, passwordAlert, confirmPassAlert;
+
+    @FXML
+    private StackPane stackPane;
 
     @Autowired
     private PanelLayoutService panelLayoutService;
@@ -62,6 +66,8 @@ public void initialize() {
                     passwordField.getText(), confirmPassField.getText());
             managerDataService.submitManagerData(dto);
             panelLayoutService.changeName(nameField.getText(), lastNameField.getText());
+
+            loadDialog();
         }
     }
 
@@ -93,4 +99,24 @@ public void initialize() {
     public void setViewManager(ViewManager viewManager) {
         this.viewManager = viewManager;
     }
+
+
+
+    @FXML
+    private void loadDialog() {
+        JFXDialogLayout content = new JFXDialogLayout();
+        content.setHeading(new Text("OK"));
+        content.setBody(new Text("Zmieniono dane personalne"));
+        JFXDialog dialog = new JFXDialog(stackPane, content, JFXDialog.DialogTransition.CENTER);
+        JFXButton button = new JFXButton("OK");
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                dialog.close();
+            }
+        });
+        content.setActions(button);
+        dialog.show();
+    }
+
 }
