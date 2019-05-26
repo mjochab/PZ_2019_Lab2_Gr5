@@ -1,4 +1,8 @@
-package ur.inf.lab2.pz.servicemanmanagement.domain.timetable;
+package ur.inf.lab2.pz.servicemanmanagement.timetable.impl;
+
+import ur.inf.lab2.pz.servicemanmanagement.timetable.task.AllocatedTask;
+import ur.inf.lab2.pz.servicemanmanagement.timetable.task.ClientData;
+import ur.inf.lab2.pz.servicemanmanagement.timetable.task.TaskState;
 
 import java.time.LocalDateTime;
 

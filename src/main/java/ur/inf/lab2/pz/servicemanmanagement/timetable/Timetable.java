@@ -1,7 +1,8 @@
-package ur.inf.lab2.pz.servicemanmanagement.domain.timetable;
+package ur.inf.lab2.pz.servicemanmanagement.timetable;
 
 import javafx.scene.control.Control;
 import ur.inf.lab2.pz.servicemanmanagement.domain.DateRange;
+import ur.inf.lab2.pz.servicemanmanagement.timetable.task.AllocatedTask;
 
 import java.util.Collection;
 import java.util.Set;

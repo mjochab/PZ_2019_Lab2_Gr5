@@ -1,4 +1,4 @@
-package ur.inf.lab2.pz.servicemanmanagement.domain.timetable;
+package ur.inf.lab2.pz.servicemanmanagement.timetable.task;
 
 public interface TimetableTask {
     String getId(); // np. M1  (Pierwsza litera taga + numer, następny task z tagiem montaż byłby M2)

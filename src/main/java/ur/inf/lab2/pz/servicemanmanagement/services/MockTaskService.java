@@ -1,7 +1,12 @@
-package ur.inf.lab2.pz.servicemanmanagement.service;
+package ur.inf.lab2.pz.servicemanmanagement.services;
 
 import org.springframework.stereotype.Service;
-import ur.inf.lab2.pz.servicemanmanagement.domain.timetable.*;
+import ur.inf.lab2.pz.servicemanmanagement.timetable.dto.GroupData;
+import ur.inf.lab2.pz.servicemanmanagement.timetable.task.AllocatedTask;
+import ur.inf.lab2.pz.servicemanmanagement.timetable.task.ClientData;
+import ur.inf.lab2.pz.servicemanmanagement.timetable.task.TaskState;
+import ur.inf.lab2.pz.servicemanmanagement.timetable.task.UnallocatedTask;
+import ur.inf.lab2.pz.servicemanmanagement.timetable.TimetableDatasource;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -12,7 +17,7 @@ public class MockTaskService implements TimetableDatasource {
 
     @Override
     public Set<AllocatedTask> getAllocatedTasks(Long leaderId) {
-        AllocatedTask simpleTask0 = new SimpleTimetableTask(
+        AllocatedTask simpleTask0 = new MockAllocatedTask(
                 "M1",
                 "Montaż",
                 "Pojechać, zniszczyć i wrócić",
@@ -28,7 +33,7 @@ public class MockTaskService implements TimetableDatasource {
                         "m1-montaż"),
                 false,
                 TaskState.TODO);
-        AllocatedTask simpleTask1 = new SimpleTimetableTask(
+        AllocatedTask simpleTask1 = new MockAllocatedTask(
                 "M2",
                 "Montaż",
                 "Pojechać, zniszczyć i wrócić",
@@ -44,7 +49,7 @@ public class MockTaskService implements TimetableDatasource {
                         "m2-montaż"),
                 true,
                 TaskState.TODO);
-        AllocatedTask simpleTask2 = new SimpleTimetableTask(
+        AllocatedTask simpleTask2 = new MockAllocatedTask(
                 "M3",
                 "Montaż",
                 "Montaż aparatury do bimbru",
@@ -60,7 +65,7 @@ public class MockTaskService implements TimetableDatasource {
                         "m3-montaż"),
                 false,
                 TaskState.DONE);
-        AllocatedTask simpleTask3 = new SimpleTimetableTask(
+        AllocatedTask simpleTask3 = new MockAllocatedTask(
                 "R1",
                 "Rozbiórka",
                 "Rozebrać siostrę klienta",
@@ -84,7 +89,7 @@ public class MockTaskService implements TimetableDatasource {
 
     @Override
     public Set<UnallocatedTask> getUnallocatedTasks() {
-        UnallocatedTask simpleTask1 = new SimpleUnallocatedTask(
+        UnallocatedTask simpleTask1 = new MockUnallocatedTask(
                 "N1",
                 "Nieprzydzielone",
                 "Hejka",
@@ -96,7 +101,7 @@ public class MockTaskService implements TimetableDatasource {
                         "n1-nieprzydzielone",
                         "n1-nieprzydzielone",
                         "n1-nieprzydzielone"));
-        UnallocatedTask simpleTask2 = new SimpleUnallocatedTask(
+        UnallocatedTask simpleTask2 = new MockUnallocatedTask(
                 "N2",
                 "Nieprzydzielone",
                 "Hejka2",
@@ -188,13 +193,13 @@ public class MockTaskService implements TimetableDatasource {
         }
     }
 
-    private class SimpleUnallocatedTask implements UnallocatedTask {
+    private class MockUnallocatedTask implements UnallocatedTask {
         private String id;
         private String tag;
         private String description;
         private ClientData clientData;
 
-        public SimpleUnallocatedTask(String id, String tag, String description, ClientData clientData) {
+        public MockUnallocatedTask(String id, String tag, String description, ClientData clientData) {
             this.id = id;
             this.tag = tag;
             this.description = description;
@@ -222,7 +227,7 @@ public class MockTaskService implements TimetableDatasource {
         }
     }
 
-    private class SimpleTimetableTask implements AllocatedTask {
+    private class MockAllocatedTask implements AllocatedTask {
         private String id;
         private String tag;
         private String description;
@@ -232,7 +237,7 @@ public class MockTaskService implements TimetableDatasource {
         private boolean isWholeDayTask;
         private TaskState state;
 
-        public SimpleTimetableTask(String id, String tag, String description, LocalDateTime dateTimeFrom, LocalDateTime dateTimeTo, ClientData clientData, boolean isWholeDayTask, TaskState state) {
+        public MockAllocatedTask(String id, String tag, String description, LocalDateTime dateTimeFrom, LocalDateTime dateTimeTo, ClientData clientData, boolean isWholeDayTask, TaskState state) {
             this.id = id;
             this.tag = tag;
             this.description = description;
@@ -287,7 +292,7 @@ public class MockTaskService implements TimetableDatasource {
         public boolean equals(Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
-            SimpleTimetableTask that = (SimpleTimetableTask) o;
+            MockAllocatedTask that = (MockAllocatedTask) o;
             return Objects.equals(id, that.id);
         }
 

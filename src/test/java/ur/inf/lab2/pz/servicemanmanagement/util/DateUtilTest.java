@@ -2,7 +2,6 @@ package ur.inf.lab2.pz.servicemanmanagement.util;
 
 import org.junit.Test;
 import ur.inf.lab2.pz.servicemanmanagement.domain.DateRange;
-import ur.inf.lab2.pz.servicemanmanagement.service.TimetableManager;
 import ur.inf.lab2.pz.servicemanmanagement.utils.DateUtils;
 
 import java.text.ParseException;

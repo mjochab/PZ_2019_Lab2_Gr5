@@ -1,6 +1,8 @@
-package ur.inf.lab2.pz.servicemanmanagement.domain.timetable;
+package ur.inf.lab2.pz.servicemanmanagement.timetable.impl;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import ur.inf.lab2.pz.servicemanmanagement.timetable.task.ClientData;
+import ur.inf.lab2.pz.servicemanmanagement.timetable.task.UnallocatedTask;
 
 public class UnallocatedTaskTableItem extends RecursiveTreeObject<UnallocatedTaskTableItem> implements UnallocatedTask {
 
