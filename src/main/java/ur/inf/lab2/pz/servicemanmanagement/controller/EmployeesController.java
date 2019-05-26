@@ -81,14 +81,20 @@ public class EmployeesController implements Initializable {
 
     private void initTableColumns() {
         TreeTableColumn emailCol = new TreeTableColumn("Adres email");
+        TreeTableColumn firstNameCol = new TreeTableColumn("Imię");
+        TreeTableColumn lastNameCol = new TreeTableColumn("Nazwisko");
+
         TreeTableColumn isActiveCol = new TreeTableColumn("Aktywny");
         TreeTableColumn groupNameCol = new TreeTableColumn("Nazwa grupy");
 
-        servicemansTableView.getColumns().addAll(emailCol, isActiveCol, groupNameCol);
+        servicemansTableView.getColumns().addAll(firstNameCol,lastNameCol, emailCol, isActiveCol, groupNameCol);
 
         emailCol.setCellValueFactory(new TreeItemPropertyValueFactory<User, String>("email"));
         isActiveCol.setCellValueFactory(new TreeItemPropertyValueFactory<User, String>("enabled"));
         groupNameCol.setCellValueFactory(new TreeItemPropertyValueFactory<User, String>("groupName"));
+        firstNameCol.setCellValueFactory(new TreeItemPropertyValueFactory<User, String>("firstName"));
+        lastNameCol.setCellValueFactory(new TreeItemPropertyValueFactory<User, String>("lastName"));
+
     }
 
     public void loadTable() {
@@ -106,6 +112,8 @@ public class EmployeesController implements Initializable {
             ServicemanDTO servicemanDTO = new ServicemanDTO();
             servicemanDTO.setEmail(serviceman.getEmail());
             servicemanDTO.setGroupName(serviceman.getGroupName());
+            servicemanDTO.setFirstName(serviceman.getFirstName());
+            servicemanDTO.setLastName(serviceman.getLastName());
 
             if (serviceman.isEnabled()) servicemanDTO.setEnabled("TAK");
             else servicemanDTO.setEnabled("NIE");
