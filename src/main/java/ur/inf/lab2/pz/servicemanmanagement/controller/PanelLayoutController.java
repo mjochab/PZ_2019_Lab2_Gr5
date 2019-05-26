@@ -48,6 +48,9 @@ public class PanelLayoutController {
     private Label dateLabel;
 
     @FXML
+    private Label groupNameLabel;
+
+    @FXML
     private JFXButton dashboardButton;
     @FXML
     private JFXButton timetableButton;
@@ -67,9 +70,19 @@ public class PanelLayoutController {
             employeeButton.getChildrenUnmodifiable().forEach(node -> node.setManaged(false));
             AnchorPane.setTopAnchor(timetableButton, 0.0);
 
-            fullNameLabel.setText("Andrzej Gołota");
+            fullNameLabel.setText(SecurityContext.getLoggedUser().getFirstName() + " " +
+                    SecurityContext.getLoggedUser().getLastName());
             roleLabel.setText("Głowa serwisantów");
+            groupNameLabel.setText(SecurityContext.getLoggedUser().getGroupName());
 
+
+        }
+
+        else{
+            fullNameLabel.setText(SecurityContext.getLoggedUser().getFirstName() + " " +
+                    SecurityContext.getLoggedUser().getLastName());
+            groupNameLabel.setText(SecurityContext.getLoggedUser().getCompanyName());
+            roleLabel.setText("Kierownik");
 
         }
     }

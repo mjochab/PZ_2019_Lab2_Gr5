@@ -11,6 +11,8 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import ur.inf.lab2.pz.servicemanmanagement.domain.Task;
 import ur.inf.lab2.pz.servicemanmanagement.domain.dto.NewestTaskDTO;
@@ -62,8 +64,7 @@ public class ManagerDashboardController implements Initializable {
     }
 
     private void fetchTasks() {
-        List<Task> tasks = taskRepository.findAll();
-        Collections.reverse(tasks);
+        Page<Task> tasks = taskRepository.findNewest(new PageRequest(0, 5));
         List<NewestTaskDTO> newestTaskDTOS = new ArrayList<>();
 
         for (Task task : tasks) {

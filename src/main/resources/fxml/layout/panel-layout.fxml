@@ -61,6 +61,11 @@
                   <String fx:value="bg-primary" />
                </styleClass>
             </JFXButton>
+            <Label fx:id="groupNameLabel" layoutX="622.0" layoutY="26.0" text="asd" textFill="WHITE" AnchorPane.leftAnchor="622.0" AnchorPane.rightAnchor="622.0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="sideNavContainer" layoutX="10.0" layoutY="77.0" prefHeight="200.0" prefWidth="200.0" styleClass="bg-dark-primary" stylesheets="@../../styles/styles.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="75.0">
