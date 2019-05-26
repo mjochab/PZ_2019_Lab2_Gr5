@@ -8,5 +8,4 @@ public class ServicemanDataController {
     public void submitServicemanData() {
 
     }
-
 }

@@ -22,6 +22,7 @@ import ur.inf.lab2.pz.servicemanmanagement.services.TaskService;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewComponent;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewManager;
 
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -47,7 +48,7 @@ public class NewTaskDialogController implements Initializable {
     @FXML
     private JFXTreeTableView<Client> tableView;
     @FXML
-    private Text titleAlert, detailsAlert;
+    private Text titleAlert, detailsAlert, notSelectedAlert;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -72,12 +73,15 @@ public class NewTaskDialogController implements Initializable {
     void saveTask(ActionEvent event) {
         if(validate()) {
             TreeItem<Client> client = tableView.getSelectionModel().getSelectedItem();
-            NewTaskDTO newTaskDTO = new NewTaskDTO(titleTextField.getText(), detailsTextArea.getText(), client.getValue());
-
-            taskService.saveNewTask(newTaskDTO);
-            Stage stage = (Stage) saveButton.getScene().getWindow();
-            stage.close();
-            timetableController.loadTable();
+            if (client != null) {
+                NewTaskDTO newTaskDTO = new NewTaskDTO(titleTextField.getText(), detailsTextArea.getText(), client.getValue());
+                taskService.saveNewTask(newTaskDTO);
+                Stage stage = (Stage) saveButton.getScene().getWindow();
+                stage.close();
+                timetableController.loadTable();
+            } else{
+                notSelectedAlert.setText("Wybierz klienta z listy, lub dodaj jeśli jeszcze nie został zarejestrowany");
+            }
         }
     }
 
