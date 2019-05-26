@@ -42,6 +42,8 @@ interface TimetableDatasource {
     void saveAllocated(Collection<AllocatedTask> allocatedTasks);
 
     void saveUnallocated(Collection<UnallocatedTask> unallocatedTasks);
+
+    List<GroupData> getGroups();
 }
 
 interface AllocatedTaskRaportPrinter {
@@ -472,6 +474,10 @@ public class TimetableManager {
     public void save(Set<AllocatedTask> allocatedTasks, Set<UnallocatedTask> unallocatedTasks) {
         datasource.saveAllocated(allocatedTasks);
         datasource.saveUnallocated(unallocatedTasks);
+    }
+
+    public List<GroupData> getAllGroups() {
+        return datasource.getGroups();
     }
 
     private class MockPrinter implements AllocatedTaskRaportPrinter {

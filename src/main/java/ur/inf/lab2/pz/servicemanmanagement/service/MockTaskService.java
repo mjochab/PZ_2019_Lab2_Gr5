@@ -1,15 +1,11 @@
 package ur.inf.lab2.pz.servicemanmanagement.service;
 
 import org.springframework.stereotype.Service;
-import ur.inf.lab2.pz.servicemanmanagement.domain.timetable.AllocatedTask;
-import ur.inf.lab2.pz.servicemanmanagement.domain.timetable.ClientData;
-import ur.inf.lab2.pz.servicemanmanagement.domain.timetable.TaskState;
-import ur.inf.lab2.pz.servicemanmanagement.domain.timetable.UnallocatedTask;
+import ur.inf.lab2.pz.servicemanmanagement.domain.timetable.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
-
 
 @Service
 public class MockTaskService implements TimetableDatasource {
@@ -125,6 +121,14 @@ public class MockTaskService implements TimetableDatasource {
     @Override
     public void saveUnallocated(Collection<UnallocatedTask> unallocatedTasks) {
         System.out.println("Saving " + unallocatedTasks.size() + " unallocatedTasks");
+    }
+
+    @Override
+    public List<GroupData> getGroups() {
+        return Arrays.asList(
+                new GroupData(1L, "Grupa śmieci"),
+                new GroupData(1L, "Grupa upośledzonych"),
+                new GroupData(1L, "Grupa kretynów"));
     }
 
 

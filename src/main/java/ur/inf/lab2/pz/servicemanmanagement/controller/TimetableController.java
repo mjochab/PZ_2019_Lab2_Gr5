@@ -18,10 +18,7 @@ import javafx.scene.layout.StackPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ur.inf.lab2.pz.servicemanmanagement.domain.*;
-import ur.inf.lab2.pz.servicemanmanagement.domain.timetable.AllocatedTask;
-import ur.inf.lab2.pz.servicemanmanagement.domain.timetable.Timetable;
-import ur.inf.lab2.pz.servicemanmanagement.domain.timetable.UnallocatedTask;
-import ur.inf.lab2.pz.servicemanmanagement.domain.timetable.UnallocatedTaskTableItem;
+import ur.inf.lab2.pz.servicemanmanagement.domain.timetable.*;
 import ur.inf.lab2.pz.servicemanmanagement.repository.TaskRepository;
 import ur.inf.lab2.pz.servicemanmanagement.service.TimetableManager;
 import ur.inf.lab2.pz.servicemanmanagement.utils.DateUtils;
@@ -32,41 +29,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-class GroupData {
-    private Long leaderId;
-    private String groupName;
-
-    public GroupData(Long leaderId, String groupName) {
-        this.leaderId = leaderId;
-        this.groupName = groupName;
-    }
-
-    public Long getLeaderId() {
-        return leaderId;
-    }
-
-    public void setLeaderId(Long leaderId) {
-        this.leaderId = leaderId;
-    }
-
-    public String getGroupName() {
-        return groupName;
-    }
-
-    public void setGroupName(String groupName) {
-        this.groupName = groupName;
-    }
-
-    @Override
-    public String toString() {
-        return groupName;
-    }
-}
-
 
 @Controller
 public class TimetableController implements Initializable {
@@ -98,17 +64,17 @@ public class TimetableController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //TODO DEV
-        serviceTeamSelect.getItems().add(new GroupData(1L, "Grupa śmieci"));
-        serviceTeamSelect.getItems().add(new GroupData(1L, "Grupa upośledzonych"));
-        serviceTeamSelect.getItems().add(new GroupData(1L, "Grupa kretynów"));
-        //
-
+        initGroups();
         initUnallocatedTaskTable();
         initTimetable();
         turnOffTimetableSettingControls();
         initDatePanel();
         viewManager.loadComponentInto(placeForTimetable, ViewComponent.TIMETABLE_GROUP_NOT_SELECTED);
+    }
+
+    private void initGroups() {
+        List<GroupData> groups = timetableManager.getAllGroups();
+        serviceTeamSelect.getItems().addAll(groups);
     }
 
     private void initDatePanel() {
