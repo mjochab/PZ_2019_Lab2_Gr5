@@ -83,6 +83,7 @@ public class PanelLayoutController {
                     vBoxNotification.setBackground(new Background(new BackgroundFill(Color.ROYALBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
                     vBoxNotification.setPadding(new Insets(10, 10, 10,10));
                     vBoxNotification.setSpacing(6);
+                    vboxnotifications.setId("vbox" + i);
 
                     Text dateAndTime = new Text("27-06-2019 ; 20:00");
                     dateAndTime.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD,12));
@@ -101,6 +102,12 @@ public class PanelLayoutController {
                     TextFlow textFlowDescription = new TextFlow(notificationsDescription);
 
                     vBoxNotification.getChildren().addAll(flowPane1, textFlowTitle, textFlowDescription);
+                    Button buttonDeleteNotification = new Button("Usuń powiadomienie");
+                    buttonDeleteNotification.setStyle("-fx-background-color: linear-gradient(#ff5400, #be1d00);\n" +
+                            "    -fx-background-radius: 30;\n" +
+                            "    -fx-background-insets: 0;\n" +
+                            "    -fx-text-fill: white;");
+                   // buttonDeleteNotification.setBackground(new Background(new BackgroundFill(Color.rgb(255,0,0), CornerRadii.EMPTY, Insets.EMPTY)));
 
 
                     Label label = new Label("27-06-2019 ; 20:00 ");
@@ -113,11 +120,13 @@ public class PanelLayoutController {
                     label.setPadding(new Insets(0, 5, 0, 50));
 
 
-                    vboxnotifications.getChildren().addAll(vBoxNotification);
+                    vboxnotifications.getChildren().addAll(vBoxNotification, buttonDeleteNotification);
 
                 }
-                Label lastLabel = new Label();
-                vboxnotifications.getChildren().add(lastLabel);
+
+                Label end = new Label();
+
+                vboxnotifications.getChildren().addAll(end);
 
             } else {
                 closeNav.setToX(-(drawer.getWidth()));
