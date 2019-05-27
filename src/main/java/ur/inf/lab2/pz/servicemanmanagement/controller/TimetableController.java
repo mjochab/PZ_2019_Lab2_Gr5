@@ -111,7 +111,7 @@ public class TimetableController implements Initializable {
 
         idCol.setCellValueFactory(new TreeItemPropertyValueFactory<Client, String>("id"));
         tagCol.setCellValueFactory(new TreeItemPropertyValueFactory<Client, String>("tag"));
-        descriptionCol.setCellValueFactory(new TreeItemPropertyValueFactory<Client, String>("description"));
+        descriptionCol.setCellValueFactory(new TreeItemPropertyValueFactory<Client, String>("details"));
 
     }
 
@@ -176,7 +176,8 @@ public class TimetableController implements Initializable {
                 .map(TreeItem::getValue)
                 .collect(Collectors.toSet());
 
-        timetableManager.save(allocatedTasks, unallocatedTasks);
+        GroupData selectedGroup = serviceTeamSelect.getSelectionModel().getSelectedItem();
+        timetableManager.save(selectedGroup.getLeaderId(), allocatedTasks, unallocatedTasks);
     }
 
 

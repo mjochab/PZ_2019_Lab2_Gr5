@@ -39,7 +39,7 @@ public class TimetableTaskData implements AllocatedTask {
     }
 
     @Override
-    public String getDescription() {
+    public String getDetails() {
         return description;
     }
 

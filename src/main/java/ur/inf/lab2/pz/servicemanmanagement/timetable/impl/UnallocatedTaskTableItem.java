@@ -14,7 +14,7 @@ public class UnallocatedTaskTableItem extends RecursiveTreeObject<UnallocatedTas
     public UnallocatedTaskTableItem(UnallocatedTask task) {
         this.id = task.getId();
         this.tag = task.getTag();
-        this.description = task.getDescription();
+        this.description = task.getDetails();
         this.clientData = task.getClientData();
     }
 
@@ -36,7 +36,7 @@ public class UnallocatedTaskTableItem extends RecursiveTreeObject<UnallocatedTas
     }
 
     @Override
-    public String getDescription() {
+    public String getDetails() {
         return description;
     }
 

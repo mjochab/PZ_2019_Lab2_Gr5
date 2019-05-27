@@ -14,7 +14,7 @@ public interface TimetableDatasource {
 
     Set<UnallocatedTask> getUnallocatedTasks();
 
-    void saveAllocated(Collection<AllocatedTask> allocatedTasks);
+    void saveAllocated(Long leaderId, Collection<AllocatedTask> allocatedTasks);
 
     void saveUnallocated(Collection<UnallocatedTask> unallocatedTasks);
 

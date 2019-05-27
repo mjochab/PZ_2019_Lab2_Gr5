@@ -96,7 +96,7 @@ public class ManagerTimetable implements Timetable {
         AllocatedTask task = transformAppointmentToTask(app);
         editTaskDialogData.setTaskId(task.getId());
         editTaskDialogData.setTaskTag(task.getTag());
-        editTaskDialogData.setTaskDescription(task.getDescription());
+        editTaskDialogData.setTaskDescription(task.getDetails());
         editTaskDialogData.setDateTimeFrom(task.getDateTimeFrom());
         editTaskDialogData.setDateTimeTo(task.getDateTimeTo());
         editTaskDialogData.setWholeDay(task.isWholeDayTask());
@@ -117,6 +117,12 @@ public class ManagerTimetable implements Timetable {
             if (selectedDirectory != null)
                 raportPrinter.print(transformAppointmentToTask(appointment), selectedDirectory.getAbsolutePath());
         });
+
+        if (appointment.isWholeDay()) {
+            editTaskDialogData.disableDateToNode();
+            editTaskDialogData.disableTimeToNode();
+            editTaskDialogData.disableTimeFromNode();
+        }
 
         if (isDoneTask(appointment)) {
             editTaskDialogData.disableDetachNode();
@@ -161,7 +167,7 @@ public class ManagerTimetable implements Timetable {
 
     private void setAppointmentAsWholeDay(Agenda.Appointment appointment, LocalDateTime dateTimeFrom) {
         appointment.setStartLocalDateTime(dateTimeFrom);
-        appointment.setEndLocalDateTime(dateTimeFrom);
+        appointment.setEndLocalDateTime(dateTimeFrom.plusHours(3));
         appointment.setWholeDay(true);
     }
 
@@ -409,7 +415,7 @@ public class ManagerTimetable implements Timetable {
     }
 
     private String prepareTaskSummary(TimetableTask task) {
-        return prepareTaskSummary(task.getId(), task.getTag(), task.getDescription());
+        return prepareTaskSummary(task.getId(), task.getTag(), task.getDetails());
     }
 
     private String prepareTaskSummary(String id, String tag, String description) {

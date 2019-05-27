@@ -57,8 +57,8 @@ public class TimetableManager {
         return datasource.getAllocatedTasks(leaderId);
     }
 
-    public void save(Set<AllocatedTask> allocatedTasks, Set<UnallocatedTask> unallocatedTasks) {
-        datasource.saveAllocated(allocatedTasks);
+    public void save(Long leaderId, Set<AllocatedTask> allocatedTasks, Set<UnallocatedTask> unallocatedTasks) {
+        datasource.saveAllocated(leaderId, allocatedTasks);
         datasource.saveUnallocated(unallocatedTasks);
     }
 
