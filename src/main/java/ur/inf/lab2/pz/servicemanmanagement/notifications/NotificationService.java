@@ -62,6 +62,7 @@ public class NotificationService {
         notificationRepository.save(targetNotification);
     }
 
+    @Transactional
     public void deleteNotifications(List<Long> ids) {
 
         for (Notification notification : notificationRepository.findAllById(ids)) {
@@ -71,6 +72,7 @@ public class NotificationService {
         notificationRepository.deleteByIdIn(ids);
     }
 
+    @Transactional
     public void deleteNotification(long id) throws IOException {
 
         Notification targetNotification = notificationRepository.findById(id).orElseThrow(() -> new IOException());

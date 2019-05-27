@@ -57,6 +57,8 @@ public class PanelLayoutController {
     @FXML
     private VBox vboxnotifications;
 
+    private List<Notification> notifications;
+
 
     @FXML
     public void initialize() {
@@ -72,6 +74,7 @@ public class PanelLayoutController {
             fullNameLabel.setText("Andrzej Gołota");
             roleLabel.setText("Głowa serwisantów");
         }
+
     }
 
     @FXML
@@ -81,12 +84,10 @@ public class PanelLayoutController {
         TranslateTransition closeNav = new TranslateTransition(new Duration(150), drawer);
         notificationsButton.setOnAction(evt -> {
             if (drawer.getTranslateX() != 0) {
+
                 vboxnotifications.getChildren().clear();
-                openNav.play();
 
-
-
-                List<Notification> notifications =
+                notifications =
                         notificationService.getUserNotifications(
                                 SecurityContext.getLoggedUser().getId());
 
@@ -121,7 +122,8 @@ public class PanelLayoutController {
                             "    -fx-background-radius: 30;\n" +
                             "    -fx-background-insets: 0;\n" +
                             "    -fx-text-fill: white;");
-
+                    buttonDeleteNotification.toFront();
+                    buttonDeleteNotification.setDisable(false);
 
 
 
@@ -132,8 +134,16 @@ public class PanelLayoutController {
                     notificationAndButtonComponent.getChildren().addAll(vBoxNotification, buttonDeleteNotification);
 
 
-                    buttonDeleteNotification.setOnAction(deleteClickedEvent -> {
+                    buttonDeleteNotification.setOnMouseClicked(deleteClickedEvent -> {
                             notificationAndButtonComponent.setVisible(false);
+                            try {
+                                notificationService.deleteNotification(notification.getId());
+                                notifications.remove(notification);
+                            }
+                            catch (IOException ex) {
+                                ex.getMessage();
+                            }
+
                        // vboxnotifications.getChildren().remove(notificationAndButtonComponent);
                     });
 
@@ -142,6 +152,7 @@ public class PanelLayoutController {
 
                 Label end = new Label();
 
+                openNav.play();
                 vboxnotifications.getChildren().addAll(end);
 
             } else {
