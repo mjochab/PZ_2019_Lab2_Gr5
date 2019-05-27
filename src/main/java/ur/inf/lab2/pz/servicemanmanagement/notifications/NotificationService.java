@@ -7,6 +7,7 @@ import ur.inf.lab2.pz.servicemanmanagement.domain.Notification;
 import ur.inf.lab2.pz.servicemanmanagement.domain.User;
 import ur.inf.lab2.pz.servicemanmanagement.repository.AllUsersRepository;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.List;
 
@@ -26,13 +27,21 @@ public class NotificationService {
         return notifications;
     }
 
-    public void addNotification(Notification notification, long userId) throws IOException {
+//    public void addNotification(Notification notification, Long userId) throws IOException {
+//
+//        User targetUser = allUsersRepository.findById(userId).orElseThrow(() -> new IOException());
+//
+//        notification.setUser(targetUser);
+//        targetUser.getNotifications().add(notification);
+//
+//        notificationRepository.save(notification);
+//    }
+
+    @Transactional
+    public void addNotification(String title, String content, Long userId) throws IOException {
 
         User targetUser = allUsersRepository.findById(userId).orElseThrow(() -> new IOException());
-
-        notification.setUser(targetUser);
-        targetUser.getNotifications().add(notification);
-
+        Notification notification = new Notification(title, content, targetUser);
         notificationRepository.save(notification);
     }
 
@@ -46,8 +55,7 @@ public class NotificationService {
 
     public void deleteNotifications(List<Long> ids) {
 
-        for(Notification notification : notificationRepository.findAllById(ids))
-        {
+        for (Notification notification : notificationRepository.findAllById(ids)) {
             notification.getUser().getNotifications().remove(notification);
         }
 

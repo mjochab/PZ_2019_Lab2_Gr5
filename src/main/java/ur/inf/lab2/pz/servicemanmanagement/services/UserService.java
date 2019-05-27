@@ -8,6 +8,7 @@ import ur.inf.lab2.pz.servicemanmanagement.domain.*;
 import ur.inf.lab2.pz.servicemanmanagement.domain.dto.ManagerRegisterDTO;
 import ur.inf.lab2.pz.servicemanmanagement.domain.dto.ServicemanFirstLoginDTO;
 import ur.inf.lab2.pz.servicemanmanagement.domain.enums.Roles;
+import ur.inf.lab2.pz.servicemanmanagement.notifications.NotificationService;
 import ur.inf.lab2.pz.servicemanmanagement.repository.AllUsersRepository;
 import ur.inf.lab2.pz.servicemanmanagement.repository.ManagerRepository;
 import ur.inf.lab2.pz.servicemanmanagement.repository.RoleRepository;
@@ -44,6 +45,9 @@ public class UserService {
 
     @Autowired
     private ViewManager viewManager;
+
+    @Autowired
+    private NotificationService notificationService;
 
     public void userLogin(String email, String password) throws IOException {
 
@@ -98,6 +102,12 @@ public class UserService {
         currentUser.setPassword(encryptionService.encode(data.getPassword()));
         currentUser.setEnabled(true);
         servicemanRepository.save(currentUser);
+
+        notificationService.addNotification(
+                "Pierwsze logowanie",
+                        "Użytkownik " + currentUser.getFirstName() + " dołączył do naszego zespołu.",
+                currentUser.getManager().getId()
+        );
 
         viewManager.switchLayout(Layout.PANEL, ViewComponent.TIMETABLE);
     }
