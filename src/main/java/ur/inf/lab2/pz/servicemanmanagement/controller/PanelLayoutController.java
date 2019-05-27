@@ -2,7 +2,10 @@ package ur.inf.lab2.pz.servicemanmanagement.controller;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.animation.TranslateTransition;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -75,7 +78,7 @@ public class PanelLayoutController {
             if (drawer.getTranslateX() != 0) {
                 openNav.play();
 
-                for(int i = 0; i<15; i++) {
+                for(int i = 0; i<10; i++) {
 
                     VBox vBoxNotification = new VBox();
                     vBoxNotification.setMinWidth(230);
@@ -108,10 +111,21 @@ public class PanelLayoutController {
                             "    -fx-text-fill: white;");
 
 
+
                     VBox notificationAndButtonComponent = new VBox();
                     notificationAndButtonComponent.setSpacing(5);
                     notificationAndButtonComponent.setAlignment(Pos.TOP_CENTER);
-                    notificationAndButtonComponent.setId("vbox" + i);
+
+
+
+
+
+
+
+
+
+
+
                     notificationAndButtonComponent.getChildren().addAll(vBoxNotification, buttonDeleteNotification);
 
                     vboxnotifications.getChildren().addAll(notificationAndButtonComponent);
@@ -128,6 +142,8 @@ public class PanelLayoutController {
             }
         });
     }
+
+
 
     @FXML
     public void navigateToDashboard(ActionEvent event) throws IOException {

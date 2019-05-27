@@ -121,11 +121,11 @@
          </children>
       </AnchorPane>
       <AnchorPane fx:id="placeForComponent" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: gray;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="75.0" />
-      <AnchorPane fx:id="drawer" layoutX="1300.0" layoutY="75.0" prefHeight="645.0" prefWidth="260.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="-298.0" AnchorPane.topAnchor="75.0">
+      <AnchorPane fx:id="drawer" layoutX="1300.0" layoutY="75.0" prefWidth="278.0" AnchorPane.bottomAnchor="-156.0" AnchorPane.rightAnchor="-298.0" AnchorPane.topAnchor="75.0">
          <children>
             <ScrollPane prefHeight="645.0" prefWidth="278.0">
                <content>
-                  <VBox fx:id="vboxnotifications" alignment="TOP_CENTER" disable="true" prefHeight="645.0" prefWidth="260.0" spacing="15.0" styleClass="bg-light-primary" stylesheets="@../../styles/styles.css">
+                  <VBox fx:id="vboxnotifications" alignment="TOP_CENTER" disable="true" prefWidth="260.0" spacing="15.0" styleClass="bg-light-primary" stylesheets="@../../styles/styles.css">
                      <padding>
                         <Insets top="10.0" />
                      </padding>
