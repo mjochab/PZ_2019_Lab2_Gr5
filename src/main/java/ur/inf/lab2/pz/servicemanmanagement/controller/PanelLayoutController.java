@@ -1,6 +1,9 @@
 package ur.inf.lab2.pz.servicemanmanagement.controller;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,6 +21,8 @@ import ur.inf.lab2.pz.servicemanmanagement.view.ViewComponent;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewManager;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Controller
 public class PanelLayoutController {
@@ -37,6 +42,12 @@ public class PanelLayoutController {
     private Label roleLabel;
 
     @FXML
+    private Label timeLabel;
+
+    @FXML
+    private Label dateLabel;
+
+    @FXML
     private JFXButton dashboardButton;
     @FXML
     private JFXButton timetableButton;
@@ -45,7 +56,9 @@ public class PanelLayoutController {
 
     @FXML
     public void initialize() {
+        initClock();
         if (SecurityContext.getLoggedUser().role.getRole().equals("ROLE_SERVICEMAN")) {
+
             dashboardButton.setManaged(false);
             dashboardButton.setVisible(false);
             dashboardButton.getChildrenUnmodifiable().forEach(node -> node.setManaged(false));
@@ -56,6 +69,8 @@ public class PanelLayoutController {
 
             fullNameLabel.setText("Andrzej Gołota");
             roleLabel.setText("Głowa serwisantów");
+
+
         }
     }
 
@@ -106,6 +121,18 @@ public class PanelLayoutController {
     public void logout(ActionEvent event) throws IOException {
         SecurityContext.setLoggedUser(null);
         viewManager.switchLayout(Layout.START, ViewComponent.LOGIN);
+    }
+
+    @FXML
+    public void initClock() {
+        Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+            dateLabel.setText(LocalDateTime.now().format(dateFormatter));
+            timeLabel.setText(LocalDateTime.now().format(timeFormatter));
+        }), new KeyFrame(Duration.seconds(1)));
+        clock.setCycleCount(Animation.INDEFINITE);
+        clock.play();
     }
 
 }
