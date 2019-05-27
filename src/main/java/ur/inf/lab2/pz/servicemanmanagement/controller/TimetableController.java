@@ -111,7 +111,7 @@ public class TimetableController implements Initializable {
 
         idCol.setCellValueFactory(new TreeItemPropertyValueFactory<Client, String>("id"));
         tagCol.setCellValueFactory(new TreeItemPropertyValueFactory<Client, String>("tag"));
-        descriptionCol.setCellValueFactory(new TreeItemPropertyValueFactory<Client, String>("description"));
+        descriptionCol.setCellValueFactory(new TreeItemPropertyValueFactory<Client, String>("details"));
 
     }
 

@@ -96,7 +96,7 @@ public class ManagerTimetable implements Timetable {
         AllocatedTask task = transformAppointmentToTask(app);
         editTaskDialogData.setTaskId(task.getId());
         editTaskDialogData.setTaskTag(task.getTag());
-        editTaskDialogData.setTaskDescription(task.getDescription());
+        editTaskDialogData.setTaskDescription(task.getDetails());
         editTaskDialogData.setDateTimeFrom(task.getDateTimeFrom());
         editTaskDialogData.setDateTimeTo(task.getDateTimeTo());
         editTaskDialogData.setWholeDay(task.isWholeDayTask());
@@ -408,7 +408,7 @@ public class ManagerTimetable implements Timetable {
     }
 
     private String prepareTaskSummary(TimetableTask task) {
-        return prepareTaskSummary(task.getId(), task.getTag(), task.getDescription());
+        return prepareTaskSummary(task.getId(), task.getTag(), task.getDetails());
     }
 
     private String prepareTaskSummary(String id, String tag, String description) {

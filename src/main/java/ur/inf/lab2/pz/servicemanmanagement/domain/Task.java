@@ -3,16 +3,19 @@ package ur.inf.lab2.pz.servicemanmanagement.domain;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import ur.inf.lab2.pz.servicemanmanagement.domain.enums.TaskStatus;
+import ur.inf.lab2.pz.servicemanmanagement.timetable.task.*;
 
+import javax.annotation.PostConstruct;
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
-public class Task extends RecursiveTreeObject<Task> {
+public class Task extends RecursiveTreeObject<Task> implements AllocatedTask, UnallocatedTask {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "author_id")
@@ -33,17 +36,40 @@ public class Task extends RecursiveTreeObject<Task> {
     @JoinColumn(name = "task_status")
     private TaskStatus status;
 
+    private TaskState state = TaskState.TODO;
+
     @JoinColumn(name = "creation_date")
     private Date creationDate;
 
     @JoinColumn(name = "visit_date")
     private Date visitDate;
 
+    private String tag;
 
-    public Task(User author, User teamLeader, String title, String details, Client client, TaskStatus status, Date creationDate, Date visitDate) {
+    private LocalDateTime dateTimeFrom;
+
+    private LocalDateTime dateTimeTo;
+
+    @Column(name="whole_day")
+    private boolean isWholeDayTask;
+
+    private boolean allocated;
+
+    @Transient
+    private ClientData clientData;
+
+    @PostConstruct
+    public void initClientData() {
+        clientData = new ClientDataImpl(this);
+    }
+
+    public Task(String id, User author, User teamLeader, String title, String tag, String details,
+                Client client, TaskStatus status, Date creationDate, Date visitDate) {
+        this.id = id;
         this.author = author;
         this.teamLeader = teamLeader;
         this.title = title;
+        this.tag = tag;
         this.details = details;
         this.client = client;
         this.status = status;
@@ -54,11 +80,19 @@ public class Task extends RecursiveTreeObject<Task> {
     public Task() {
     }
 
-    public Long getId() {
+    public Task(AllocatedTask allocatedTask) {
+        this.id = allocatedTask.getId();
+        this.state = allocatedTask.getState();
+        this.dateTimeFrom = allocatedTask.getDateTimeFrom();
+        this.dateTimeTo = allocatedTask.getDateTimeTo();
+        this.isWholeDayTask= allocatedTask.isWholeDayTask();
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -88,6 +122,11 @@ public class Task extends RecursiveTreeObject<Task> {
 
     public String getDetails() {
         return details;
+    }
+
+    @Override
+    public ClientData getClientData() {
+        return clientData;
     }
 
     public void setDetails(String details) {
@@ -124,5 +163,53 @@ public class Task extends RecursiveTreeObject<Task> {
 
     public void setVisitDate(Date visitDate) {
         this.visitDate = visitDate;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    public LocalDateTime getDateTimeFrom() {
+        return dateTimeFrom;
+    }
+
+    public void setDateTimeFrom(LocalDateTime dateTimeFrom) {
+        this.dateTimeFrom = dateTimeFrom;
+    }
+
+    public LocalDateTime getDateTimeTo() {
+        return dateTimeTo;
+    }
+
+    public void setDateTimeTo(LocalDateTime dateTimeTo) {
+        this.dateTimeTo = dateTimeTo;
+    }
+
+    public boolean isWholeDayTask() {
+        return isWholeDayTask;
+    }
+
+    public void setWholeDayTask(boolean wholeDayTask) {
+        this.isWholeDayTask = wholeDayTask;
+    }
+
+    public boolean isAllocated() {
+        return allocated;
+    }
+
+    public void setAllocated(boolean allocated) {
+        this.allocated = allocated;
+    }
+
+    public TaskState getState() {
+        return state;
+    }
+
+    public void setState(TaskState state) {
+        this.state = state;
     }
 }
