@@ -120,7 +120,9 @@ public class MockTaskService implements TimetableDatasource {
 
     @Override
     public void saveAllocated(Collection<AllocatedTask> allocatedTasks) {
-        System.out.println("Saving " + allocatedTasks.size() + " allocatedTasks");
+        allocatedTasks.forEach(task -> {
+            System.out.println(task.toString());
+        });
     }
 
     @Override

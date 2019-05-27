@@ -10,7 +10,7 @@ import java.util.Set;
 public interface Timetable {
     void loadTasks(Collection<AllocatedTask> tasksFromActualWeek);
     Control getView();
-    Set<AllocatedTask> getAllocatedTasks();
+    Set<AllocatedTask> dumpAllocatedTasks();
     void clear();
 
     DateRange nextWeek();

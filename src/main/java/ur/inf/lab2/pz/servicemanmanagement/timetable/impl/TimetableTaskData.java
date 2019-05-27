@@ -67,4 +67,18 @@ public class TimetableTaskData implements AllocatedTask {
     public TaskState getState() {
         return state;
     }
+
+    @Override
+    public String toString() {
+        return "TimetableTaskData{" +
+                "id='" + id + '\'' +
+                ", tag='" + tag + '\'' +
+                ", description='" + description + '\'' +
+                ", startDateTime=" + startDateTime +
+                ", endDateTime=" + endDateTime +
+                ", isWholeDay=" + isWholeDay +
+                ", clientData=" + clientData +
+                ", state=" + state +
+                '}';
+    }
 }

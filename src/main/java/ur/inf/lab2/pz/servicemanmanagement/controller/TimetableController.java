@@ -171,7 +171,7 @@ public class TimetableController implements Initializable {
 
     @FXML
     private void persistTasks() {
-        Set<AllocatedTask> allocatedTasks = timetable.getAllocatedTasks();
+        Set<AllocatedTask> allocatedTasks = timetable.dumpAllocatedTasks();
         Set<UnallocatedTask> unallocatedTasks = tasksTableView.getRoot().getChildren().stream()
                 .map(TreeItem::getValue)
                 .collect(Collectors.toSet());

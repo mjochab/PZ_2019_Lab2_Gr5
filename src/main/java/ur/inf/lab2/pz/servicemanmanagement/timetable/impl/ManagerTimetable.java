@@ -269,7 +269,8 @@ public class ManagerTimetable implements Timetable {
     }
 
     @Override
-    public Set<AllocatedTask> getAllocatedTasks() {
+    public Set<AllocatedTask> dumpAllocatedTasks() {
+        agenda.selectedAppointments().clear();
         return agenda.appointments().stream()
                 .filter(appointment -> !isEmptyTask(appointment) && !isDoneTask(appointment))
                 .map(this::transformAppointmentToTask)
