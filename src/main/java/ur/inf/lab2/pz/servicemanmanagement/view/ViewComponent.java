@@ -13,7 +13,8 @@ public enum ViewComponent {
     NEW_TASK_DIALOG("component/manager/new-task-dialog"),
     NEW_CLIENT_DIALOG("component/manager/new-client"),
     TIMETABLE_GROUP_NOT_SELECTED("/component/manager/group-not-selected"),
-    EDIT_TASK_DIALOG("/component/edit-task-dialog");
+    EDIT_TASK_DIALOG("/component/edit-task-dialog"),
+    SERVICEMAN_TIMETABLE("/component/serviceman/serviceman-timetable");
 
 
     private String fxmlPath;

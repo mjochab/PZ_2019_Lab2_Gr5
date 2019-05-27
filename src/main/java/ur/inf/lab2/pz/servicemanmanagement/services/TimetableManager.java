@@ -12,11 +12,13 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.StackPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ur.inf.lab2.pz.servicemanmanagement.domain.Task;
 import ur.inf.lab2.pz.servicemanmanagement.timetable.AllocatedTaskRaportPrinter;
 import ur.inf.lab2.pz.servicemanmanagement.timetable.Timetable;
 import ur.inf.lab2.pz.servicemanmanagement.timetable.TimetableTaskEditDialogData;
 import ur.inf.lab2.pz.servicemanmanagement.timetable.dto.GroupData;
 import ur.inf.lab2.pz.servicemanmanagement.timetable.impl.ManagerTimetable;
+import ur.inf.lab2.pz.servicemanmanagement.timetable.impl.ServicemanTimetable;
 import ur.inf.lab2.pz.servicemanmanagement.timetable.impl.UnallocatedTaskTableItem;
 import ur.inf.lab2.pz.servicemanmanagement.timetable.task.AllocatedTask;
 import ur.inf.lab2.pz.servicemanmanagement.timetable.task.ClientData;
@@ -47,6 +49,15 @@ public class TimetableManager {
         return new RecursiveTreeItem<>(unallocatedTasksList, RecursiveTreeObject::getChildren);
     }
 
+    public TreeItem<UnallocatedTaskTableItem> convertToUnallocatedTreeItemTask(Task newTask) {
+        TaskConverter taskConverter = new TaskConverter();
+        return new TreeItem(
+                new UnallocatedTaskTableItem(
+                        taskConverter.convertToUnallocated(newTask)
+                )
+        );
+    }
+
     public Timetable createTimetable(TreeTableView<UnallocatedTaskTableItem> unallocatedTaskTable, StackPane rootStackPane, Parent editTaskDialogBody) {
         TimetableTaskEditDialogData dialogData = new ManagerTaskEditDialogData(editTaskDialogBody, rootStackPane);
 
@@ -62,9 +73,21 @@ public class TimetableManager {
         datasource.saveUnallocated(unallocatedTasks);
     }
 
+    public void saveAllocated(Long leaderId, Set<AllocatedTask> allocatedTasks) {
+        datasource.saveAllocated(leaderId, allocatedTasks);
+    }
+
     public List<GroupData> getAllGroups() {
         return datasource.getGroups();
     }
+
+    public Timetable createServicemanTimetable(StackPane rootStackPane, Parent editTaskDialog) {
+        TimetableTaskEditDialogData dialogData = new ManagerTaskEditDialogData(editTaskDialog, rootStackPane);
+
+        return new ServicemanTimetable(dialogData, new MockPrinter());
+    }
+
+
 
     private class MockPrinter implements AllocatedTaskRaportPrinter {
 

@@ -95,7 +95,15 @@ public class PanelLayoutController {
 
     @FXML
     public void navigateToTimetable(ActionEvent event) throws IOException {
-        viewManager.loadComponent(ViewComponent.TIMETABLE);
+        final String roleManager = Roles.ROLE_MANAGER.toString();
+        final String roleServiceman = Roles.ROLE_SERVICEMAN.toString();
+        String actualRole = SecurityContext.getLoggedUser().role.getRole();
+
+        if (roleManager.equals(actualRole))
+            viewManager.loadComponent(ViewComponent.TIMETABLE);
+        else if (roleServiceman.equals(actualRole))
+            viewManager.loadComponent(ViewComponent.SERVICEMAN_TIMETABLE);
+
     }
 
     @FXML
