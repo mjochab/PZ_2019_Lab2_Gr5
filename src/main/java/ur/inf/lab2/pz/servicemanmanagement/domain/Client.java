@@ -33,7 +33,7 @@ public class Client extends RecursiveTreeObject<Client> {
 
     private String city;
 
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Task> tasks = new ArrayList<>();
 
     public Client() {
