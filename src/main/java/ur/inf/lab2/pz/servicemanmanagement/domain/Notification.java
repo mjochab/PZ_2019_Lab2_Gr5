@@ -29,6 +29,8 @@ public class Notification {
     @JoinColumn(name = "user_id")
     private User user;
 
+    public Notification() {}
+
 
     public Long getId() {
         return id;

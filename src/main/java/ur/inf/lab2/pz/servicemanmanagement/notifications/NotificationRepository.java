@@ -8,7 +8,8 @@ import java.util.List;
 
 public interface NotificationRepository extends PagingAndSortingRepository<Notification, Long> {
 
-    List<Notification> findAllByUserIdOrderByCreationDateDesc(long id, Pageable pageable);
+    //List<Notification> findAllByUserIdOrderByCreationDateDesc(long id, Pageable pageable);
 
+    List<Notification> findAllByUserIdOrderByCreationDateDesc(long id);
     void deleteByIdIn(List<Long> ids);
 }
