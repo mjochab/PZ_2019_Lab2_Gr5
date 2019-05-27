@@ -125,7 +125,7 @@
          <children>
             <ScrollPane prefHeight="645.0" prefWidth="278.0">
                <content>
-                  <VBox fx:id="vboxnotifications" alignment="TOP_CENTER" disable="true" prefHeight="645.0" prefWidth="260.0" spacing="10.0" styleClass="bg-light-primary" stylesheets="@../../styles/styles.css">
+                  <VBox fx:id="vboxnotifications" alignment="TOP_CENTER" disable="true" prefHeight="645.0" prefWidth="260.0" spacing="15.0" styleClass="bg-light-primary" stylesheets="@../../styles/styles.css">
                      <padding>
                         <Insets top="10.0" />
                      </padding>

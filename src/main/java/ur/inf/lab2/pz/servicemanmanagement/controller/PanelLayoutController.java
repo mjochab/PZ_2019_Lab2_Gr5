@@ -83,7 +83,6 @@ public class PanelLayoutController {
                     vBoxNotification.setBackground(new Background(new BackgroundFill(Color.ROYALBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
                     vBoxNotification.setPadding(new Insets(10, 10, 10,10));
                     vBoxNotification.setSpacing(6);
-                    vboxnotifications.setId("vbox" + i);
 
                     Text dateAndTime = new Text("27-06-2019 ; 20:00");
                     dateAndTime.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD,12));
@@ -107,20 +106,15 @@ public class PanelLayoutController {
                             "    -fx-background-radius: 30;\n" +
                             "    -fx-background-insets: 0;\n" +
                             "    -fx-text-fill: white;");
-                   // buttonDeleteNotification.setBackground(new Background(new BackgroundFill(Color.rgb(255,0,0), CornerRadii.EMPTY, Insets.EMPTY)));
 
 
-                    Label label = new Label("27-06-2019 ; 20:00 ");
-                    label.setMinWidth(230);
-                    label.setMinHeight(20);
-                    label.setMaxWidth(230);
-                    label.setBackground(new Background(new BackgroundFill(Color.rgb(0,0,255), CornerRadii.EMPTY, Insets.EMPTY)));
-                    label.setTextFill(Color.rgb(0,0,0));
-                    label.setFont(Font.font("Verdana", FontWeight.BOLD,12));
-                    label.setPadding(new Insets(0, 5, 0, 50));
+                    VBox notificationAndButtonComponent = new VBox();
+                    notificationAndButtonComponent.setSpacing(5);
+                    notificationAndButtonComponent.setAlignment(Pos.TOP_CENTER);
+                    notificationAndButtonComponent.setId("vbox" + i);
+                    notificationAndButtonComponent.getChildren().addAll(vBoxNotification, buttonDeleteNotification);
 
-
-                    vboxnotifications.getChildren().addAll(vBoxNotification, buttonDeleteNotification);
+                    vboxnotifications.getChildren().addAll(notificationAndButtonComponent);
 
                 }
 
