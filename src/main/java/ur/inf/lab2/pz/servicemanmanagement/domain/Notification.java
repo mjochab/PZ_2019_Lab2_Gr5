@@ -77,4 +77,10 @@ public class Notification {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public Notification(String title, String description, User user) {
+        this.title = title;
+        this.description = description;
+        this.user = user;
+    }
 }
