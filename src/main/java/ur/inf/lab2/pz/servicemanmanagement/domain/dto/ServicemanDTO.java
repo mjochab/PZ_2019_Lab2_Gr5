@@ -7,6 +7,8 @@ public class ServicemanDTO extends RecursiveTreeObject<ServicemanDTO> {
     private String email;
     private String enabled;
     private String groupName;
+    private String firstName;
+    private String lastName;
 
     public String getEmail() {
         return email;
@@ -30,5 +32,21 @@ public class ServicemanDTO extends RecursiveTreeObject<ServicemanDTO> {
 
     public void setGroupName(String groupName) {
         this.groupName = groupName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 }
