@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXScrollPane?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import java.lang.String?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ur.inf.lab2.pz.servicemanmanagement.controller.PanelLayoutController">
@@ -121,44 +121,17 @@
          </children>
       </AnchorPane>
       <AnchorPane fx:id="placeForComponent" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: gray;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="75.0" />
-      <AnchorPane fx:id="drawer" layoutX="10.0" layoutY="10.0" prefWidth="250.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="-250.0" AnchorPane.topAnchor="75.0">
+      <AnchorPane fx:id="drawer" layoutX="1300.0" layoutY="75.0" prefHeight="645.0" prefWidth="260.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="-298.0" AnchorPane.topAnchor="75.0">
          <children>
-            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="645.0" prefWidth="250.0" stylesheets="@../../styles/styles.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <AnchorPane prefHeight="645.0" prefWidth="250.0" styleClass="bg-light-primary" stylesheets="@../../styles/styles.css">
-                     <children>
-                        <JFXScrollPane maxHeight="900.0" maxWidth="250.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="667.0" prefWidth="250.0" styleClass="bg-light-primary" stylesheets="@../../styles/styles.css">
-                           <children>
-                              <AnchorPane maxHeight="900.0" maxWidth="1.7976931348623157E308" prefHeight="645.0" prefWidth="250.0" styleClass="bg-light-primary" stylesheets="@../../styles/styles.css">
-                                 <children>
-                                    <Rectangle fx:id="notification" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="10.0" layoutY="35.0" stroke="BLACK" strokeType="INSIDE" width="230.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="35.0" />
-                                    <Label layoutX="15.0" layoutY="39.0" maxHeight="42.0" maxWidth="220.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="220.0" text="Grupa pierwsza zakonczyla zadanie" />
-                                    <Rectangle fx:id="notification1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="10.0" layoutY="93.0" stroke="BLACK" strokeType="INSIDE" width="230.0" />
-                                    <Label layoutX="15.0" layoutY="97.0" maxHeight="42.0" maxWidth="220.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="220.0" text="UFO wyladowalo" />
-                                    <Rectangle fx:id="notification2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="10.0" layoutY="150.0" stroke="BLACK" strokeType="INSIDE" width="230.0" />
-                                    <Label layoutX="15.0" layoutY="154.0" maxHeight="42.0" maxWidth="220.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="220.0" text="Wypelnic PIT" />
-                                    <Rectangle fx:id="notification3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="10.0" layoutY="323.0" stroke="BLACK" strokeType="INSIDE" width="230.0" />
-                                    <Label layoutX="15.0" layoutY="327.0" maxHeight="42.0" maxWidth="220.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="220.0" text="Error 404" />
-                                    <Rectangle fx:id="notification11" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="10.0" layoutY="264.0" stroke="BLACK" strokeType="INSIDE" width="230.0" />
-                                    <Label layoutX="15.0" layoutY="268.0" maxHeight="42.0" maxWidth="220.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="220.0" text="Kierownik Nowak awansowal" />
-                                    <Rectangle fx:id="notification21" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="10.0" layoutY="208.0" stroke="BLACK" strokeType="INSIDE" width="230.0" />
-                                    <Label layoutX="15.0" layoutY="212.0" maxHeight="42.0" maxWidth="220.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="220.0" text="Seriviceman zakonczyl prace" />
-                                    <Rectangle fx:id="notification31" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="10.0" layoutY="381.0" stroke="BLACK" strokeType="INSIDE" width="230.0" />
-                                    <Label layoutX="15.0" layoutY="385.0" maxHeight="42.0" maxWidth="220.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="220.0" text="Choc na szluga" />
-                                    <Rectangle fx:id="notification111" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="10.0" layoutY="439.0" stroke="BLACK" strokeType="INSIDE" width="230.0" />
-                                    <Label layoutX="15.0" layoutY="443.0" maxHeight="42.0" maxWidth="220.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="220.0" text="Konfederacja wygrywa wybory" />
-                                    <Rectangle fx:id="notification211" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="10.0" layoutY="497.0" stroke="BLACK" strokeType="INSIDE" width="230.0" />
-                                    <Label layoutX="15.0" layoutY="501.0" maxHeight="42.0" maxWidth="220.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="220.0" text="Seriviceman zakonczyl prace" />
-                                    <Rectangle fx:id="notification1111" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="10.0" layoutY="555.0" stroke="BLACK" strokeType="INSIDE" width="230.0" />
-                                    <Label layoutX="15.0" layoutY="559.0" maxHeight="42.0" maxWidth="220.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="220.0" text="Konfederacja wygrywa wybory" />
-                                 </children>
-                              </AnchorPane>
-                           </children>
-                        </JFXScrollPane>
-                     </children>
-                  </AnchorPane>
-               </children>
-            </VBox>
+            <ScrollPane prefHeight="645.0" prefWidth="278.0">
+               <content>
+                  <VBox fx:id="vboxnotifications" alignment="TOP_CENTER" disable="true" prefHeight="645.0" prefWidth="260.0" spacing="10.0" styleClass="bg-light-primary" stylesheets="@../../styles/styles.css">
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                  </VBox>
+               </content>
+            </ScrollPane>
          </children>
       </AnchorPane>
    </children>

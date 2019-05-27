@@ -33,3 +33,7 @@
 .bg-divider {
     -fx-background-color: #BDBDBD;
 }
+
+.scrollpane {
+    -fx-background-color: #B3E5FC;
+}

@@ -1,13 +1,19 @@
 package ur.inf.lab2.pz.servicemanmanagement.controller;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXScrollPane;
 import javafx.animation.TranslateTransition;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.*;
 import javafx.util.Duration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,6 +49,8 @@ public class PanelLayoutController {
     private JFXButton timetableButton;
     @FXML
     private JFXButton employeeButton;
+    @FXML
+    private VBox vboxnotifications;
 
 
     @FXML
@@ -69,7 +77,49 @@ public class PanelLayoutController {
         notificationsButton.setOnAction(evt -> {
             if (drawer.getTranslateX() != 0) {
                 openNav.play();
-                drawer.getChildren().add(new Rectangle());
+
+                for(int i = 0; i<15; i++) {
+
+                    VBox vBoxNotification = new VBox();
+                    vBoxNotification.setMinWidth(230);
+                    vBoxNotification.setMaxWidth(230);
+                    vBoxNotification.setBackground(new Background(new BackgroundFill(Color.ROYALBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+                    vBoxNotification.setPadding(new Insets(10, 10, 10,10));
+                    vBoxNotification.setSpacing(6);
+
+                    Text dateAndTime = new Text("27-06-2019 ; 20:00");
+                    dateAndTime.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD,12));
+                    FlowPane flowPane1 = new FlowPane();
+                    flowPane1.setAlignment(Pos.TOP_CENTER);
+                    flowPane1.setMinHeight(12);
+                    flowPane1.getChildren().addAll(dateAndTime);
+
+
+                    Text notificationTitle = new Text("Tytuł powiadomienia");
+                    notificationTitle.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD,12));
+                    TextFlow textFlowTitle = new TextFlow(notificationTitle);
+
+
+                    Text notificationsDescription = new Text("Opis powiadomienia, bardzo fajnego powiadomienia w luuuuuuuuuuuuuuuuuuuj takze tego no komuś kopara opadnie ");
+                    TextFlow textFlowDescription = new TextFlow(notificationsDescription);
+
+                    vBoxNotification.getChildren().addAll(flowPane1, textFlowTitle, textFlowDescription);
+
+
+                    Label label = new Label("27-06-2019 ; 20:00 ");
+                    label.setMinWidth(230);
+                    label.setMinHeight(20);
+                    label.setMaxWidth(230);
+                    label.setBackground(new Background(new BackgroundFill(Color.rgb(0,0,255), CornerRadii.EMPTY, Insets.EMPTY)));
+                    label.setTextFill(Color.rgb(0,0,0));
+                    label.setFont(Font.font("Verdana", FontWeight.BOLD,12));
+                    label.setPadding(new Insets(0, 5, 0, 50));
+
+
+                    vboxnotifications.getChildren().addAll(vBoxNotification);
+
+                }
+
             } else {
                 closeNav.setToX(-(drawer.getWidth()));
                 closeNav.play();
