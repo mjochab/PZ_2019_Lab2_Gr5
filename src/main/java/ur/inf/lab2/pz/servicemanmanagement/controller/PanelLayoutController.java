@@ -116,6 +116,8 @@ public class PanelLayoutController {
                     vboxnotifications.getChildren().addAll(vBoxNotification);
 
                 }
+                Label lastLabel = new Label();
+                vboxnotifications.getChildren().add(lastLabel);
 
             } else {
                 closeNav.setToX(-(drawer.getWidth()));
