@@ -114,7 +114,7 @@ class TaskConverter {
     }
 
     public String createTagId(Long id, String tag) {
-        return tag.substring(0, 1) + id;
+        return (tag.substring(0, 1) + id).toUpperCase();
     }
 
     public Long convertTagIdToEntityId(String tagId, String tag) {

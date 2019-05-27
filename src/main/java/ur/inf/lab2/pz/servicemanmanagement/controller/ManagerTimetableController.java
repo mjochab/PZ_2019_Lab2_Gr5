@@ -37,7 +37,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Controller
-public class TimetableController implements Initializable {
+public class ManagerTimetableController implements Initializable {
 
 //    ObservableList<AllocatedTask> tasks;
     @Autowired

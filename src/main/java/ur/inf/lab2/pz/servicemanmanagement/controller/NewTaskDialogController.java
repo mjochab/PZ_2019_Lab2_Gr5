@@ -28,7 +28,7 @@ import java.util.ResourceBundle;
 public class NewTaskDialogController implements Initializable {
 
     @Autowired
-    TimetableController timetableController;
+    ManagerTimetableController timetableController;
     ObservableList<Client> clients;
     @Autowired
     private ViewManager viewManager;
