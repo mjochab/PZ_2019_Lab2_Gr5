@@ -20,12 +20,21 @@ public class NotificationService {
     @Autowired
     private AllUsersRepository allUsersRepository;
 
-    public List<Notification> getUserNotifications(long id, int page) {
 
-        List<Notification> notifications = notificationRepository.findAllByUserIdOrderByCreationDateDesc(id, PageRequest.of(page, 10));
+    public List<Notification> getUserNotifications(long id) {
+
+        List<Notification> notifications = notificationRepository.findAllByUserIdOrderByCreationDateDesc(id);
 
         return notifications;
     }
+
+
+//    public List<Notification> getUserNotifications(long id, int page) {
+//
+//        List<Notification> notifications = notificationRepository.findAllByUserIdOrderByCreationDateDesc(id, PageRequest.of(page, 10));
+//
+//        return notifications;
+//    }
 
 //    public void addNotification(Notification notification, Long userId) throws IOException {
 //

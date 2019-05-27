@@ -2,10 +2,7 @@ package ur.inf.lab2.pz.servicemanmanagement.controller;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.animation.TranslateTransition;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -17,20 +14,28 @@ import javafx.scene.text.*;
 import javafx.util.Duration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import ur.inf.lab2.pz.servicemanmanagement.domain.Notification;
 import ur.inf.lab2.pz.servicemanmanagement.domain.SecurityContext;
 import ur.inf.lab2.pz.servicemanmanagement.domain.enums.Roles;
+import ur.inf.lab2.pz.servicemanmanagement.notifications.NotificationService;
 import ur.inf.lab2.pz.servicemanmanagement.service.MockSecurityContext;
 import ur.inf.lab2.pz.servicemanmanagement.view.Layout;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewComponent;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewManager;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Controller
 public class PanelLayoutController {
 
     @Autowired
     private ViewManager viewManager;
+
+    @Autowired
+    private NotificationService notificationService;
 
     @FXML
     private Button notificationsButton;
@@ -78,8 +83,12 @@ public class PanelLayoutController {
             if (drawer.getTranslateX() != 0) {
                 openNav.play();
 
-                for(int i = 0; i<10; i++) {
 
+                List<Notification> notifications =
+                        notificationService.getUserNotifications(
+                                SecurityContext.getLoggedUser().getId());
+
+                notifications.forEach((notification) -> {
                     VBox vBoxNotification = new VBox();
                     vBoxNotification.setMinWidth(230);
                     vBoxNotification.setMaxWidth(230);
@@ -87,20 +96,21 @@ public class PanelLayoutController {
                     vBoxNotification.setPadding(new Insets(10, 10, 10,10));
                     vBoxNotification.setSpacing(6);
 
-                    Text dateAndTime = new Text("27-06-2019 ; 20:00");
+
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+
+                    Text dateAndTime = new Text(notification.getCreationDate().format(formatter));
                     dateAndTime.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD,12));
                     FlowPane flowPane1 = new FlowPane();
                     flowPane1.setAlignment(Pos.TOP_CENTER);
                     flowPane1.setMinHeight(12);
                     flowPane1.getChildren().addAll(dateAndTime);
 
-
-                    Text notificationTitle = new Text("Tytuł powiadomienia");
+                    Text notificationTitle = new Text(notification.getTitle());
                     notificationTitle.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD,12));
                     TextFlow textFlowTitle = new TextFlow(notificationTitle);
 
-
-                    Text notificationsDescription = new Text("Opis powiadomienia, bardzo fajnego powiadomienia w luuuuuuuuuuuuuuuuuuuj takze tego no komuś kopara opadnie ");
+                    Text notificationsDescription = new Text(notification.getDescription());
                     TextFlow textFlowDescription = new TextFlow(notificationsDescription);
 
                     vBoxNotification.getChildren().addAll(flowPane1, textFlowTitle, textFlowDescription);
@@ -112,25 +122,21 @@ public class PanelLayoutController {
 
 
 
+
                     VBox notificationAndButtonComponent = new VBox();
                     notificationAndButtonComponent.setSpacing(5);
                     notificationAndButtonComponent.setAlignment(Pos.TOP_CENTER);
-
-
-
-
-
-
-
-
-
-
-
+                    notificationAndButtonComponent.setId(String.valueOf(notification.getId()));
                     notificationAndButtonComponent.getChildren().addAll(vBoxNotification, buttonDeleteNotification);
 
-                    vboxnotifications.getChildren().addAll(notificationAndButtonComponent);
 
-                }
+                    buttonDeleteNotification.setOnAction(deleteClickedEvent -> {
+                            notificationAndButtonComponent.setVisible(false);
+                       // vboxnotifications.getChildren().remove(notificationAndButtonComponent);
+                    });
+
+                    vboxnotifications.getChildren().addAll(notificationAndButtonComponent);
+                });
 
                 Label end = new Label();
 
@@ -142,8 +148,6 @@ public class PanelLayoutController {
             }
         });
     }
-
-
 
     @FXML
     public void navigateToDashboard(ActionEvent event) throws IOException {
