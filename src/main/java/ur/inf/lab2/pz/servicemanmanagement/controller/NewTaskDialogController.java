@@ -28,7 +28,7 @@ import java.util.ResourceBundle;
 public class NewTaskDialogController implements Initializable {
 
     @Autowired
-    TimetableController timetableController;
+    ManagerTimetableController timetableController;
     ObservableList<Client> clients;
     @Autowired
     private ViewManager viewManager;
@@ -73,7 +73,7 @@ public class NewTaskDialogController implements Initializable {
         taskService.saveNewTask(newTaskDTO);
         Stage stage = (Stage) saveButton.getScene().getWindow();
         stage.close();
-        timetableController.loadTable();
+        timetableController.fetchUnallocatedTasksToTable();
     }
 
     public void loadTable() {
