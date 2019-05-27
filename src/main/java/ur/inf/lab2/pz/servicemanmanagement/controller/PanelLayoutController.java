@@ -81,7 +81,9 @@ public class PanelLayoutController {
         TranslateTransition closeNav = new TranslateTransition(new Duration(150), drawer);
         notificationsButton.setOnAction(evt -> {
             if (drawer.getTranslateX() != 0) {
+                vboxnotifications.getChildren().clear();
                 openNav.play();
+
 
 
                 List<Notification> notifications =
@@ -137,6 +139,8 @@ public class PanelLayoutController {
             } else {
                 closeNav.setToX(-(drawer.getWidth()));
                 closeNav.play();
+
+
             }
         });
     }
