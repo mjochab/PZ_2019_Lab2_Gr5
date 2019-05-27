@@ -12,14 +12,11 @@ CREATE TABLE `client` (
 
 CREATE TABLE `task` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `author_id` int(11) NOT NULL,
-  `team_leader_id` int(11) DEFAULT NULL,
-  `title` varchar(255) NOT NULL,
-  `details` varchar(255) DEFAULT NULL,
+  `leader_id` int(11) DEFAULT NULL,
+  `tag` varchar(255) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
   `client_id` bigint NOT NULL,
-  `status` varchar (255) DEFAULT NULL,
-  `creation_date` DATETIME NOT NULL,
-  `visit_date` DATETIME DEFAULT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`client_id`) references `client`(`id`) on delete no action on update cascade
+  FOREIGN KEY (`client_id`) references `client`(`id`) on delete no action on update cascade,
+  FOREIGN KEY (`leader_id`) references `user`(`id`) on delete no action on update cascade
 );
