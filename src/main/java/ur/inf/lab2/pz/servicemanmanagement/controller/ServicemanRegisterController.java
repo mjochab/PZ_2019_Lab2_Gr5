@@ -15,5 +15,5 @@ public class ServicemanRegisterController {
 
     public void register() throws IOException {
 
-        viewManager.switchLayout(Layout.PANEL, ViewComponent.TIMETABLE); }
+        viewManager.switchLayout(Layout.PANEL, ViewComponent.SERVICEMAN_TIMETABLE); }
 }
