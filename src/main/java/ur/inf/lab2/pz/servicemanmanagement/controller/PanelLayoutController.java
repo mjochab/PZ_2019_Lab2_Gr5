@@ -22,7 +22,9 @@ import ur.inf.lab2.pz.servicemanmanagement.view.ViewManager;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
+/**
+ * klasa kontrolera głównego layoutu aplikacji
+ */
 @Controller
 public class PanelLayoutController {
 

@@ -5,6 +5,10 @@ import ur.inf.lab2.pz.servicemanmanagement.timetable.task.TaskState;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+/**
+ * Encja reprezentująca zadanie które menadżer przyedziela je swoim serwisantom
+ */
+
 @Entity
 public class Task {
 

@@ -13,6 +13,9 @@ import ur.inf.lab2.pz.servicemanmanagement.services.ServicemanFirstLoginService;
 
 import java.io.IOException;
 
+/**
+ * klasa kontrolera panelu pierwszego logowania nowego serwisanta
+ */
 @Controller
 public class ServicemanFirstLoginController {
 

@@ -3,6 +3,10 @@ package ur.inf.lab2.pz.servicemanmanagement.domain;
 
 import javax.persistence.*;
 
+/**
+ * Encja reprezentująca Użytkownika systemu
+ */
+
 @Entity
 @Table(name = "user")
 @Inheritance

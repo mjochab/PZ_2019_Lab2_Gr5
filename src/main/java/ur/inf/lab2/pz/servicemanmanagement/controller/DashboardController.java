@@ -16,7 +16,9 @@ import ur.inf.lab2.pz.servicemanmanagement.services.UserService;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewManager;
 
 import java.io.IOException;
-
+/**
+ * klasa kontrolera głównego dashboardu
+ */
 @Controller
 public class DashboardController {
 

@@ -2,6 +2,9 @@ package ur.inf.lab2.pz.servicemanmanagement.domain.dto;
 
 import java.time.LocalDateTime;
 
+/**
+ * Klasa data transfer object używana do przesyłania statusu wykonywanego zadania używana w ManagerDashboardController
+ */
 public class TaskStatusDTO {
 
 
