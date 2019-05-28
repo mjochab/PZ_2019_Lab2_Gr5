@@ -1,8 +1,10 @@
 package ur.inf.lab2.pz.servicemanmanagement.timetable;
 
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import ur.inf.lab2.pz.servicemanmanagement.timetable.task.ClientData;
+import ur.inf.lab2.pz.servicemanmanagement.timetable.task.TaskState;
 
 import java.time.LocalDateTime;
 
@@ -60,4 +62,8 @@ public interface TimetableTaskEditDialogData {
     void disableSaveNode();
 
     void clean();
+
+    TaskState getState();
+
+    Button getStateButton();
 }

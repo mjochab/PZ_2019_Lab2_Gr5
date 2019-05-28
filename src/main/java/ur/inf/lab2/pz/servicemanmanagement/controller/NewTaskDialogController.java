@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ur.inf.lab2.pz.servicemanmanagement.domain.Client;
+import ur.inf.lab2.pz.servicemanmanagement.domain.Task;
 import ur.inf.lab2.pz.servicemanmanagement.domain.dto.NewTaskDTO;
 import ur.inf.lab2.pz.servicemanmanagement.repository.ClientRepository;
 import ur.inf.lab2.pz.servicemanmanagement.services.TaskService;
@@ -70,10 +71,10 @@ public class NewTaskDialogController implements Initializable {
         TreeItem<Client> client = tableView.getSelectionModel().getSelectedItem();
         NewTaskDTO newTaskDTO = new NewTaskDTO(titleTextField.getText(), detailsTextArea.getText(), client.getValue());
 
-        taskService.saveNewTask(newTaskDTO);
+        Task newTask = taskService.saveNewTask(newTaskDTO);
         Stage stage = (Stage) saveButton.getScene().getWindow();
         stage.close();
-        timetableController.fetchUnallocatedTasksToTable();
+        timetableController.onNewTask(newTask); //todo add task a nie odswiez tabele
     }
 
     public void loadTable() {

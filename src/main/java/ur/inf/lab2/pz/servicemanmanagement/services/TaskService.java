@@ -12,14 +12,14 @@ public class TaskService {
     @Autowired
     private TaskRepository taskRepository;
 
-    public void saveNewTask(NewTaskDTO newTaskDTO) {
+    public Task saveNewTask(NewTaskDTO newTaskDTO) {
         Task newTask = new Task(
                 newTaskDTO.getTitle(),
                 newTaskDTO.getDetails(),
                 newTaskDTO.getClient()
         );
 
-        taskRepository.save(newTask);
+        return taskRepository.save(newTask);
     }
 
 }
