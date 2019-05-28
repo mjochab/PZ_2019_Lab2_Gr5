@@ -156,6 +156,6 @@ public class PanelLayoutController {
     }
 
     public void newName(String x, String y) {
-
+        fullNameLabel.setText(x + " " + y);
     }
 }
