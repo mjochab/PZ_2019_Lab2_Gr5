@@ -5,12 +5,13 @@ import org.springframework.stereotype.Service;
 import ur.inf.lab2.pz.servicemanmanagement.domain.SecurityContext;
 import ur.inf.lab2.pz.servicemanmanagement.domain.User;
 import ur.inf.lab2.pz.servicemanmanagement.domain.dto.ServicemanDataDTO;
+import ur.inf.lab2.pz.servicemanmanagement.repository.AllUsersRepository;
 import ur.inf.lab2.pz.servicemanmanagement.repository.UserRepository;
 
 @Service
 public class ServicemanDataService {
     @Autowired
-    private UserRepository userRepository;
+    private AllUsersRepository userRepository;
 
     @Autowired
     private EncryptionService encryptionService;

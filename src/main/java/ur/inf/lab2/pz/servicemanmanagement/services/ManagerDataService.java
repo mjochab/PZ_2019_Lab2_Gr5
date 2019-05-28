@@ -11,6 +11,7 @@ import ur.inf.lab2.pz.servicemanmanagement.domain.dto.ManagerDataDTO;
 import ur.inf.lab2.pz.servicemanmanagement.domain.dto.ManagerRegisterDTO;
 import ur.inf.lab2.pz.servicemanmanagement.domain.dto.ServicemanFirstLoginDTO;
 import ur.inf.lab2.pz.servicemanmanagement.domain.enums.Roles;
+import ur.inf.lab2.pz.servicemanmanagement.repository.AllUsersRepository;
 import ur.inf.lab2.pz.servicemanmanagement.repository.RoleRepository;
 import ur.inf.lab2.pz.servicemanmanagement.repository.UserRepository;
 import ur.inf.lab2.pz.servicemanmanagement.view.Layout;
@@ -21,7 +22,7 @@ import ur.inf.lab2.pz.servicemanmanagement.domain.User;
 @Service
 public class ManagerDataService {
     @Autowired
-    private UserRepository userRepository;
+    private AllUsersRepository userRepository;
 
     @Autowired
     private EncryptionService encryptionService;
