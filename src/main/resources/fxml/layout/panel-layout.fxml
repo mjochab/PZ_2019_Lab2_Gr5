@@ -8,16 +8,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ur.inf.lab2.pz.servicemanmanagement.controller.PanelLayoutController">
+<AnchorPane style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ur.inf.lab2.pz.servicemanmanagement.controller.PanelLayoutController">
    <children>
       <AnchorPane prefHeight="75.0" prefWidth="200.0" styleClass="bg-dark-primary" stylesheets="@../../styles/styles.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label accessibleRole="PARENT" layoutX="1204.0" layoutY="30.0" styleClass="text-icons" stylesheets="@../../styles/styles.css" text="11:21" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
+            <Label fx:id="timeLabel" accessibleRole="PARENT" layoutX="1204.0" layoutY="30.0" styleClass="text-icons" stylesheets="@../../styles/styles.css" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
                <font>
                   <Font name="Noto Sans CJK TC Medium" size="24.0" />
                </font>
             </Label>
-            <JFXButton fx:id="notificationsButton" accessibleRole="PARENT" buttonType="RAISED" layoutX="1011.0" layoutY="20.0" mnemonicParsing="false" onAction="#drawerAction" prefHeight="36.0" prefWidth="151.0" stylesheets="@../../styles/styles.css" text="Powiadomienia" textFill="#4b5364" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="15.0">
+            <JFXButton fx:id="notificationsButton" accessibleRole="PARENT" buttonType="RAISED" layoutX="975.0" layoutY="18.0" mnemonicParsing="false" onAction="#drawerAction" prefHeight="36.0" prefWidth="151.0" stylesheets="@../../styles/styles.css" text="Powiadomienia" textFill="#4b5364" AnchorPane.rightAnchor="154.0" AnchorPane.topAnchor="18.0">
                <graphic>
                   <FontAwesomeIconView fill="WHITE" glyphName="BELL_ALT" size="20" />
                </graphic>
@@ -28,12 +28,12 @@
                   <String fx:value="text-icons" />
                   <String fx:value="bg-primary" />
                </styleClass></JFXButton>
-            <Label accessibleRole="PARENT" layoutX="1162.0" layoutY="10.0" prefHeight="26.0" prefWidth="78.0" styleClass="text-icons" stylesheets="@../../styles/styles.css" text="06.04.2019" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+            <Label fx:id="dateLabel" accessibleRole="PARENT" layoutX="1200.0" layoutY="11.0" prefHeight="26.0" prefWidth="80.0" styleClass="text-icons" stylesheets="@../../styles/styles.css" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="11.0">
                <font>
                   <Font name="Noto Sans CJK TC Light" size="16.0" />
                </font>
             </Label>
-            <FontAwesomeIconView accessibleRole="PARENT" fill="WHITE" glyphName="CALENDAR" layoutX="1178.0" layoutY="50.0" size="20" text="" wrappingWidth="12.0" AnchorPane.bottomAnchor="19.0" AnchorPane.rightAnchor="80.0" />
+            <FontAwesomeIconView accessibleRole="PARENT" fill="WHITE" glyphName="CALENDAR" layoutX="1136.0" layoutY="42.0" size="20" text="" wrappingWidth="12.0" AnchorPane.bottomAnchor="29.75223159790039" AnchorPane.rightAnchor="132.0" />
             <AnchorPane layoutX="5.0" layoutY="7.0" prefHeight="43.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="0.0">
                <children>
                   <Label fx:id="roleLabel" accessibleRole="PARENT" styleClass="text-icons" stylesheets="@../../styles/styles.css" text="Kierownik" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
@@ -61,6 +61,11 @@
                   <String fx:value="bg-primary" />
                </styleClass>
             </JFXButton>
+            <Label fx:id="groupNameLabel" layoutX="622.0" layoutY="26.0" text="asd" textFill="WHITE" AnchorPane.leftAnchor="622.0" AnchorPane.rightAnchor="622.0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="sideNavContainer" layoutX="10.0" layoutY="77.0" prefHeight="200.0" prefWidth="200.0" styleClass="bg-dark-primary" stylesheets="@../../styles/styles.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="75.0">

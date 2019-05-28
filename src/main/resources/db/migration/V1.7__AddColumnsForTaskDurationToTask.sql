@@ -1,0 +1,9 @@
+ALTER TABLE `task`
+    ADD COLUMN `date_time_from` DATETIME DEFAULT NULL;
+
+ALTER TABLE `task`
+    ADD COLUMN `date_time_to` DATETIME DEFAULT NULL;
+
+ALTER TABLE `task`
+    ADD COLUMN `state` VARCHAR(32) DEFAULT NULL;
+

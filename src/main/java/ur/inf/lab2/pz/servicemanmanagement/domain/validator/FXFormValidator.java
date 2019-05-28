@@ -1,6 +1,7 @@
 package ur.inf.lab2.pz.servicemanmanagement.domain.validator;
 
 import javafx.scene.text.Text;
+import org.thymeleaf.util.NumberUtils;
 import org.thymeleaf.util.Validate;
 import ur.inf.lab2.pz.servicemanmanagement.utils.StringUtils;
 
@@ -46,6 +47,18 @@ public class FXFormValidator {
                 hasErrors = true;
             }
         }
+
+     public void  isNumber(String number, Text errorLabel){
+
+                try{
+                    Integer.parseInt(number);
+                }
+                catch (Exception E){
+                    errorLabel.setText(ValidateMessage.INCORRECT_NUMBER_FORMAT);
+                    errorLabel.setVisible(true);
+                    hasErrors = true;
+                }
+     }
     }
 
 

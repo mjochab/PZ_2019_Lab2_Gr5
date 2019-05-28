@@ -24,6 +24,10 @@ dependencies {
 	compile 'com.jfoenix:jfoenix:8.0.8'
 	compile group: 'de.jensd', name: 'fontawesomefx', version: '8.9'
 
+	//JasperReports
+	compile group: 'net.sf.jasperreports', name: 'jasperreports', version: '6.8.0'
+	compile group: 'com.lowagie', name: 'itext', version: '2.1.7'
+	
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.1.4.RELEASE'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
@@ -44,6 +48,8 @@ dependencies {
 
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '1.2.0.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '2.1.4.RELEASE'
+	compile group: 'org.jfxtras', name: 'jfxtras-agenda', version: '8.0-r6'
+
 }
 
 test {

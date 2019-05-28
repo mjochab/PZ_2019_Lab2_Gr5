@@ -3,299 +3,102 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ur.inf.lab2.pz.servicemanmanagement.controller.TimetableController">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ur.inf.lab2.pz.servicemanmanagement.controller.ManagerTimetableController">
    <children>
-      <JFXComboBox layoutX="29.0" layoutY="44.0" prefHeight="40.0" prefWidth="211.0" promptText="Wybierz grupę serwisantów" AnchorPane.leftAnchor="29.0" />
-      <Label layoutX="278.0" layoutY="14.0" text="Nieprzydzielone zadania" />
-      <JFXButton fx:id="NewTaskButton" buttonType="RAISED" layoutX="673.0" layoutY="9.0" onAction="#openNewTaskDialog" prefHeight="25.0" prefWidth="121.0" style="-fx-background-color: #3a21f5;;" text="Nowe zadanie" textFill="WHITE" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="9.0" />
-      <GridPane layoutX="52.0" layoutY="169.0" prefHeight="505.0" prefWidth="722.0">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints maxHeight="20.0" minHeight="5.0" prefHeight="5.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="1.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="1.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="1.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="1.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="1.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="1.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="1.0" minHeight="10.0" prefHeight="1.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         </rowConstraints>
+      <AnchorPane fx:id="placeForTimetable" layoutX="25.0" layoutY="297.0" prefHeight="400.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="320.0" />
+      <JFXTreeTableView fx:id="tasksTableView" layoutX="381.0" layoutY="-116.0" prefHeight="184.0" prefWidth="1000.0" styleClass="global-font" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="45.0" />
+      <FlowPane alignment="CENTER_LEFT" layoutX="260.0" layoutY="14.0" prefHeight="45.0" prefWidth="1000.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Separator prefWidth="200.0" style="-fx-background-color: black;" GridPane.rowIndex="1" />
-            <Separator prefWidth="200.0" style="fx-background-color: black;" GridPane.rowIndex="3" />
-            <Separator prefWidth="200.0" GridPane.rowIndex="5" />
-            <Separator prefWidth="200.0" GridPane.rowIndex="7" />
-            <Separator prefWidth="200.0" GridPane.rowIndex="9" />
-            <Separator prefWidth="200.0" GridPane.rowIndex="11" />
-            <Separator prefWidth="200.0" GridPane.rowIndex="13" />
-            <GridPane>
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-               <children>
-                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="20.03.2019" />
-                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="21.03.2019" GridPane.columnIndex="1" />
-                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="22.03.2019" GridPane.columnIndex="2" />
-                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="23.03.2019" GridPane.columnIndex="3" />
-                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="24.03.2019" GridPane.columnIndex="4" />
-                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="25.03.2019" GridPane.columnIndex="5" />
-                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="26.03.2019" GridPane.columnIndex="6" />
-                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="27.03.2019" GridPane.columnIndex="7" />
-               </children>
-            </GridPane>
-            <GridPane GridPane.rowIndex="8">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-               <children>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: cce6ff;" GridPane.columnIndex="1">
-                     <children>
-                        <Label layoutX="13.0" layoutY="20.0" text="ZADANIE" />
-                     </children>
-                     <opaqueInsets>
-                        <Insets top="50.0" />
-                     </opaqueInsets>
-                  </Pane>
-               </children>
-            </GridPane>
-            <GridPane GridPane.rowIndex="2">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-               <children>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: cce6ff;">
-                     <opaqueInsets>
-                        <Insets top="50.0" />
-                     </opaqueInsets>
-                     <GridPane.margin>
-                        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
-                     </GridPane.margin>
-                     <children>
-                        <Label layoutX="13.0" layoutY="20.0" text="ZADANIE" />
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: cce6ff;" GridPane.columnIndex="2">
-                     <children>
-                        <Label layoutX="13.0" layoutY="20.0" text="ZADANIE" />
-                     </children>
-                     <opaqueInsets>
-                        <Insets top="50.0" />
-                     </opaqueInsets>
-                     <GridPane.margin>
-                        <Insets bottom="5.0" left="5.0" />
-                     </GridPane.margin>
-                  </Pane>
-               </children>
-            </GridPane>
-            <GridPane GridPane.rowIndex="4">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-               <children>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: cce6ff;">
-                     <children>
-                        <Label layoutX="13.0" layoutY="20.0" text="ZADANIE" />
-                     </children>
-                     <opaqueInsets>
-                        <Insets top="50.0" />
-                     </opaqueInsets>
-                  </Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: cce6ff;" GridPane.columnIndex="3">
-                     <children>
-                        <Label layoutX="13.0" layoutY="20.0" text="ZADANIE" />
-                     </children>
-                     <opaqueInsets>
-                        <Insets top="50.0" />
-                     </opaqueInsets>
-                  </Pane>
-               </children>
-            </GridPane>
-            <GridPane GridPane.rowIndex="6">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-               <children>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: cce6ff;" GridPane.columnIndex="6">
-                     <children>
-                        <Label layoutX="13.0" layoutY="20.0" text="ZADANIE" />
-                     </children>
-                     <opaqueInsets>
-                        <Insets top="50.0" />
-                     </opaqueInsets>
-                  </Pane>
-               </children>
-            </GridPane>
-            <GridPane GridPane.rowIndex="12">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-               <children>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: cce6ff;">
-                     <children>
-                        <Label layoutX="13.0" layoutY="20.0" text="ZADANIE" />
-                     </children>
-                     <opaqueInsets>
-                        <Insets top="50.0" />
-                     </opaqueInsets>
-                  </Pane>
-               </children>
-            </GridPane>
-            <GridPane GridPane.rowIndex="10">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-               <children>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: cce6ff;" GridPane.columnIndex="3">
-                     <children>
-                        <Label layoutX="13.0" layoutY="20.0" text="ZADANIE" />
-                     </children>
-                     <opaqueInsets>
-                        <Insets top="50.0" />
-                     </opaqueInsets>
-                  </Pane>
-               </children>
-            </GridPane>
-            <GridPane GridPane.rowIndex="14">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-            </GridPane>
+            <JFXButton fx:id="NewTaskButton" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" onAction="#openNewTaskDialog" prefHeight="21.0" prefWidth="25.0" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="global-font" />
+                  <String fx:value="bg-dark-primary" />
+               </styleClass>
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="18" />
+               </graphic>
+               <FlowPane.margin>
+                  <Insets />
+               </FlowPane.margin>
+            </JFXButton>
+            <Label styleClass="global-font" text="Nieprzydzielone zadania">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <FlowPane.margin>
+                  <Insets left="15.0" />
+               </FlowPane.margin>
+            </Label>
          </children>
-      </GridPane>
-      <Label layoutX="12.0" layoutY="184.0" text="7:00" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="184.0">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="12.0" layoutY="251.0" text="8:00">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="12.0" layoutY="321.0" text="9:00">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="6.0" layoutY="388.0" text="10:00">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="6.0" layoutY="457.0" text="11:00">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="6.0" layoutY="527.0" text="12:00">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="4.0" layoutY="594.0" text="13:00">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <JFXTreeTableView fx:id="tasksTableView" layoutX="381.0" layoutY="-116.0" prefHeight="282.0" prefWidth="457.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="44.0" />
+      </FlowPane>
+      <FlowPane alignment="CENTER_LEFT" layoutX="526.0" layoutY="229.0" prefHeight="91.0" prefWidth="1280.0" styleClass="global-font" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="229.0">
+         <children>
+            <FontAwesomeIconView glyphName="GROUP" size="24">
+               <FlowPane.margin>
+                  <Insets left="20.0" />
+               </FlowPane.margin>
+            </FontAwesomeIconView>
+            <JFXComboBox fx:id="serviceTeamSelect" onAction="#groupChanged" prefHeight="40.0" prefWidth="200.0" promptText="Wybierz grupę" styleClass="global-font">
+               <FlowPane.margin>
+                  <Insets left="5.0" />
+               </FlowPane.margin>
+            </JFXComboBox>
+            <FlowPane fx:id="datePanel" alignment="CENTER" prefHeight="40.0" prefWidth="400.0" style="-fx-background-radius: 20 20 20 20; -fx-background-color: #ebebeb;">
+               <children>
+                  <FontAwesomeIconView glyphName="ARROW_CIRCLE_LEFT" onMouseClicked="#moveToPrevWeek" size="32" />
+                  <Label fx:id="dateFromLabel" text="05.05.2019">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <FlowPane.margin>
+                        <Insets left="10.0" right="5.0" />
+                     </FlowPane.margin>
+                  </Label>
+                  <Label text="-">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="dateToLabel" text="12.05.2019">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <FlowPane.margin>
+                        <Insets left="5.0" right="10.0" />
+                     </FlowPane.margin>
+                  </Label>
+                  <FontAwesomeIconView glyphName="ARROW_CIRCLE_RIGHT" onMouseClicked="#moveToNextWeek" size="32" />
+               </children>
+               <effect>
+                  <DropShadow color="#00000053" height="40.0" radius="19.5" width="40.0" />
+               </effect>
+               <FlowPane.margin>
+                  <Insets left="20.0" />
+               </FlowPane.margin>
+            </FlowPane>
+            <JFXButton fx:id="undoButton" buttonType="RAISED" onAction="#undoTasks" text="Cofnij">
+               <FlowPane.margin>
+                  <Insets left="10.0" />
+               </FlowPane.margin>
+            </JFXButton>
+            <JFXButton fx:id="persistButton" onAction="#persistTasks" text="Zapisz">
+               <FlowPane.margin>
+                  <Insets left="10.0" />
+               </FlowPane.margin>
+            </JFXButton>
+         </children>
+      </FlowPane>
    </children>
 </AnchorPane>
