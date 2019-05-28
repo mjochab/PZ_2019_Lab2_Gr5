@@ -1,6 +1,4 @@
-package ur.inf.lab2.pz.reportgenerator;
-
-import net.sf.jasperreports.engine.JRException;
+package ur.inf.lab2.pz.servicemanmanagement.config.reportgenerator;
 
 public interface TaskReport {
 

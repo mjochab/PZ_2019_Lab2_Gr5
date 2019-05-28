@@ -1,4 +1,4 @@
-package ur.inf.lab2.pz.reportgenerator;
+package ur.inf.lab2.pz.servicemanmanagement.config.reportgenerator;
 
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
@@ -7,15 +7,14 @@ import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
 import net.sf.jasperreports.export.SimplePdfReportConfiguration;
 
-import java.io.FileInputStream;
-import java.io.InputStream;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class TaskReportGenerator {
 
-    public static void generateTaskReport(TaskReportImpl task, String pathToFile) throws JRException {
-
+    public void generateTaskReport(TaskReport task, String pathToFile) throws JRException {
+        pathToFile += "/raport_" + new Date().getTime();
         JasperReport jasperReport = JasperCompileManager.compileReport("src/main/resources/jrxml/report.jrxml");
 
         Map<String, Object> parameters = new HashMap<>();

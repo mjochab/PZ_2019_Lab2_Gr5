@@ -69,7 +69,7 @@ public class UserService {
             else if (SecurityContext.getLoggedUser().getRole().getRole().equals(Roles.ROLE_SERVICEMAN.toString())) {
                 if (!SecurityContext.getLoggedUser().isEnabled()) {
                     viewManager.loadComponent(ViewComponent.SERVICEMAN_REGISTER);
-                } else viewManager.switchLayout(Layout.PANEL, ViewComponent.TIMETABLE);
+                } else viewManager.switchLayout(Layout.PANEL, ViewComponent.SERVICEMAN_TIMETABLE);
             } else throw new IOException();
         } else throw new IOException();
 

@@ -1,4 +1,4 @@
-package ur.inf.lab2.pz.reportgenerator;
+package ur.inf.lab2.pz.servicemanmanagement.config.reportgenerator;
 
 public class TaskReportImpl implements TaskReport {
 

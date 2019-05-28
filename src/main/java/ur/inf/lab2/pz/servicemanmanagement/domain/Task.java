@@ -1,54 +1,42 @@
 package ur.inf.lab2.pz.servicemanmanagement.domain;
 
-
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import ur.inf.lab2.pz.servicemanmanagement.domain.enums.TaskStatus;
+import ur.inf.lab2.pz.servicemanmanagement.timetable.task.TaskState;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
-public class Task extends RecursiveTreeObject<Task> {
+public class Task extends RecursiveTreeObject<Task> implements Comparable<Task> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    @JoinColumn(name = "author_id")
-    private User author;
+    private String tag;
+    private String description;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "team_leader_id")
-    private User teamLeader;
-
-    private String title;
-
-    private String details;
-
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "client_id")
     private Client client;
 
-    @JoinColumn(name = "task_status")
-    private TaskStatus status;
+    @ManyToOne
+    @JoinColumn(name = "leader_id")
+    private Serviceman leader;
 
-    @JoinColumn(name = "creation_date")
-    private Date creationDate;
+    private LocalDateTime dateTimeFrom;
+    private LocalDateTime dateTimeTo;
 
-    @JoinColumn(name = "visit_date")
-    private Date visitDate;
+    @Enumerated(EnumType.STRING)
+    private TaskState state;
 
+    private boolean wholeDayTask;
 
-    public Task(User author, User teamLeader, String title, String details, Client client, TaskStatus status, Date creationDate, Date visitDate) {
-        this.author = author;
-        this.teamLeader = teamLeader;
-        this.title = title;
-        this.details = details;
+    public Task(String tag, String description, Client client) {
+        this.tag = tag;
+        this.description = description;
         this.client = client;
-        this.status = status;
-        this.creationDate = creationDate;
-        this.visitDate = visitDate;
+
     }
 
     public Task() {
@@ -62,36 +50,20 @@ public class Task extends RecursiveTreeObject<Task> {
         this.id = id;
     }
 
-    public User getAuthor() {
-        return author;
+    public String getTag() {
+        return tag;
     }
 
-    public void setAuthor(User author) {
-        this.author = author;
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 
-    public User getTeamLeader() {
-        return teamLeader;
+    public String getDescription() {
+        return description;
     }
 
-    public void setTeamLeader(User teamLeader) {
-        this.teamLeader = teamLeader;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDetails() {
-        return details;
-    }
-
-    public void setDetails(String details) {
-        this.details = details;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Client getClient() {
@@ -102,27 +74,56 @@ public class Task extends RecursiveTreeObject<Task> {
         this.client = client;
     }
 
-    public TaskStatus getStatus() {
-        return status;
+    public Serviceman getLeader() {
+        return leader;
     }
 
-    public void setStatus(TaskStatus status) {
-        this.status = status;
+    public void setLeader(Serviceman leader) {
+        this.leader = leader;
     }
 
-    public Date getCreationDate() {
-        return creationDate;
+    public LocalDateTime getDateTimeFrom() {
+        return dateTimeFrom;
     }
 
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
+    public void setDateTimeFrom(LocalDateTime dateTimeFrom) {
+        this.dateTimeFrom = dateTimeFrom;
     }
 
-    public Date getVisitDate() {
-        return visitDate;
+    public LocalDateTime getDateTimeTo() {
+        return dateTimeTo;
     }
 
-    public void setVisitDate(Date visitDate) {
-        this.visitDate = visitDate;
+    public void setDateTimeTo(LocalDateTime dateTimeTo) {
+        this.dateTimeTo = dateTimeTo;
+    }
+
+    public TaskState getState() {
+        return state;
+    }
+
+    public void setState(TaskState state) {
+        this.state = state;
+    }
+
+    public boolean isWholeDayTask() {
+        return wholeDayTask;
+    }
+
+    public void setWholeDayTask(boolean wholeDayTask) {
+        this.wholeDayTask = wholeDayTask;
+    }
+
+    public boolean hasTeamLeader() {
+        return this.getLeader() != null;
+    }
+
+
+    @Override
+    public int compareTo(Task o) {
+        if (getDateTimeFrom() == null || o.getDateTimeFrom() == null) {
+            return 0;
+        }
+        return getDateTimeFrom().compareTo(o.getDateTimeFrom());
     }
 }

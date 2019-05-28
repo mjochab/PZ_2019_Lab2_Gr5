@@ -57,24 +57,6 @@ public class DashboardController {
         this.viewManager = viewManager;
     }
 
-//    @FXML
-//    public void addWorker(ActionEvent event) {
-//
-//        Role role = roleRepository.findByRole("ROLE_SERVICEMAN");
-//        System.out.println(emailInput.getText());
-//        System.out.println(groupNameInput.getText());
-//        String firstPassword = UUID.randomUUID().toString().substring(0, 6);
-//        String groupName = groupNameInput.getText();
-//        // User user = new User(emailInput.getText(), firstPassword, groupName);
-//        User newUser = new User();
-//        newUser.setEmail(emailInput.getText());
-//        newUser.setGroupName(groupName);
-//        newUser.setPassword(encryptionService.encode(firstPassword));
-//        newUser.setRole(role);
-//
-//        userRepository.save(newUser);
-//        emailSender.sendEmail(emailInput.getText(), "Account's First password", firstPassword);
-//    }
 
     @FXML
     private void drawerAction() throws IOException {

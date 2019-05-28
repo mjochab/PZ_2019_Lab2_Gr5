@@ -1,6 +1,9 @@
 package ur.inf.lab2.pz.servicemanmanagement.controller;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,7 +21,6 @@ import ur.inf.lab2.pz.servicemanmanagement.domain.Notification;
 import ur.inf.lab2.pz.servicemanmanagement.domain.SecurityContext;
 import ur.inf.lab2.pz.servicemanmanagement.domain.enums.Roles;
 import ur.inf.lab2.pz.servicemanmanagement.notifications.NotificationService;
-import ur.inf.lab2.pz.servicemanmanagement.service.MockSecurityContext;
 import ur.inf.lab2.pz.servicemanmanagement.view.Layout;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewComponent;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewManager;
@@ -27,6 +29,8 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Controller
 public class PanelLayoutController {
@@ -49,6 +53,15 @@ public class PanelLayoutController {
     private Label roleLabel;
 
     @FXML
+    private Label timeLabel;
+
+    @FXML
+    private Label dateLabel;
+
+    @FXML
+    private Label groupNameLabel;
+
+    @FXML
     private JFXButton dashboardButton;
     @FXML
     private JFXButton timetableButton;
@@ -62,7 +75,9 @@ public class PanelLayoutController {
 
     @FXML
     public void initialize() {
+        initClock();
         if (SecurityContext.getLoggedUser().role.getRole().equals("ROLE_SERVICEMAN")) {
+
             dashboardButton.setManaged(false);
             dashboardButton.setVisible(false);
             dashboardButton.getChildrenUnmodifiable().forEach(node -> node.setManaged(false));
@@ -71,8 +86,20 @@ public class PanelLayoutController {
             employeeButton.getChildrenUnmodifiable().forEach(node -> node.setManaged(false));
             AnchorPane.setTopAnchor(timetableButton, 0.0);
 
-            fullNameLabel.setText("Andrzej Gołota");
+            fullNameLabel.setText(SecurityContext.getLoggedUser().getFirstName() + " " +
+                    SecurityContext.getLoggedUser().getLastName());
             roleLabel.setText("Głowa serwisantów");
+            groupNameLabel.setText(SecurityContext.getLoggedUser().getGroupName());
+
+
+        }
+
+        else{
+            fullNameLabel.setText(SecurityContext.getLoggedUser().getFirstName() + " " +
+                    SecurityContext.getLoggedUser().getLastName());
+            groupNameLabel.setText(SecurityContext.getLoggedUser().getCompanyName());
+            roleLabel.setText("Kierownik");
+
         }
 
     }
@@ -171,7 +198,15 @@ public class PanelLayoutController {
 
     @FXML
     public void navigateToTimetable(ActionEvent event) throws IOException {
-        viewManager.loadComponent(ViewComponent.TIMETABLE);
+        final String roleManager = Roles.ROLE_MANAGER.toString();
+        final String roleServiceman = Roles.ROLE_SERVICEMAN.toString();
+        String actualRole = SecurityContext.getLoggedUser().role.getRole();
+
+        if (roleManager.equals(actualRole))
+            viewManager.loadComponent(ViewComponent.TIMETABLE);
+        else if (roleServiceman.equals(actualRole))
+            viewManager.loadComponent(ViewComponent.SERVICEMAN_TIMETABLE);
+
     }
 
     @FXML
@@ -198,4 +233,19 @@ public class PanelLayoutController {
         viewManager.switchLayout(Layout.START, ViewComponent.LOGIN);
     }
 
+    @FXML
+    public void initClock() {
+        Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+            dateLabel.setText(LocalDateTime.now().format(dateFormatter));
+            timeLabel.setText(LocalDateTime.now().format(timeFormatter));
+        }), new KeyFrame(Duration.seconds(1)));
+        clock.setCycleCount(Animation.INDEFINITE);
+        clock.play();
+    }
+
+    public void newName(String x, String y) {
+        fullNameLabel.setText(x + " " + y);
+    }
 }
