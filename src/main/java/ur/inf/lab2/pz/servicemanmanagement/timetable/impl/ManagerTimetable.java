@@ -278,7 +278,7 @@ public class ManagerTimetable implements Timetable {
     public Set<AllocatedTask> dumpAllocatedTasks() {
         agenda.selectedAppointments().clear();
         return agenda.appointments().stream()
-                .filter(appointment -> !isEmptyTask(appointment) && !isDoneTask(appointment))
+                .filter(appointment -> !isEmptyTask(appointment))
                 .map(this::transformAppointmentToTask)
                 .collect(Collectors.toSet());
     }

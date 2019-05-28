@@ -24,6 +24,7 @@ import ur.inf.lab2.pz.servicemanmanagement.view.ViewManager;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @Controller
@@ -54,7 +55,7 @@ public class ServicemanTimetableController {
     }
 
     private void initTimetable() {
-        Parent editTaskDialog = viewManager.getComponent(ViewComponent.EDIT_TASK_DIALOG);
+        Parent editTaskDialog = viewManager.getComponent(ViewComponent.SERVICEMAN_EDIT_TASK_DIALOG);
         StackPane rootStackPane = viewManager.getRoot();
         timetable = timetableManager.createServicemanTimetable(rootStackPane, editTaskDialog);
         timetable.loadTasks(timetableManager.getAllAllocatedTasks(SecurityContext.getLoggedUser().getId()));
@@ -94,9 +95,14 @@ public class ServicemanTimetableController {
         updateDateRangeLabels(weekRange);
     }
 
+    private Logger log = Logger.getGlobal();
+
+
     @FXML
     private void persistTasks() {
         Set<AllocatedTask> allocatedTasks = timetable.dumpAllocatedTasks();
+        log.info(String.valueOf(allocatedTasks.size()) + "!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
         timetableManager.saveAllocated(SecurityContext.getLoggedUser().getId(), allocatedTasks);
     }
 }

@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 import javafx.collections.ListChangeListener;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Control;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableView;
@@ -77,7 +78,6 @@ public class ServicemanTimetable implements Timetable {
     private void initTaskEditDialog(TimetableTaskEditDialogData editTaskDialogData) {
         agenda.setEditAppointmentCallback(app -> {
 
-                editTaskDialogData.clean();
                 JFXDialog editTaskDialog = prepareEditTaskDialog(editTaskDialogData.getStackPane(), editTaskDialogData.getView());
                 setDialogActions(app, editTaskDialog, editTaskDialogData);
                 setTaskData(app, editTaskDialogData);
@@ -117,45 +117,25 @@ public class ServicemanTimetable implements Timetable {
                 raportPrinter.print(transformAppointmentToTask(appointment), selectedDirectory.getAbsolutePath());
         });
 
-        if (appointment.isWholeDay()) {
-            editTaskDialogData.disableDateToNode();
-            editTaskDialogData.disableTimeToNode();
-            editTaskDialogData.disableTimeFromNode();
-        }
+        Button stateButton = editTaskDialogData.getStateButton();
+        editTaskDialogData.getStateButton()
+                .setOnMouseClicked(event -> {
+                    if (editTaskDialogData.getState().equals(TaskState.TODO))
+                        stateButton.setText(TaskState.DONE.getName());
+                    else
+                        stateButton.setText(TaskState.TODO.getName());
+                });
 
-        if (isDoneTask(appointment)) {
-            editTaskDialogData.disableDetachNode();
-            editTaskDialogData.disableDescriptionNode();
-            editTaskDialogData.disableDateFromNode();
-            editTaskDialogData.disableTimeFromNode();
-            editTaskDialogData.disableDateToNode();
-            editTaskDialogData.disableTimeToNode();
-            editTaskDialogData.disableWholeDayNode();
-            editTaskDialogData.disableSaveNode();
-        } else {
-            editTaskDialogData.getDetachNode()
-                    .setOnMouseClicked(event -> {
-                        agenda.appointments().remove(appointment);
-                        editTaskDialog.close();
-                    });
+        editTaskDialogData.getSaveNode()
+                .setOnMouseClicked(event -> {
+                    TaskState taskState = editTaskDialogData.getState();
 
-            editTaskDialogData.getSaveNode()
-                    .setOnMouseClicked(event -> {
-                        String newDescription = editTaskDialogData.getTaskDescription();
-                        updateAppointmentDescription(appointment, newDescription);
+                    String id = transformAppointmentToTask(appointment).getId();
+                    tasksStates.put(id, taskState);
 
-                        LocalDateTime dateTimeFrom = editTaskDialogData.getDateTimeFrom();
-                        if (editTaskDialogData.isWholeDayTask())
-                            setAppointmentAsWholeDay(appointment, dateTimeFrom);
-                        else {
-                            LocalDateTime dateTimeTo = editTaskDialogData.getDateTimeTo();
-                            updateAppointmentDuration(appointment, dateTimeTo, dateTimeFrom);
-                        }
-
-                        agenda.refresh();
-                        editTaskDialog.close();
-                    });
-        }
+                    agenda.refresh();
+                    editTaskDialog.close();
+                });
     }
 
     private void updateAppointmentDuration(Agenda.Appointment appointment, LocalDateTime dateTimeTo, LocalDateTime dateTimeFrom) {
@@ -277,7 +257,7 @@ public class ServicemanTimetable implements Timetable {
     public Set<AllocatedTask> dumpAllocatedTasks() {
         agenda.selectedAppointments().clear();
         return agenda.appointments().stream()
-                .filter(appointment -> !isEmptyTask(appointment) && !isDoneTask(appointment))
+                .filter(appointment -> !isEmptyTask(appointment))
                 .map(this::transformAppointmentToTask)
                 .collect(Collectors.toSet());
     }

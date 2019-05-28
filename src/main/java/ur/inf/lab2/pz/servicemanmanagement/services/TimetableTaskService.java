@@ -46,6 +46,7 @@ public class TimetableTaskService implements TimetableDatasource {
     public void saveAllocated(Long leaderId, Collection<AllocatedTask> allocatedTasks) {
         Serviceman groupLeader = usersRepository.findById(leaderId).orElseThrow(() -> new IllegalStateException());
 
+        allocatedTasks.forEach(task -> System.out.println(task));
         allocatedTasks.forEach(task -> {
             Long entityId = taskConverter.convertTagIdToEntityId(task.getId(), task.getTag());
 
