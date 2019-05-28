@@ -14,8 +14,7 @@ import java.util.Map;
 
 public class TaskReportGenerator {
 
-    public static void generateTaskReport(TaskReportImpl task, String pathToFile) throws JRException {
-
+    public void generateTaskReport(TaskReport task, String pathToFile) throws JRException {
         JasperReport jasperReport = JasperCompileManager.compileReport("src/main/resources/jrxml/report.jrxml");
 
         Map<String, Object> parameters = new HashMap<>();

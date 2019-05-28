@@ -62,7 +62,7 @@ public class TimetableManager {
     public Timetable createTimetable(TreeTableView<UnallocatedTaskTableItem> unallocatedTaskTable, StackPane rootStackPane, Parent editTaskDialogBody) {
         TimetableTaskEditDialogData dialogData = new ManagerTaskEditDialogData(editTaskDialogBody, rootStackPane);
 
-        return new ManagerTimetable(unallocatedTaskTable, dialogData, new MockPrinter());
+        return new ManagerTimetable(unallocatedTaskTable, dialogData, new SvcPrinter());
     }
 
     public Set<AllocatedTask> getAllAllocatedTasks(Long leaderId) {
@@ -85,17 +85,7 @@ public class TimetableManager {
     public Timetable createServicemanTimetable(StackPane rootStackPane, Parent editTaskDialog) {
         TimetableTaskEditDialogData dialogData = new ServicemanTaskEditDialogData(editTaskDialog, rootStackPane);
 
-        return new ServicemanTimetable(dialogData, new MockPrinter());
-    }
-
-
-
-    private class MockPrinter implements AllocatedTaskRaportPrinter {
-
-        @Override
-        public void print(AllocatedTask taskToPrint, String absolutePath) {
-            System.out.println("Save task: " + taskToPrint + " to path: " + absolutePath);
-        }
+        return new ServicemanTimetable(dialogData, new SvcPrinter());
     }
 
     private class ManagerTaskEditDialogData implements TimetableTaskEditDialogData {
