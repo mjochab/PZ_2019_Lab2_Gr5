@@ -14,7 +14,7 @@ import java.util.Map;
 public class TaskReportGenerator {
 
     public void generateTaskReport(TaskReport task, String pathToFile) throws JRException {
-        pathToFile += "/raport_" + new Date().getTime();
+        pathToFile += "/raport_" + new Date().getTime() + ".pdf";
 
         JasperReport jasperReport = JasperCompileManager.compileReport(getClass().getClassLoader().getResourceAsStream("/jrxml/report.jrxml"));
 
