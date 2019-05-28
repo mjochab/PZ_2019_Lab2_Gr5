@@ -155,4 +155,7 @@ public class PanelLayoutController {
         clock.play();
     }
 
+    public void newName(String x, String y) {
+        fullNameLabel.setText(x + " " + y);
+    }
 }
