@@ -70,3 +70,7 @@
 .client-data {
     -fx-font-size: 16;
 }
+
+.scrollpane {
+    -fx-background-color: #B3E5FC;
+}

@@ -3,7 +3,9 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import java.lang.String?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -124,21 +126,17 @@
          </children>
       </AnchorPane>
       <AnchorPane fx:id="placeForComponent" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: gray;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="75.0" />
-      <AnchorPane fx:id="drawer" layoutX="10.0" layoutY="10.0" prefWidth="250.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="-250.0" AnchorPane.topAnchor="75.0">
+      <AnchorPane fx:id="drawer" layoutX="1300.0" layoutY="75.0" prefHeight="645.0" prefWidth="278.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="-298.0" AnchorPane.topAnchor="75.0">
          <children>
-            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" styleClass="bg-light-primary" stylesheets="@../../styles/styles.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <AnchorPane prefHeight="50.0" prefWidth="200.0">
-                     <children>
-                        <Label alignment="CENTER" layoutX="79.0" layoutY="17.0" text="Powiadomienie1" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="17.0">
-                           <font>
-                              <Font name="Noto Sans CJK TC Light" size="13.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </AnchorPane>
-               </children>
-            </VBox>
+            <ScrollPane prefHeight="645.0" prefWidth="278.0">
+               <content>
+                  <VBox fx:id="vboxnotifications" alignment="TOP_CENTER" prefHeight="645.0" prefWidth="260.0" spacing="15.0" styleClass="bg-light-primary" stylesheets="@../../styles/styles.css">
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                  </VBox>
+               </content>
+            </ScrollPane>
          </children>
       </AnchorPane>
    </children>

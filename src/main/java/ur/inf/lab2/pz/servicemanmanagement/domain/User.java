@@ -2,15 +2,14 @@ package ur.inf.lab2.pz.servicemanmanagement.domain;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
 @Inheritance
 public abstract class User {
 
-    @ManyToOne
-    @JoinColumn(name = "id_role")
-    public Role role;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,8 +21,15 @@ public abstract class User {
     private String groupName;
     private boolean enabled = false;
 
-    public User() {
-    }
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+    private List<Notification> notifications = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name="id_role")
+    public Role role;
+
+    public User() { }
 
     public User(String email, String password, String groupName) {
         this.email = email;
@@ -106,5 +112,13 @@ public abstract class User {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public List<Notification> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(List<Notification> notifications) {
+        this.notifications = notifications;
     }
 }
