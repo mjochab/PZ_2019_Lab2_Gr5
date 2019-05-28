@@ -21,6 +21,7 @@ public abstract class User {
     private String groupName;
     private boolean enabled = false;
 
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch=FetchType.LAZY)
     private List<Notification> notifications = new ArrayList<>();
 

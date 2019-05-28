@@ -145,7 +145,7 @@ public class PanelLayoutController {
 
                     vBoxNotification.getChildren().addAll(flowPane1, textFlowTitle, textFlowDescription);
                     Button buttonDeleteNotification = new Button("Usuń powiadomienie");
-                    buttonDeleteNotification.setStyle("-fx-background-color: linear-gradient(#ff5400, #be1d00);\n" +
+                    buttonDeleteNotification.setStyle("-fx-background-color: linear-gradient(#064be0, #144082);\n" +
                             "    -fx-background-radius: 30;\n" +
                             "    -fx-background-insets: 0;\n" +
                             "    -fx-text-fill: white;");
