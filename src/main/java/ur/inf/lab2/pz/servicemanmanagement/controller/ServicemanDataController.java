@@ -3,11 +3,14 @@ package ur.inf.lab2.pz.servicemanmanagement.controller;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import ur.inf.lab2.pz.servicemanmanagement.domain.SecurityContext;
 import ur.inf.lab2.pz.servicemanmanagement.domain.dto.ServicemanDataDTO;
 import ur.inf.lab2.pz.servicemanmanagement.domain.validator.ServicemanDataValidator;
+import ur.inf.lab2.pz.servicemanmanagement.service.DialogService;
 import ur.inf.lab2.pz.servicemanmanagement.services.PanelLayoutService;
 import ur.inf.lab2.pz.servicemanmanagement.services.ServicemanDataService;
 
@@ -26,10 +29,21 @@ public class ServicemanDataController {
     @FXML
     private Text nameAlert, lastNameAlert, passwordAlert, confirmPassAlert;
 
+    @FXML
+    private StackPane stackPane;
+
+
     @Autowired
     private PanelLayoutService panelLayoutService;
 
+    @Autowired
+    private DialogService dialogService;
 
+    @FXML
+    public void initialize(){
+        firstNameTextField.setText(SecurityContext.getLoggedUser().getFirstName());
+        lastNameTextField.setText(SecurityContext.getLoggedUser().getLastName());
+    }
 
     public void submitServicemanData() {
 
@@ -38,6 +52,9 @@ public class ServicemanDataController {
                     confirmPassField.getText());
             servicemanDataService.submitServicemanData(dto);
             panelLayoutService.changeName(firstNameTextField.getText(), lastNameTextField.getText());
+
+            dialogService.loadDialog(stackPane, new Text("OK"), new Text("Zmieniono dane personalne"));
+
         }
     }
 
