@@ -2,6 +2,7 @@ package ur.inf.lab2.pz.servicemanmanagement.domain.dto;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class NewestTaskDTO extends RecursiveTreeObject<NewestTaskDTO> {
@@ -11,7 +12,7 @@ public class NewestTaskDTO extends RecursiveTreeObject<NewestTaskDTO> {
     private String teamLeader;
     private String clientName;
     private String address;
-    private Date creationDate;
+    private LocalDateTime creationDate;
 
     public String getTitle() {
         return title;
@@ -53,15 +54,15 @@ public class NewestTaskDTO extends RecursiveTreeObject<NewestTaskDTO> {
         this.address = address;
     }
 
-    public Date getCreationDate() {
+    public LocalDateTime getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
     }
 
-    public NewestTaskDTO(String title, String details, String teamLeader, String clientName, String address, Date creationDate) {
+    public NewestTaskDTO(String title, String details, String teamLeader, String clientName, String address, LocalDateTime creationDate) {
         this.title = title;
         this.details = details;
         this.teamLeader = teamLeader;

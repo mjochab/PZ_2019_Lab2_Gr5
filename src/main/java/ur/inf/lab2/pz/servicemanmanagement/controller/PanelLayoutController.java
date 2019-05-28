@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ur.inf.lab2.pz.servicemanmanagement.domain.SecurityContext;
 import ur.inf.lab2.pz.servicemanmanagement.domain.enums.Roles;
-import ur.inf.lab2.pz.servicemanmanagement.service.MockSecurityContext;
 import ur.inf.lab2.pz.servicemanmanagement.view.Layout;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewComponent;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewManager;
@@ -109,7 +108,15 @@ public class PanelLayoutController {
 
     @FXML
     public void navigateToTimetable(ActionEvent event) throws IOException {
-        viewManager.loadComponent(ViewComponent.TIMETABLE);
+        final String roleManager = Roles.ROLE_MANAGER.toString();
+        final String roleServiceman = Roles.ROLE_SERVICEMAN.toString();
+        String actualRole = SecurityContext.getLoggedUser().role.getRole();
+
+        if (roleManager.equals(actualRole))
+            viewManager.loadComponent(ViewComponent.TIMETABLE);
+        else if (roleServiceman.equals(actualRole))
+            viewManager.loadComponent(ViewComponent.SERVICEMAN_TIMETABLE);
+
     }
 
     @FXML

@@ -72,12 +72,12 @@ public class ManagerDashboardController implements Initializable {
             newestTaskDTO.setAddress(task.getClient().getStreet() + " " + task.getClient().getHouseNumber() +
                     "/" + task.getClient().getApartmentNumber());
             newestTaskDTO.setClientName(task.getClient().getFirstName() + " " + task.getClient().getLastName());
-            newestTaskDTO.setCreationDate(task.getCreationDate());
-            newestTaskDTO.setDetails(task.getDetails());
-            newestTaskDTO.setTitle(task.getTitle());
+            newestTaskDTO.setCreationDate(task.getDateTimeFrom());
+            newestTaskDTO.setDetails(task.getDescription());
+            newestTaskDTO.setTitle(task.getTag());
 
             if (!task.hasTeamLeader()) newestTaskDTO.setTeamLeader("-");
-            else newestTaskDTO.setTeamLeader(task.getTeamLeader().getFirstName() + task.getTeamLeader().getLastName());
+            else newestTaskDTO.setTeamLeader(task.getLeader().getFirstName() + task.getLeader().getLastName());
 
             newestTaskDTOS.add(newestTaskDTO);
         }
