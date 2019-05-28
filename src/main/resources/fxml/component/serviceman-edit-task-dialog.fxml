@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="global-font" stylesheets="@../../styles/styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <FlowPane alignment="CENTER_LEFT" prefHeight="75.0" prefWidth="477.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <FontAwesomeIconView glyphName="STICKY_NOTE_ALT" size="24">
+               <FlowPane.margin>
+                  <Insets left="10.0" />
+               </FlowPane.margin>
+            </FontAwesomeIconView>
+            <Label fx:id="taskId" style="-fx-font-size: 20;" text="M1">
+               <FlowPane.margin>
+                  <Insets left="5.0" />
+               </FlowPane.margin>
+            </Label>
+            <Label text="-" />
+            <Label fx:id="taskTag" style="-fx-font-size: 20;" text="Montaż" />
+            <JFXButton fx:id="print" buttonType="RAISED" styleClass="bg-light-primary" stylesheets="@../../styles/styles.css" text="Drukuj">
+               <graphic>
+                  <FontAwesomeIconView fx:id="print" glyphName="PRINT" />
+               </graphic>
+               <FlowPane.margin>
+                  <Insets left="10.0" />
+               </FlowPane.margin>
+            </JFXButton>
+            <JFXButton fx:id="stateButton" style="-fx-background-color: lightgray; -fx-text-fill: black;" text="STAN">
+               <FlowPane.margin>
+                  <Insets left="10.0" />
+               </FlowPane.margin>
+            </JFXButton>
+         </children>
+      </FlowPane>
+      <FlowPane alignment="CENTER_RIGHT" prefHeight="75.0" prefWidth="48.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <FontAwesomeIconView fx:id="exit" glyphName="REMOVE" size="24">
+               <FlowPane.margin>
+                  <Insets right="15.0" />
+               </FlowPane.margin>
+            </FontAwesomeIconView>
+         </children>
+      </FlowPane>
+      <FlowPane prefHeight="1.0" prefWidth="200.0" style="-fx-background-color: black;" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="75.0" />
+      <JFXTabPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="75.0">
+         <tabs>
+            <Tab text="Zadanie">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label style="-fx-font-size: 16;" text="Opis:">
+                                 <VBox.margin>
+                                    <Insets left="30.0" top="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <FlowPane prefHeight="200.0" prefWidth="200.0" styleClass="very-light-bg" stylesheets="@../../styles/styles.css">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="30.0" right="30.0" top="5.0" />
+                                 </VBox.margin>
+                                 <children>
+                                    <Label fx:id="taskDescription" text="Label">
+                                       <FlowPane.margin>
+                                          <Insets left="5.0" top="5.0" />
+                                       </FlowPane.margin>
+                                    </Label>
+                                 </children>
+                              </FlowPane>
+                              <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0">
+                                 <children>
+                                    <Label text="Data i godzina od:">
+                                       <HBox.margin>
+                                          <Insets right="15.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Label fx:id="dateFrom" text="27.05.2019">
+                                       <HBox.margin>
+                                          <Insets right="10.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Label fx:id="timeFrom" text="13:00" />
+                                 </children>
+                                 <padding>
+                                    <Insets left="30.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox alignment="BOTTOM_LEFT" prefHeight="20.0" prefWidth="200.0">
+                                 <children>
+                                    <Label text="Data i godzina do:">
+                                       <HBox.margin>
+                                          <Insets right="15.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Label fx:id="dateTo" text="Label">
+                                       <HBox.margin>
+                                          <Insets right="15.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Label fx:id="timeTo" text="Label" />
+                                 </children>
+                                 <padding>
+                                    <Insets left="30.0" />
+                                 </padding>
+                              </HBox>
+                              <FlowPane alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0">
+                                 <children>
+                                    <JFXCheckBox fx:id="wholeDay" disable="true" text="Cały dzień">
+                                       <FlowPane.margin>
+                                          <Insets top="10.0" />
+                                       </FlowPane.margin>
+                                    </JFXCheckBox>
+                                 </children>
+                                 <padding>
+                                    <Insets left="30.0" />
+                                 </padding>
+                              </FlowPane>
+                              <FlowPane alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="200.0">
+                                 <children>
+                                    <JFXButton fx:id="saveTask" text="Zapisz">
+                                       <graphic>
+                                          <FontAwesomeIconView fill="WHITE" glyphName="SAVE" />
+                                       </graphic>
+                                       <styleClass>
+                                          <String fx:value="bg-primary" />
+                                          <String fx:value="text-icons" />
+                                       </styleClass>
+                                       <FlowPane.margin>
+                                          <Insets bottom="5.0" />
+                                       </FlowPane.margin>
+                                    </JFXButton>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets right="15.0" />
+                                 </VBox.margin>
+                              </FlowPane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Dane klienta">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <VBox prefHeight="287.0" prefWidth="300.0" styleClass="client-data">
+                                 <children>
+                                    <Label text="Imię:" />
+                                    <Label text="Nazwisko:" />
+                                    <Label text="Numer telefonu:" />
+                                    <Label text="Ulica:" />
+                                    <Label text="Numer domu:" />
+                                    <Label text="Numer lokalu:" />
+                                    <Label text="Miasto:" />
+                                 </children>
+                                 <padding>
+                                    <Insets left="100.0" top="30.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox prefHeight="287.0" prefWidth="400.0" styleClass="client-data">
+                                 <children>
+                                    <Label fx:id="clientFirstname" text="Label" />
+                                    <Label fx:id="clientSurname" text="Label" />
+                                    <Label fx:id="clientPhoneNumber" text="Label" />
+                                    <Label fx:id="clientStreet" text="Label" />
+                                    <Label fx:id="clientHouseNumber" text="Label" />
+                                    <Label fx:id="clientFlatNumber" text="Label" />
+                                    <Label fx:id="clientCity" text="Label" />
+                                 </children>
+                                 <padding>
+                                    <Insets top="30.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+         </tabs>
+      </JFXTabPane>
+   </children>
+</AnchorPane>

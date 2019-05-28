@@ -186,4 +186,8 @@ public class ManagerTimetableController implements Initializable {
         viewManager.openDialog(ViewComponent.NEW_TASK_DIALOG);
     }
 
+    public void onNewTask(Task newTask) {
+        TreeItem<UnallocatedTaskTableItem> newTableItem = timetableManager.convertToUnallocatedTreeItemTask(newTask);
+        tasksTableView.getRoot().getChildren().add(newTableItem);
+    }
 }

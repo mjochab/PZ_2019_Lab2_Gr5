@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 import javafx.collections.ListChangeListener;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Control;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableView;
@@ -11,10 +12,13 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.DirectoryChooser;
 import jfxtras.scene.control.agenda.Agenda;
 import ur.inf.lab2.pz.servicemanmanagement.domain.DateRange;
+import ur.inf.lab2.pz.servicemanmanagement.timetable.AllocatedTaskRaportPrinter;
 import ur.inf.lab2.pz.servicemanmanagement.timetable.Timetable;
 import ur.inf.lab2.pz.servicemanmanagement.timetable.TimetableTaskEditDialogData;
-import ur.inf.lab2.pz.servicemanmanagement.timetable.AllocatedTaskRaportPrinter;
-import ur.inf.lab2.pz.servicemanmanagement.timetable.task.*;
+import ur.inf.lab2.pz.servicemanmanagement.timetable.task.AllocatedTask;
+import ur.inf.lab2.pz.servicemanmanagement.timetable.task.ClientData;
+import ur.inf.lab2.pz.servicemanmanagement.timetable.task.TaskState;
+import ur.inf.lab2.pz.servicemanmanagement.timetable.task.TimetableTask;
 import ur.inf.lab2.pz.servicemanmanagement.utils.DateUtils;
 import ur.inf.lab2.pz.servicemanmanagement.utils.StringUtils;
 
@@ -25,7 +29,8 @@ import java.util.stream.Collectors;
 
 import static ur.inf.lab2.pz.servicemanmanagement.utils.DateUtils.toLocalDateTime;
 
-public class ManagerTimetable implements Timetable {
+public class ServicemanTimetable implements Timetable {
+
     private static final String DESCRIPTION_PATTERN = "{id} / {tag} /\n{description}";
     private static final String[] GLOBAL_STYLE_CLASSES = {"global-font"};
     private static final String EMPTY_TASK_ID = "empty-task-id";
@@ -44,13 +49,12 @@ public class ManagerTimetable implements Timetable {
     private Map<String, ClientData> clientsData;
     private Map<String, TaskState> tasksStates;
 
-    public ManagerTimetable(TreeTableView<UnallocatedTaskTableItem> unallocatedTaskTable,
-                            TimetableTaskEditDialogData editTaskDialogData,
+    public ServicemanTimetable(TimetableTaskEditDialogData editTaskDialogData,
                             AllocatedTaskRaportPrinter printer) {
         Date now = new Date();
         this.weekDateRange = DateUtils.getWeekDateRangeByDate(now);
         initGroups();
-        initAgenda(unallocatedTaskTable, editTaskDialogData);
+        initAgenda(editTaskDialogData);
 
         raportPrinter = printer;
         clientsData = new HashMap<>();
@@ -58,31 +62,26 @@ public class ManagerTimetable implements Timetable {
     }
 
 
-    private void initAgenda(TreeTableView<UnallocatedTaskTableItem> unallocatedTaskTable, TimetableTaskEditDialogData editTaskDialogData) {
+    private void initAgenda(TimetableTaskEditDialogData editTaskDialogData) {
         agenda = new Agenda();
         agenda.displayedLocalDateTime().set(toLocalDateTime(weekDateRange.getFrom()));
+        agenda.setAllowDragging(false);
+        agenda.setAllowResize(false);
+
 
         initTaskEditDialog(editTaskDialogData);
 
         setStyleOnSelected();
-        allowCreatingTasksByDrag();
-        allowAllocateUnallocatedTaskToEmptyTask(unallocatedTaskTable);
-        allowDetachTask(unallocatedTaskTable);
         agenda.getStyleClass().addAll(GLOBAL_STYLE_CLASSES);
     }
 
     private void initTaskEditDialog(TimetableTaskEditDialogData editTaskDialogData) {
         agenda.setEditAppointmentCallback(app -> {
 
-            if (isEmptyTask(app)) {
-                agenda.appointments().remove(app);
-            } else {
-                editTaskDialogData.clean();
                 JFXDialog editTaskDialog = prepareEditTaskDialog(editTaskDialogData.getStackPane(), editTaskDialogData.getView());
                 setDialogActions(app, editTaskDialog, editTaskDialogData);
                 setTaskData(app, editTaskDialogData);
                 editTaskDialog.show();
-            }
 
             return null;
         });
@@ -118,45 +117,25 @@ public class ManagerTimetable implements Timetable {
                 raportPrinter.print(transformAppointmentToTask(appointment), selectedDirectory.getAbsolutePath());
         });
 
-        if (appointment.isWholeDay()) {
-            editTaskDialogData.disableDateToNode();
-            editTaskDialogData.disableTimeToNode();
-            editTaskDialogData.disableTimeFromNode();
-        }
+        Button stateButton = editTaskDialogData.getStateButton();
+        editTaskDialogData.getStateButton()
+                .setOnMouseClicked(event -> {
+                    if (editTaskDialogData.getState().equals(TaskState.TODO))
+                        stateButton.setText(TaskState.DONE.getName());
+                    else
+                        stateButton.setText(TaskState.TODO.getName());
+                });
 
-        if (isDoneTask(appointment)) {
-            editTaskDialogData.disableDetachNode();
-            editTaskDialogData.disableDescriptionNode();
-            editTaskDialogData.disableDateFromNode();
-            editTaskDialogData.disableTimeFromNode();
-            editTaskDialogData.disableDateToNode();
-            editTaskDialogData.disableTimeToNode();
-            editTaskDialogData.disableWholeDayNode();
-            editTaskDialogData.disableSaveNode();
-        } else {
-            editTaskDialogData.getDetachNode()
-                    .setOnMouseClicked(event -> {
-                        agenda.appointments().remove(appointment);
-                        editTaskDialog.close();
-                    });
+        editTaskDialogData.getSaveNode()
+                .setOnMouseClicked(event -> {
+                    TaskState taskState = editTaskDialogData.getState();
 
-            editTaskDialogData.getSaveNode()
-                    .setOnMouseClicked(event -> {
-                        String newDescription = editTaskDialogData.getTaskDescription();
-                        updateAppointmentDescription(appointment, newDescription);
+                    String id = transformAppointmentToTask(appointment).getId();
+                    tasksStates.put(id, taskState);
 
-                        LocalDateTime dateTimeFrom = editTaskDialogData.getDateTimeFrom();
-                        if (editTaskDialogData.isWholeDayTask())
-                            setAppointmentAsWholeDay(appointment, dateTimeFrom);
-                        else {
-                            LocalDateTime dateTimeTo = editTaskDialogData.getDateTimeTo();
-                            updateAppointmentDuration(appointment, dateTimeTo, dateTimeFrom);
-                        }
-
-                        agenda.refresh();
-                        editTaskDialog.close();
-                    });
-        }
+                    agenda.refresh();
+                    editTaskDialog.close();
+                });
     }
 
     private void updateAppointmentDuration(Agenda.Appointment appointment, LocalDateTime dateTimeTo, LocalDateTime dateTimeFrom) {
