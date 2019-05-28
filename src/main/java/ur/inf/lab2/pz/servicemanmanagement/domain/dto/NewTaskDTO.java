@@ -2,6 +2,9 @@ package ur.inf.lab2.pz.servicemanmanagement.domain.dto;
 
 import ur.inf.lab2.pz.servicemanmanagement.domain.Client;
 
+/**
+ * Klasa data transfer object używana do przesyłania danych z formularza podczas tworzenia nowego zadania
+ */
 public class NewTaskDTO {
     private String title;
     private String details;

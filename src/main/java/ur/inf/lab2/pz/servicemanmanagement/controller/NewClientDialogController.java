@@ -12,7 +12,9 @@ import ur.inf.lab2.pz.servicemanmanagement.domain.dto.NewClientDTO;
 import ur.inf.lab2.pz.servicemanmanagement.domain.validator.NewClientValidator;
 import ur.inf.lab2.pz.servicemanmanagement.domain.validator.WorkerAddValidator;
 import ur.inf.lab2.pz.servicemanmanagement.services.ClientService;
-
+/**
+ * klasa kontrolera panelu dodawania nowego klienta
+ */
 @Controller
 public class NewClientDialogController {
 

@@ -21,6 +21,12 @@ import ur.inf.lab2.pz.servicemanmanagement.repository.TaskRepository;
 import java.net.URL;
 import java.util.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+/**
+ * klasa kontrolera głównego dashboardu menadżera
+ */
 @Controller
 public class ManagerDashboardController implements Initializable {
 

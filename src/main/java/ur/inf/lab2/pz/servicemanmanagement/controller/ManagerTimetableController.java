@@ -35,7 +35,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.stream.Collectors;
-
+/**
+ * klasa kontrolera harmonogramu menadżera
+ */
 @Controller
 public class ManagerTimetableController implements Initializable {
 

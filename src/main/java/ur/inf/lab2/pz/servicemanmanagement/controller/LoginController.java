@@ -13,6 +13,8 @@ import ur.inf.lab2.pz.servicemanmanagement.view.ViewManager;
 
 import java.io.IOException;
 
+/**
+ * klasa kontrolera panelu logowania */
 @Controller
 public class LoginController {
 

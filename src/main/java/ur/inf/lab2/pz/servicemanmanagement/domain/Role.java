@@ -2,9 +2,12 @@ package ur.inf.lab2.pz.servicemanmanagement.domain;
 
 import javax.persistence.*;
 
+/**
+ * Encja reprezentująca Role użytkownika potrzebna do spring security
+ */
+
 @Entity
 @Table(name="user_role")
-
 public class Role {
 
     @Id

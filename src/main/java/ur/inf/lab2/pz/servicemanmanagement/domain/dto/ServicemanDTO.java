@@ -2,6 +2,10 @@ package ur.inf.lab2.pz.servicemanmanagement.domain.dto;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
+
+/**
+ * Klasa data transfer object używana do przesyłania danych potrzebnych do wyświetlenia serwisantów w tabeli
+ */
 public class ServicemanDTO extends RecursiveTreeObject<ServicemanDTO> {
 
     private String email;

@@ -5,6 +5,10 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Encja reprezentująca Użytkownika systemu
+ */
+
 @Entity
 @Table(name = "user")
 @Inheritance
