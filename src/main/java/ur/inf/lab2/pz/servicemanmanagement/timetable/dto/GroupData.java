@@ -1,5 +1,8 @@
 package ur.inf.lab2.pz.servicemanmanagement.timetable.dto;
 
+/**
+ * Klasa wykorzystywana do grupowania pracowników do odpowiednich liderów
+ */
 public class GroupData {
     private Long leaderId;
     private String groupName;

@@ -1,5 +1,8 @@
 package ur.inf.lab2.pz.servicemanmanagement.timetable.task;
 
+/**
+ * Klasa implementująca interfejs określający dane klienta
+ */
 public class ClientDataImplx implements ClientData {
 
     private String firstName;

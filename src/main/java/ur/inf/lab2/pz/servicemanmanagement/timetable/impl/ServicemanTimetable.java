@@ -29,6 +29,9 @@ import java.util.stream.Collectors;
 
 import static ur.inf.lab2.pz.servicemanmanagement.utils.DateUtils.toLocalDateTime;
 
+/**
+ * Klasa wykorzystywana do generowania harmonogramu serwisanta
+ */
 public class ServicemanTimetable implements Timetable {
 
     private static final String DESCRIPTION_PATTERN = "{id} / {tag} /\n{description}";

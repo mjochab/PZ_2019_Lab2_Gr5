@@ -9,10 +9,15 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import org.springframework.stereotype.Service;
 
+/**
+ * Klasa obsługująca pojawianie się Dialogu
+ */
 @Service
 public class DialogService {
 
-
+    /**
+     * Metoda obsługująca zdarzenie kliknięcia w przycisk
+     */
     public void loadDialog(StackPane stackPane, Text title, Text dialogContent) {
         JFXDialogLayout content = new JFXDialogLayout();
         content.setHeading(title);

@@ -8,6 +8,9 @@ import ur.inf.lab2.pz.servicemanmanagement.domain.dto.ServicemanDataDTO;
 import ur.inf.lab2.pz.servicemanmanagement.repository.AllUsersRepository;
 import ur.inf.lab2.pz.servicemanmanagement.repository.UserRepository;
 
+/**
+ * Klasa wykorzystywana podczas zmiany danych serwisanta
+ */
 @Service
 public class ServicemanDataService {
     @Autowired
@@ -16,6 +19,9 @@ public class ServicemanDataService {
     @Autowired
     private EncryptionService encryptionService;
 
+    /**
+     * Metoda obsługująca zdarzenie kliknięcia w przycisk potwierdzający zmianę danych
+     */
     public void submitServicemanData(ServicemanDataDTO data)  {
         User currentUser = SecurityContext.getLoggedUser();
         currentUser.setFirstName(data.getFirstName());

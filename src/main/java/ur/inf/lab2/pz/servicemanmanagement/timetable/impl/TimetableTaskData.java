@@ -6,6 +6,9 @@ import ur.inf.lab2.pz.servicemanmanagement.timetable.task.TaskState;
 
 import java.time.LocalDateTime;
 
+/**
+ * Klasa wykorzystywana do gererowania listy zadań
+ */
 public class TimetableTaskData implements AllocatedTask {
 
     private String id;

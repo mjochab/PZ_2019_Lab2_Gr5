@@ -1,5 +1,8 @@
 package ur.inf.lab2.pz.servicemanmanagement.view;
 
+/**
+ * Enum określajacy komponenty panelu
+ */
 public enum ViewComponent {
     LOGIN("component/login"),
     DASHBOARD("component/manager/dashboard"),

@@ -25,6 +25,9 @@ import java.util.stream.Collectors;
 
 import static ur.inf.lab2.pz.servicemanmanagement.utils.DateUtils.toLocalDateTime;
 
+/**
+ * Klasa wykorzystywana do generowania harmonogramu managera
+ */
 public class ManagerTimetable implements Timetable {
     private static final String DESCRIPTION_PATTERN = "{id} / {tag} /\n{description}";
     private static final String[] GLOBAL_STYLE_CLASSES = {"global-font"};

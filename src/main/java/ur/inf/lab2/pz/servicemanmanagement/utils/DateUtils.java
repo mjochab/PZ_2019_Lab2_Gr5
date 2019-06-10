@@ -9,6 +9,9 @@ import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * Klasa wykorzystywana do obsługi wyświetlania aktualnej daty
+ */
 public class DateUtils {
 
     public static final DateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy");

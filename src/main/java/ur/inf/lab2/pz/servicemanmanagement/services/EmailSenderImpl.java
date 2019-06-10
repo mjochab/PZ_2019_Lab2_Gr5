@@ -11,12 +11,21 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.util.UUID;
 
+/**
+ * Klasa implementująca interfejs używany do obsługi funkci wysyłania wiadomości email nowo zarejestrowanych użytkowników
+ */
 @Service
 public class EmailSenderImpl implements EmailSender {
 
     @Autowired
     private JavaMailSender javaMailSender;
 
+    /**
+     * Metoda służaca do obsługi zdarzenia wysłania wiadomości email
+     * @param to parametr określający na jaki adres email ma zostać wysłana wiadomość
+     * @param title parametr określający tytuł wiadomości
+     * @param content parametr określajacy zawartość wiadomośći
+     */
     @Override
     public void sendEmail(String to, String title, String content) {
         MimeMessage mail = javaMailSender.createMimeMessage();

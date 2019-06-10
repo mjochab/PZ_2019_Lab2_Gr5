@@ -1,5 +1,8 @@
 package ur.inf.lab2.pz.servicemanmanagement.timetable.task;
 
+/**
+ * Interfejs wykorzystywany podczas generowania tabeli z zadaniami
+ */
 public interface TimetableTask {
     String getId(); // np. M1  (Pierwsza litera taga + numer, następny task z tagiem montaż byłby M2)
     String getTag(); //np. Montaż

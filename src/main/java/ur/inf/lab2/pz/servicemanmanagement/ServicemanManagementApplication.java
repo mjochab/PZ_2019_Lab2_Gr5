@@ -8,6 +8,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewManager;
 
+/**
+ * Kalsa startowa projekt JavaFX
+ */
 @SpringBootApplication
 public class ServicemanManagementApplication extends Application {
 
@@ -16,6 +19,9 @@ public class ServicemanManagementApplication extends Application {
 	@Autowired
 	private ViewManager viewManager;
 
+	/**
+	 * Metoda uruchomieniowa
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}

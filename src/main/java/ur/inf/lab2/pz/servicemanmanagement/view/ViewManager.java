@@ -21,6 +21,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Klasa wykorzystywana podczas generowania panelu menagera
+ */
 @Component
 public class ViewManager {
 
@@ -34,6 +37,11 @@ public class ViewManager {
 
     private StackPane root;
 
+    /**
+     * Metoda inicjalizująca widok panelu managera
+     * @param stage parametr określajacy właściwości wyświetlanego widoku okna
+     * @throws IOException obsługa wyjatku
+     */
     public void init(Stage stage) throws IOException {
         this.stage = stage;
 
@@ -76,6 +84,11 @@ public class ViewManager {
 
     }
 
+    /**
+     * Metoda odpowiedzialna za załądowanie komponentu do panelu
+     * @param component parametr określajacy komponent
+     * @throws IOException obsługa wyjątku
+     */
     public void loadComponent(ViewComponent component) throws IOException {
         AnchorPane placeForComponent = (AnchorPane) findChildNodeById(actualLayout, actualLayoutType.getMainComponentId());
 

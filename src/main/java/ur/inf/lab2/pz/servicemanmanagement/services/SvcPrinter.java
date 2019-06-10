@@ -6,6 +6,9 @@ import ur.inf.lab2.pz.servicemanmanagement.config.reportgenerator.TaskReportGene
 import ur.inf.lab2.pz.servicemanmanagement.timetable.AllocatedTaskRaportPrinter;
 import ur.inf.lab2.pz.servicemanmanagement.timetable.task.AllocatedTask;
 
+/**
+ * Klasa wykorzystywana do obsługi drukowania raportów
+ */
 public class SvcPrinter implements AllocatedTaskRaportPrinter {
     @Override
     public void print(AllocatedTask taskToPrint, String absolutePath) {

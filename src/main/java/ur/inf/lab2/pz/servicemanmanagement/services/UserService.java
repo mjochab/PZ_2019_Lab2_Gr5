@@ -21,6 +21,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Klasa wykorzystywana podczas obsługi użytkowników
+ */
 @Service
 public class UserService {
 
@@ -49,6 +52,12 @@ public class UserService {
     @Autowired
     private NotificationService notificationService;
 
+    /**
+     * Metoda obsługująca logowanie
+     * @param email parametr określajacy adres email użytkownika
+     * @param password parametr określajacy hasło użytkownika
+     * @throws IOException obsługa wyjątku
+     */
     public void userLogin(String email, String password) throws IOException {
 
         List<User> allByEmail = allUsersRepository.findAllByEmail(email);
@@ -75,6 +84,10 @@ public class UserService {
 
     }
 
+    /**
+     * Metoda obsługująca tworzenie nowego użytkownika
+     * @throws IOException obsłuzenie wyjątku, gdy użtykownik juz istnieje
+     */
     public void createUser(ManagerRegisterDTO dto, Text existingUserAlert) throws IOException {
 
         Role role = Optional.of(roleRepository.findByRole(dto.getRole())).orElseThrow(() -> new IOException());
@@ -94,6 +107,11 @@ public class UserService {
     }
 
 
+    /**
+     * Metoda obsługująca zmianę danych użytkownika
+     * @param data parametr określający dane
+     * @throws IOException obsługa wyjątku
+     */
     public void changePersonalData(ServicemanFirstLoginDTO data) throws IOException {
         Serviceman currentUser = (Serviceman) SecurityContext.getLoggedUser();
 

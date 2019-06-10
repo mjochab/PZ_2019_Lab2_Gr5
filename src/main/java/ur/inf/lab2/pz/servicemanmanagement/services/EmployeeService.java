@@ -12,6 +12,9 @@ import ur.inf.lab2.pz.servicemanmanagement.repository.RoleRepository;
 
 import java.util.UUID;
 
+/**
+ * Klasa wykorzystywana podczas dodawania nowego pracownika
+ */
 @Service
 public class EmployeeService {
 
@@ -27,6 +30,9 @@ public class EmployeeService {
     @Autowired
     private RoleRepository roleRepository;
 
+    /**
+     * Metoda obsługująca zdarzenie dodania nowego pracownika
+     */
     public void addWorker(workerAddDTO dto, Text existingUserAlert) {
 
         existingUserAlert.setVisible(false);

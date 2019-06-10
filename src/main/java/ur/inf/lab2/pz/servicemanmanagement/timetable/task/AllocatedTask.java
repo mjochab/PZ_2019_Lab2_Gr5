@@ -2,6 +2,9 @@ package ur.inf.lab2.pz.servicemanmanagement.timetable.task;
 
 import java.time.LocalDateTime;
 
+/**
+ * Interfejs wykorzystywany do obsługi przydzielonych zadań
+ */
 public interface AllocatedTask extends TimetableTask {
 
     LocalDateTime getDateTimeFrom(); //example of construct LocalDate.parse("2019-05-01").atTime(12, 00);

@@ -19,6 +19,9 @@ import ur.inf.lab2.pz.servicemanmanagement.view.ViewComponent;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewManager;
 import ur.inf.lab2.pz.servicemanmanagement.domain.User;
 
+/**
+ * Klasa wykorzystywana podczas zmiany danych managera
+ */
 @Service
 public class ManagerDataService {
     @Autowired
@@ -31,6 +34,9 @@ public class ManagerDataService {
 
     }
 
+    /**
+     * Metoda obsługująca zdarzenie kliknięcia w przycisk potwierdzający zmianę danych
+     */
     public void submitManagerData(ManagerDataDTO data)  {
         User currentUser = SecurityContext.getLoggedUser();
         currentUser.setFirstName(data.getFirstName());

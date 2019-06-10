@@ -34,6 +34,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
+/**
+ * Klasa wykorzystywana podczas wyświetlania harmonogramu
+ */
 @Service
 public class TimetableManager {
 
@@ -59,6 +62,9 @@ public class TimetableManager {
         );
     }
 
+    /**
+     * Metoda tworząca harmonodram i dodajaca do niego elementy
+     */
     public Timetable createTimetable(TreeTableView<UnallocatedTaskTableItem> unallocatedTaskTable, StackPane rootStackPane, Parent editTaskDialogBody) {
         TimetableTaskEditDialogData dialogData = new ManagerTaskEditDialogData(editTaskDialogBody, rootStackPane);
 
