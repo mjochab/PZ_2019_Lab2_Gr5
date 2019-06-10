@@ -6,6 +6,10 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import java.util.List;
 
+/**
+ * Encja reprezentująca Użytkownika zalogowanego jako menadżer
+ */
+
 @Entity
 public class Manager extends User {
 

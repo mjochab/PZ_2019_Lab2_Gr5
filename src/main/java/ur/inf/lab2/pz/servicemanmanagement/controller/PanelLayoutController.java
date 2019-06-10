@@ -32,6 +32,9 @@ import java.util.List;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * klasa kontrolera głównego layoutu aplikacji
+ */
 @Controller
 public class PanelLayoutController {
 

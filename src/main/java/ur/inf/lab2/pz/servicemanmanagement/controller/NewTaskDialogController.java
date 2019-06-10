@@ -24,7 +24,9 @@ import ur.inf.lab2.pz.servicemanmanagement.view.ViewManager;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
+/**
+ * klasa kontrolera panelu dodawania nowego zadania
+ */
 @Controller
 public class NewTaskDialogController implements Initializable {
 

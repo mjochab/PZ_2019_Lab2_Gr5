@@ -79,6 +79,9 @@ public class EmployeesController implements Initializable {
         loadTable();
     }
 
+    /**
+     * Metoda inicjalizująca columny w tabeli z pracownikami
+     */
     private void initTableColumns() {
         TreeTableColumn emailCol = new TreeTableColumn("Adres email");
         TreeTableColumn firstNameCol = new TreeTableColumn("Imię");
@@ -97,6 +100,10 @@ public class EmployeesController implements Initializable {
 
     }
 
+    /**
+     * Metoda ładująca listę serwisantów do tabeli
+     */
+
     public void loadTable() {
         TreeItem<ServicemanDTO> root = new RecursiveTreeItem<>(servicemansDTO, RecursiveTreeObject::getChildren);
 
@@ -104,6 +111,9 @@ public class EmployeesController implements Initializable {
         servicemansTableView.setShowRoot(false);
     }
 
+    /**
+     * Metoda zaciągająca z bazy danych listę serwistantów
+     */
     private void fetchServicemans() {
         List<Serviceman> servicemans = servicemanRepository.findAllByManager_id(SecurityContext.getLoggedUser().getId());
         List<ServicemanDTO> servicemanDTOS = new ArrayList<>();

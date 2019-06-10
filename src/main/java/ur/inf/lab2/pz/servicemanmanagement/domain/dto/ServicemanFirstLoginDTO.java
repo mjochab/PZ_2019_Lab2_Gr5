@@ -1,6 +1,8 @@
 package ur.inf.lab2.pz.servicemanmanagement.domain.dto;
 
-
+/**
+ * Klasa data transfer object używana do przesyłania danych z formularza podczas pierwszego logowania serwisanta
+ */
 public class ServicemanFirstLoginDTO {
 
     String firstName;

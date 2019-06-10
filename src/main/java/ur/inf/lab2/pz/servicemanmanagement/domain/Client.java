@@ -6,6 +6,9 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+/**
+ * Encja reprezentująca klienta do którego będą przypisywane zadania (encja Task)
+ */
 
 @Entity
 public class Client extends RecursiveTreeObject<Client> {
