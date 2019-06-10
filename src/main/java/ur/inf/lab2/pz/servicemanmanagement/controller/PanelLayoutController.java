@@ -108,7 +108,7 @@ public class PanelLayoutController {
     }
 
     @FXML
-    private void drawerAction() throws IOException { // TODO pierwszy klik nie dziala
+    private void drawerAction() throws IOException {
         TranslateTransition openNav = new TranslateTransition(new Duration(150), drawer);
         openNav.setToX(0);
         TranslateTransition closeNav = new TranslateTransition(new Duration(150), drawer);

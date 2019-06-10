@@ -1,5 +1,8 @@
 package ur.inf.lab2.pz.servicemanmanagement.domain.dto;
 
+/**
+ * Klasa typu data transfer object zawierająca pola do zmiany danych menadżera
+ */
 public class ManagerDataDTO {
 
     String firstName;

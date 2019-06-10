@@ -5,6 +5,9 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import java.time.LocalDateTime;
 import java.util.Date;
 
+/**
+ * Klasa typu data transfer object zawierąca pola danych najnowszych tasków
+ */
 public class NewestTaskDTO extends RecursiveTreeObject<NewestTaskDTO> {
 
     private String title;

@@ -9,7 +9,6 @@ import java.util.List;
 /**
  * Encja reprezentująca klienta do którego będą przypisywane zadania (encja Task)
  */
-
 @Entity
 public class Client extends RecursiveTreeObject<Client> {
 

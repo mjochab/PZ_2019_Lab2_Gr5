@@ -45,6 +45,9 @@ public class ManagerDashboardController implements Initializable {
         loadTable();
     }
 
+    /**
+     * Metoda inicjalizująca columny w tabeli z zespołami
+     */
     private void initTableColumns() {
         TreeTableColumn title = new TreeTableColumn("Tytuł");
         TreeTableColumn details = new TreeTableColumn("Opis");
@@ -63,12 +66,18 @@ public class ManagerDashboardController implements Initializable {
         date.setCellValueFactory(new TreeItemPropertyValueFactory<NewestTaskDTO, Date>("creationDate"));
     }
 
+    /**
+     * Metoda ładująca listę tasków do tabeli
+     */
     private void loadTable() {
         TreeItem<NewestTaskDTO> root = new RecursiveTreeItem<>(tasksDTO, RecursiveTreeObject::getChildren);
         newestTasksTable.setRoot(root);
         newestTasksTable.setShowRoot(false);
     }
 
+    /**
+     * Metoda zaciągająca z bazy danych listę tasków
+     */
     private void fetchTasks() {
         Page<Task> tasks = taskRepository.findNewest(new PageRequest(0, 5));
         List<NewestTaskDTO> newestTaskDTOS = new ArrayList<>();

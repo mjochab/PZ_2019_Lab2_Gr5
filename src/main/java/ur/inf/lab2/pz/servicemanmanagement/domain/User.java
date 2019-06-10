@@ -8,7 +8,6 @@ import java.util.List;
 /**
  * Encja reprezentująca Użytkownika systemu
  */
-
 @Entity
 @Table(name = "user")
 @Inheritance
