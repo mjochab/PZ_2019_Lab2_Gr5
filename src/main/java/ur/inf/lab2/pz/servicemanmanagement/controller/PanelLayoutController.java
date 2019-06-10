@@ -24,10 +24,13 @@ import ur.inf.lab2.pz.servicemanmanagement.notifications.NotificationService;
 import ur.inf.lab2.pz.servicemanmanagement.view.Layout;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewComponent;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewManager;
+
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Controller
 public class PanelLayoutController {
@@ -56,6 +59,9 @@ public class PanelLayoutController {
     private Label dateLabel;
 
     @FXML
+    private Label groupNameLabel;
+
+    @FXML
     private JFXButton dashboardButton;
     @FXML
     private JFXButton timetableButton;
@@ -80,9 +86,19 @@ public class PanelLayoutController {
             employeeButton.getChildrenUnmodifiable().forEach(node -> node.setManaged(false));
             AnchorPane.setTopAnchor(timetableButton, 0.0);
 
-            fullNameLabel.setText("Andrzej Gołota");
+            fullNameLabel.setText(SecurityContext.getLoggedUser().getFirstName() + " " +
+                    SecurityContext.getLoggedUser().getLastName());
             roleLabel.setText("Głowa serwisantów");
+            groupNameLabel.setText(SecurityContext.getLoggedUser().getGroupName());
 
+
+        }
+
+        else{
+            fullNameLabel.setText(SecurityContext.getLoggedUser().getFirstName() + " " +
+                    SecurityContext.getLoggedUser().getLastName());
+            groupNameLabel.setText(SecurityContext.getLoggedUser().getCompanyName());
+            roleLabel.setText("Kierownik");
 
         }
 
@@ -229,4 +245,7 @@ public class PanelLayoutController {
         clock.play();
     }
 
+    public void newName(String x, String y) {
+        fullNameLabel.setText(x + " " + y);
+    }
 }

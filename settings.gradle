@@ -4,5 +4,4 @@ pluginManagement {
 	}
 }
 rootProject.name = 'serviceman-management'
-include 'raport-generator'
 

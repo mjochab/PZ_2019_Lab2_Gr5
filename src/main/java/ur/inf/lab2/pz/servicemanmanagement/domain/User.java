@@ -10,31 +10,24 @@ import java.util.List;
 @Inheritance
 public abstract class User {
 
-    @ManyToOne
-    @JoinColumn(name = "id_role")
-    public Role role;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String firstName;
-
     private String lastName;
-
     private String email;
-
     private String password;
-
     private String companyName;
-
     private String groupName;
-
     private boolean enabled = false;
 
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch=FetchType.LAZY)
     private List<Notification> notifications = new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn(name="id_role")
+    public Role role;
 
     public User() { }
 

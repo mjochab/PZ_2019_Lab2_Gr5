@@ -164,7 +164,7 @@ public class ViewManager {
     private Parent getView(String viewName) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setControllerFactory(context::getBean);
-        loader.setLocation(getClass().getResource("/fxml/" + viewName + ".fxml"));
+        loader.setLocation(getClass().getClassLoader().getResource("/fxml/" + viewName + ".fxml"));
 
         return (Parent) loader.load();
     }

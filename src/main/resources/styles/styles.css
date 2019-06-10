@@ -1,3 +1,7 @@
+.global-font {
+    -fx-font-family: "Noto Sans CJK TC DemiLight";
+}
+
 .bg-dark-primary {
     -fx-background-color: #455A64;
 }

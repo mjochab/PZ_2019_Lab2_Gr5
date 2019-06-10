@@ -1,12 +1,13 @@
 package ur.inf.lab2.pz.servicemanmanagement.domain;
 
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import ur.inf.lab2.pz.servicemanmanagement.timetable.task.TaskState;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-public class Task {
+public class Task extends RecursiveTreeObject<Task> implements Comparable<Task> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,9 +36,11 @@ public class Task {
         this.tag = tag;
         this.description = description;
         this.client = client;
+
     }
 
-    public Task() {}
+    public Task() {
+    }
 
     public Long getId() {
         return id;
@@ -83,24 +86,24 @@ public class Task {
         return dateTimeFrom;
     }
 
-    public LocalDateTime getDateTimeTo() {
-        return dateTimeTo;
-    }
-
     public void setDateTimeFrom(LocalDateTime dateTimeFrom) {
         this.dateTimeFrom = dateTimeFrom;
+    }
+
+    public LocalDateTime getDateTimeTo() {
+        return dateTimeTo;
     }
 
     public void setDateTimeTo(LocalDateTime dateTimeTo) {
         this.dateTimeTo = dateTimeTo;
     }
 
-    public void setState(TaskState state) {
-        this.state = state;
-    }
-
     public TaskState getState() {
         return state;
+    }
+
+    public void setState(TaskState state) {
+        this.state = state;
     }
 
     public boolean isWholeDayTask() {
@@ -109,5 +112,18 @@ public class Task {
 
     public void setWholeDayTask(boolean wholeDayTask) {
         this.wholeDayTask = wholeDayTask;
+    }
+
+    public boolean hasTeamLeader() {
+        return this.getLeader() != null;
+    }
+
+
+    @Override
+    public int compareTo(Task o) {
+        if (getDateTimeFrom() == null || o.getDateTimeFrom() == null) {
+            return 0;
+        }
+        return getDateTimeFrom().compareTo(o.getDateTimeFrom());
     }
 }
