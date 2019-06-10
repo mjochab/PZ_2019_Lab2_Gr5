@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 /**
  * Encja reprezentująca zadanie które menadżer przyedziela je swoim serwisantom
  */
-
 @Entity
 public class Task extends RecursiveTreeObject<Task> implements Comparable<Task> {
 

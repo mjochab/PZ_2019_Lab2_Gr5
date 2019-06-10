@@ -38,6 +38,8 @@ public class LoginController {
         alertLabel.setVisible(false);
     }
 
+
+
     public void login(ActionEvent event) {
         try {
             userService.userLogin(emailTextField.getText(), passwordTextField.getText());

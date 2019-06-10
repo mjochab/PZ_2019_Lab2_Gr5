@@ -11,6 +11,10 @@ import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.List;
 
+
+/**
+ * Serwis powiadomień
+ */
 @Service
 public class NotificationService {
 
@@ -46,6 +50,8 @@ public class NotificationService {
 //        notificationRepository.save(notification);
 //    }
 
+
+
     @Transactional
     public void addNotification(String title, String content, Long userId) throws IOException {
 
@@ -71,6 +77,7 @@ public class NotificationService {
 
         notificationRepository.deleteByIdIn(ids);
     }
+
 
     @Transactional
     public void deleteNotification(long id) throws IOException {

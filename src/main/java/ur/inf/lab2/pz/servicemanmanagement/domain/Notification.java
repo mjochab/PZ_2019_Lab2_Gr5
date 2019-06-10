@@ -9,6 +9,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * Klasa reprezentująca encje notyfikacji
+ */
 @Entity
 public class Notification {
 

@@ -60,6 +60,9 @@ public class DashboardController {
     }
 
 
+    /**
+     * Metoda odpowiedzialna za akcje bocznego panelu powiadomień
+     */
     @FXML
     private void drawerAction() throws IOException {
         TranslateTransition openNav = new TranslateTransition(new Duration(350), drawer);

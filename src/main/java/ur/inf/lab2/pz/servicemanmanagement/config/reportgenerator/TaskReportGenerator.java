@@ -11,9 +11,20 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Klasa slużąca do generowania raportów zadań
+
+ */
+
+
+
 public class TaskReportGenerator {
 
-    public void generateTaskReport(TaskReport task, String pathToFile) throws JRException {
+
+    /**
+     * Metoda slużąca do generowania raportów zadań
+        */
+        public void generateTaskReport(TaskReport task, String pathToFile) throws JRException {
         pathToFile += "/raport_" + new Date().getTime() + ".pdf";
 
         JasperReport jasperReport = JasperCompileManager.compileReport(getClass().getClassLoader().getResourceAsStream("/jrxml/report.jrxml"));

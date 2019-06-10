@@ -61,6 +61,9 @@ public class ManagerRegisterController {
         this.userService = userService;
     }
 
+    /**
+     * Metoda rejestrująca nowego menadżera
+     */
     public void register(ActionEvent event) throws IOException {
 
         if (validate()) {
@@ -75,7 +78,9 @@ public class ManagerRegisterController {
         }
 
     }
-
+    /**
+     * Walidator formularza danych do rejestracji menadżera
+     */
     private boolean validate() {
         UserRegisterFormValidator validator = new UserRegisterFormValidator(firstNameTextField.getText(),
                 lastNameTextField.getText(),

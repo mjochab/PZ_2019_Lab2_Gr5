@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewComponent;
 
+/**
+ * Komponent StageConfig służacy do konfiguracji bierzącego Stage'a
+ */
 @Component
 public class StageConfig {
 

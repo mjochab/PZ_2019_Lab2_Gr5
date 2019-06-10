@@ -134,6 +134,9 @@ public class EmployeesController implements Initializable {
         servicemansDTO = FXCollections.observableArrayList(servicemanDTOS);
     }
 
+    /**
+     * Metoda do dodawania nowego pracownika
+     */
     public void addWorker() throws IOException {
         if (validate()) {
             workerAddDTO dto = new workerAddDTO(emailInput.getText(), groupNameInput.getText());
@@ -145,6 +148,9 @@ public class EmployeesController implements Initializable {
         }
     }
 
+    /**
+     * Walidator formularza dodawania nowego pracownika
+     */
     private boolean validate() {
         WorkerAddValidator validator = new WorkerAddValidator(
                 emailInput.getText(),
@@ -156,7 +162,9 @@ public class EmployeesController implements Initializable {
         return validator.getValidator().isClean();
     }
 
-
+    /**
+     * Metoda ładująca widok dialogu po wysłaniu danych logowania
+     */
     @FXML
     private void loadDialog(String email) {
         JFXDialogLayout content = new JFXDialogLayout();

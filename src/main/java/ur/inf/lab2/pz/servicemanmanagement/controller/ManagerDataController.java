@@ -14,7 +14,9 @@ import ur.inf.lab2.pz.servicemanmanagement.service.DialogService;
 import ur.inf.lab2.pz.servicemanmanagement.services.ManagerDataService;
 import ur.inf.lab2.pz.servicemanmanagement.services.PanelLayoutService;
 import ur.inf.lab2.pz.servicemanmanagement.view.ViewManager;
-
+/**
+ * Klasa kontrolera panelu zmiany danych personalnych menadżera
+ */
 @Controller
 public class ManagerDataController {
 
@@ -46,6 +48,10 @@ public class ManagerDataController {
 //                "formularz danych kierownika");
 //        viewManager.show(ViewType.MAIN);
 //    }
+
+    /**
+     * Inizjalizacja alertów i pól tekstowych
+     */
     @FXML
     public void initialize() {
         nameAlert.setVisible(false);
@@ -58,7 +64,9 @@ public class ManagerDataController {
         companyNameField.setText(SecurityContext.getLoggedUser().getCompanyName());
 
     }
-
+    /**
+     * Metoda zmieniająca dane menadżera
+     */
     @FXML
     public void submitManagerData() {
         if (validate()) {
@@ -79,7 +87,9 @@ public class ManagerDataController {
             companyNameField.setText(companyName);
         }
     }
-
+    /**
+     * Walidator formularza zmiany danych
+     */
     private boolean validate() {
         ManagerDataValidator validator = new ManagerDataValidator(nameField.getText(),
                 lastNameField.getText(),

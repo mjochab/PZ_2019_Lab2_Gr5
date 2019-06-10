@@ -26,7 +26,9 @@ import java.util.Date;
 import java.util.Set;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
-
+/**
+ * Kontroller harmonogramu serwisanta
+ */
 @Controller
 public class ServicemanTimetableController {
 

@@ -8,7 +8,6 @@ import java.util.List;
 /**
  * Encja reprezentująca użytkownika zalogowanego jako serwisant
  */
-
 @Entity
 public class Serviceman extends User {
 
