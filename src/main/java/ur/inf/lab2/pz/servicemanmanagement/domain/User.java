@@ -2,28 +2,28 @@ package ur.inf.lab2.pz.servicemanmanagement.domain;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name="user")
-public class User {
+@Table(name = "user")
+@Inheritance
+public abstract class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String firstName;
-
     private String lastName;
-
     private String email;
-
     private String password;
-
     private String companyName;
-
     private String groupName;
-
     private boolean enabled = false;
+
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+    private List<Notification> notifications = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name="id_role")
@@ -38,7 +38,6 @@ public class User {
     }
 
 
-
     public Long getId() {
         return id;
     }
@@ -51,7 +50,7 @@ public class User {
         return firstName;
     }
 
-    public void setFirstName( String firstName) {
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
@@ -60,7 +59,7 @@ public class User {
         return lastName;
     }
 
-    public void setLastName( String lastName) {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
@@ -78,7 +77,7 @@ public class User {
         return password;
     }
 
-    public void setPassword( String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
@@ -87,7 +86,7 @@ public class User {
         return companyName;
     }
 
-    public void setCompanyName( String companyName) {
+    public void setCompanyName(String companyName) {
         this.companyName = companyName;
     }
 
@@ -113,5 +112,13 @@ public class User {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public List<Notification> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(List<Notification> notifications) {
+        this.notifications = notifications;
     }
 }

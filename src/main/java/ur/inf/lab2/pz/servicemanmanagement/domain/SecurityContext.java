@@ -11,6 +11,21 @@ public class SecurityContext {
     public static void setLoggedUser(User u) {
         loggedUser = u;
     }
+
+    public static boolean isLoggedManager() {
+        return loggedUserIs("ROLE_MANAGER");
+    }
+
+    public static boolean isLoggedServiceman() {
+        return loggedUserIs("ROLE_SERVICEMAN");
+    }
+
+    private static boolean loggedUserIs(String role) {
+        if (loggedUser == null)
+            return false;
+        else
+            return loggedUser.getRole().getRole().equals(role);
+    }
 }
 
 

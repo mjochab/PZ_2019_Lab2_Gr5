@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -26,11 +25,6 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <TableView layoutX="251.0" layoutY="50.0" prefHeight="200.0" prefWidth="474.0" style="-fx-background-color: #DDD8DC;" AnchorPane.leftAnchor="251.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0">
-         <columns>
-            <TableColumn prefWidth="75.0" text="C1" />
-         </columns>
-      </TableView>
       <ScrollPane layoutY="331.0" maxWidth="650.0" prefHeight="331.0" prefWidth="625.0" style="-fx-background-color: #DDD8DC;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="340.0">
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="516.0" prefWidth="604.0" style="-fx-background-color: white;">
@@ -147,5 +141,6 @@
             </AnchorPane>
          </content>
       </ScrollPane>
+      <JFXTreeTableView fx:id="newestTasksTable" layoutX="250.0" layoutY="50.0" prefHeight="200.0" prefWidth="539.0" AnchorPane.leftAnchor="251.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0" />
    </children>
 </AnchorPane>
